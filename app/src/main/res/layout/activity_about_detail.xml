@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.AboutDetailActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_feedbackDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/feedbackDetail"
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/et_feedBackDetail"
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:layout_below="@id/tv_feedbackDetail"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_feedback_detail"
+            android:enabled="true"
+            android:gravity="top"
+            android:hint="@string/feedbackHint"
+            android:inputType="textMultiLine"
+            android:paddingBottom="5dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:scrollbars="vertical"
+            android:textColorHint="@color/gray99"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_feed_back_detail"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="112dp"
+        android:background="@drawable/selector_button_normal_blue"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <WebView
+
+        android:id="@+id/wv_introduce_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

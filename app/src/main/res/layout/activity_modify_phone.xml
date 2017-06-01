@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.ModifyPhoneActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <LinearLayout
+        android:id="@+id/ll_old"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="131.5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/shape_white_normal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+
+                <TextView
+                    android:id="@+id/tv_old_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/oldPhone"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:id="@+id/et_input_old_phone_number"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/tv_old_number"
+                    android:background="@null"
+                    android:hint="@string/inputOldPhone"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="18sp"/>
+
+                <Button
+                    android:id="@+id/btn_send_code"
+                    android:layout_width="70dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/selector_button_normal_blue"
+                    android:text="@string/send_code"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/layout_division_line"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+
+                <TextView
+                    android:id="@+id/tv_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/identify_code"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:id="@+id/et_code"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/tv_code"
+                    android:background="@null"
+                    android:hint="@string/insert_code"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/selector_button_normal_blue"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="131.5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/shape_white_normal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+
+                <TextView
+                    android:id="@+id/tv_old_number1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/newPhone"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:id="@+id/et_input_old_phone_number1"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/tv_old_number1"
+                    android:background="@null"
+                    android:hint="@string/inputOldPhone"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="18sp"/>
+
+                <Button
+                    android:id="@+id/btn_send_code1"
+                    android:layout_width="70dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/selector_button_normal_blue"
+                    android:text="@string/send_code"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/layout_division_line"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+
+                <TextView
+                    android:id="@+id/tv_code1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/identify_code"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:id="@+id/et_code1"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/tv_code1"
+                    android:background="@null"
+                    android:hint="@string/insert_code"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_phone_ok"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/selector_button_normal_blue"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+</LinearLayout>

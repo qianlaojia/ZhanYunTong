@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.EditPersonalInfoActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <LinearLayout
+        android:id="@+id/ll_one_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_information"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:hint="@string/prompt_text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/black33"
+                android:textColorHint="@color/gray99"
+                android:textSize="18sp"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_text_limit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/prompt_text"
+            android:textColor="@color/gray99"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/shape_button_blue"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_normal_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_province"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:hint="@string/province"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black33"
+            android:textColorHint="@color/gray99"
+            android:textSize="18sp"/>
+
+        <include
+            layout="@layout/layout_division_line"/>
+
+        <EditText
+            android:id="@+id/et_city"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:hint="@string/city"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black33"
+            android:textColorHint="@color/gray99"
+            android:textSize="18sp"/>
+
+        <include
+            layout="@layout/layout_division_line"/>
+
+        <EditText
+            android:id="@+id/et_district"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:hint="@string/district"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black33"
+            android:textColorHint="@color/gray99"
+            android:textSize="18sp"/>
+
+        <include
+            layout="@layout/layout_division_line"/>
+
+        <EditText
+            android:id="@+id/et_address_detail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:hint="@string/address_detail"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black33"
+            android:textColorHint="@color/gray99"
+            android:textSize="18sp"/>
+
+        <include
+            layout="@layout/layout_division_line"/>
+
+        <Button
+            android:id="@+id/btn_save_address"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="69dp"
+            android:background="@drawable/selector_button_normal_blue"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+</LinearLayout>

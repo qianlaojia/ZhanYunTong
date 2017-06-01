@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/titleColor">
+
+    <ImageView
+        android:id="@+id/iv_service_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:background="@mipmap/phone_icon"/>
+
+    <ImageView
+
+        android:id="@+id/iv_service_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:background="@mipmap/news_icon"/>
+
+    <RadioGroup
+        android:id="@+id/title_radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_service_title"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RadioButton
+            android:id="@+id/rb_title_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/selector_text_service_left_title"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/product_consult"
+            android:textColor="@color/selector_text_service_title"/>
+
+        <RadioButton
+            android:id="@+id/rb_title_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/selector_text_service_right_title"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/order_consult"
+            android:textColor="@color/selector_text_service_title"/>
+    </RadioGroup>
+
+</RelativeLayout>

@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.OrderDetailsActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@mipmap/dingdanxiangqing_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/already_cancel"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/deal_twice"
+                    android:textColor="#fe6a2c"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_white_normal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@mipmap/register_weixin"
+                        android:contentDescription="@string/app_name"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="14dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/testText1"
+                                android:textColor="#333333"
+                                android:textSize="18sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/money"
+                                android:textColor="#fe6a2c"
+                                android:textSize="18sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="12dp"
+                            android:background="@mipmap/dingdanxiangqing_tiaozhuang"
+                            android:contentDescription="@string/app_name"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:id="@+id/Departure_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Departure_time"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/Departure_time_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/Departure_time"
+                        android:text="@string/date2"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_back_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Departure_time"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/tv_back_time"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+
+                        android:id="@+id/tv_back_time_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Departure_time_details"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@id/tv_back_time"
+                        android:text="@string/tv_back_time_details"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_order_details_people_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_back_time"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/people_number"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_order_details_people_number_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_back_time_details"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@id/tv_order_details_people_number"
+                        android:text="@string/one_people"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_white_normal">
+
+                <RelativeLayout
+                    android:id="@+id/rv_title_fly_ticket_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_gray_normal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="12dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/fly_ticket_info"
+                        android:textColor="@color/gray99"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/rv_title_fly_ticket_title">
+
+                    <TextView
+                        android:id="@+id/tv_from_ticket_fly_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/tv_back_time_details"
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/shuXian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/tv_from_ticket_fly_date"
+                        android:text="@string/shuXian"
+                        android:textColor="#333333"/>
+
+                    <TextView
+                        android:id="@+id/tv_from_ticket_fly_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/shuXian"
+                        android:text="@string/tv_back_city_details"
+                        android:textColor="#333333"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_begin_fly_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_from_ticket_fly_date"
+                        android:layout_marginStart="33dp"
+                        android:layout_marginTop="21dp"
+                        android:text="@string/tv_back_text_time"
+                        android:textColor="#333333"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_end_fly_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tv_begin_fly_time"
+                        android:layout_marginEnd="33dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/sanya"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_begin_fly_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@+id/tv_begin_fly_time"
+                        android:layout_alignTop="@+id/tv_end_fly_city"
+                        android:text="@string/zhengzhoufly"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_end_fly_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/tv_begin_fly_time"
+                        android:layout_marginEnd="33dp"
+                        android:text="@string/tv_back_text_time"
+                        android:textColor="#333333"
+                        android:textSize="18sp"/>
+
+                    <TextView
+
+                        android:id="@+id/tv_ticket_fly_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_end_fly_city"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/fly_ticket_info_details"
+                        android:textColor="@color/gray99"
+                        android:textSize="12sp"
+                        />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/up"
+                    android:background="@color/gray11"/>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/view_2">
+
+                    <TextView
+                        android:id="@+id/tv_return_from_ticket_fly_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/tv_back_time_details"
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/shuXian1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/tv_return_from_ticket_fly_date"
+                        android:text="@string/shuXian"
+                        android:textColor="#333333"/>
+
+                    <TextView
+                        android:id="@+id/tv_return_from_ticket_fly_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/shuXian1"
+                        android:text="@string/tv_back_city_details"
+                        android:textColor="#333333"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_return_begin_fly_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_return_from_ticket_fly_date"
+                        android:layout_marginStart="33dp"
+                        android:layout_marginTop="21dp"
+                        android:text="@string/tv_back_text_time"
+                        android:textColor="#333333"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_return_end_fly_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tv_return_begin_fly_time"
+                        android:layout_marginEnd="33dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/sanya"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_return_begin_fly_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/tv_return_begin_fly_time"
+                        android:layout_alignTop="@id/tv_return_end_fly_city"
+                        android:text="@string/zhengzhoufly"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_return_end_fly_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@id/tv_return_begin_fly_time"
+                        android:layout_marginEnd="33dp"
+                        android:text="@string/tv_back_text_time"
+                        android:textColor="#333333"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_return_ticket_fly_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_return_begin_fly_city"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/fly_ticket_info_details"
+                        android:textColor="@color/gray99"
+                        android:textSize="12sp"/>
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_white_normal">
+
+                <RelativeLayout
+                    android:id="@+id/rv_title_order_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_gray_normal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="12dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/order_info"
+                        android:textColor="@color/gray99"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/order_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/rv_title_order_title"
+                    android:layout_marginTop="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_order_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/order_number"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_order_number_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tv_order_number"
+                        android:layout_alignBottom="@+id/tv_order_number"
+                        android:layout_toEndOf="@+id/tv_order_number"
+                        android:text="@string/order_number_details"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/pay_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_order_number"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="9dp"
+                        android:text="@string/pay_style"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/pay_style_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_order_number"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_toEndOf="@id/pay_style"
+                        android:text="@string/pay_style_details"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pay_style"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="9dp"
+                        android:text="@string/money_string"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/money_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pay_style_details"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_toEndOf="@id/money"
+                        android:text="@string/money_details"
+                        android:textColor="#fe6a2c"
+                        android:textSize="15sp"/>
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_white_normal">
+
+                <RelativeLayout
+                    android:id="@+id/rv_visitor_info_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:background="@drawable/shape_gray_normal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="12dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/visitor_info"
+                        android:textColor="@color/gray99"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/rv_visitor_info_title"
+                    android:layout_marginTop="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_visitor_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/visitor_name"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_visitor_name_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:layout_toEndOf="@id/tv_visitor_name"
+                        android:text="@string/visitor_name_details"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/card_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_visitor_name"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="9dp"
+                        android:text="@string/card_number"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/card_number_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_visitor_name_details"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_toEndOf="@id/card_number"
+                        android:text="@string/card_nymber_details"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_visitor_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/card_number"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="9dp"
+                        android:text="@string/visitor_phone"
+                        android:textColor="#333333"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/phone_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/card_number_details"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_toEndOf="@id/tv_visitor_phone"
+                        android:text="@string/phone_details"
+                        android:textColor="#fe6a2c"
+                        android:textSize="15sp"/>
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

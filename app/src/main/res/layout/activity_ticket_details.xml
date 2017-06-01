@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.TicketDetailsActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@mipmap/dingdanxiangqing_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:text="@string/already_cancel"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:text="@string/deal_twice"
+            android:textColor="@color/colorOrange"
+            android:textSize="18sp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_white_normal">
+
+        <ImageView
+            android:id="@+id/tv_jump_to_details_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="25dp"
+            android:background="@mipmap/dingdanxiangqing_tiaozhuang"
+            android:contentDescription="@string/app_name"/>
+
+        <ImageView
+            android:id="@+id/iv_ticket_details_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:background="@mipmap/square_image"
+            android:contentDescription="@string/already_cancel"/>
+
+        <TextView
+            android:id="@+id/iv_scenic_pot_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/iv_ticket_details_image"
+            android:text="@string/tip_name"
+            android:textColor="@color/gray"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_ticket_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_scenic_pot_name"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/iv_ticket_details_image"
+            android:text="@string/money_details"
+            android:textColor="@color/colorTextOrange"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_travel_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ticket_price"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/tv_travel_time"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_travel_time_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ticket_price"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@id/tv_travel_time"
+            android:text="@string/date"
+            android:textColor="@color/gray"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_people_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_travel_time"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/people_number"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_travel_time_details"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@id/tv_people_num"
+            android:text="@string/coupon_zhang"
+            android:textColor="@color/gray"
+            android:textSize="15sp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_white_normal">
+
+        <LinearLayout
+            android:id="@+id/ll_order_information"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@drawable/shape_gray_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/order_information"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/order_num_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_order_information"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/order_num"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_ticket_details_order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_order_information"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@id/order_num_text"
+            android:text="@string/number_demo"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_pay_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_num_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/pay_style"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_pay_style_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ticket_details_order_number"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@id/tv_pay_style"
+            android:text="@string/pay_style_details"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/pay_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pay_style"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/pay_money"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_pay_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pay_style"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@id/pay_money"
+            android:text="@string/money_details"
+            android:textColor="@color/colorTextOrange"
+            android:textSize="18sp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_white_normal">
+
+        <LinearLayout
+            android:id="@+id/ll_people_information"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@drawable/shape_gray_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/people_information"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_people_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_people_information"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/people_name"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_people_name_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_people_information"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@id/tv_people_name"
+            android:text="@string/people_name_details"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_people_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_people_name"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/phone_number"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_people_phone_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_people_name_details"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@id/tv_people_phone"
+            android:text="@string/phone_details"
+            android:textColor="@color/gray"
+            android:textSize="18sp"/>
+
+
+    </RelativeLayout>
+</LinearLayout>

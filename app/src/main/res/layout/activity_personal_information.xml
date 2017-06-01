@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_person_information"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.PersonalInformationActivity">
+
+    <include
+
+        layout="@layout/layout_message_title"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/shape_white_normal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_personal_information_head_portrait"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="54dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"
+                    android:text="@string/personal_information_head"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_setting_head_image"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/home_travel_bg"/>
+
+                <ImageView
+                    android:id="@+id/iv_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/jiantou_huise"/>
+            </RelativeLayout>
+
+            <include
+                layout="@layout/layout_division_line"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_personal_information_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"
+                    android:text="@string/personal_information_nickname"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/jiantou_huise"/>
+
+                <TextView
+                    android:id="@+id/tv_setting_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_toStartOf="@id/iv_arrow"
+                    android:gravity="center"
+                    android:text="@string/noSet"
+                    android:textColor="@color/gray99"
+                    android:textSize="15sp"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="142dp"
+            android:background="@drawable/shape_white_normal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_personal_information_name"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"
+                    android:text="@string/personal_information_name"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/jiantou_huise"/>
+
+                <TextView
+                    android:id="@+id/tv_setting_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_toStartOf="@id/iv_arrow2"
+                    android:gravity="center"
+                    android:text="@string/noSet"
+                    android:textColor="@color/gray99"
+                    android:textSize="15sp"/>
+
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/layout_division_line"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_personal_information_phone"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"
+                    android:text="@string/personal_information_phone"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/jiantou_huise"/>
+
+                <TextView
+                    android:id="@+id/tv_setting_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_arrow3"
+                    android:layout_marginEnd="23dp"
+                    android:layout_toStartOf="@+id/iv_arrow3"
+                    android:gravity="center"
+                    android:text="@string/noSet"
+                    android:textColor="@color/gray99"
+                    android:textSize="15sp"/>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:background="@drawable/shape_white_normal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_personal_information_email"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"
+                    android:text="@string/personal_information_email"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/jiantou_huise"/>
+
+                <TextView
+                    android:id="@+id/tv_setting_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_toStartOf="@id/iv_arrow5"
+                    android:gravity="center"
+                    android:text="@string/noSet"
+                    android:textColor="@color/gray99"
+                    android:textSize="15sp"/>
+
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/layout_division_line"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_personal_information_address"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"
+                    android:text="@string/personal_information_address"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/jiantou_huise"/>
+
+                <TextView
+                    android:id="@+id/tv_setting_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_toStartOf="@id/iv_arrow6"
+                    android:gravity="center"
+                    android:text="@string/noSet"
+                    android:textColor="@color/gray99"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#60000000"
+            android:visibility="gone"
+            />
+    </FrameLayout>
+</LinearLayout>

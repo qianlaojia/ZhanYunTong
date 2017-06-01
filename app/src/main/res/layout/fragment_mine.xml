@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="@mipmap/me_bg">
+
+        <include
+            layout="@layout/layout_mine_title"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="74dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_head_image"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:src="@mipmap/home_travel_bg"/>
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@id/civ_head_image"
+            android:background="@null"
+            android:text="@string/LogAndRegister"
+            android:textColor="@color/white"
+
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/head"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tv_mine_all_order"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_qbdd"
+                android:gravity="center"
+                android:text="@string/all_order"/>
+
+            <TextView
+                android:id="@+id/tv_mine_to_be_paid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_daf"
+                android:gravity="center"
+                android:text="@string/need_order"/>
+
+            <TextView
+                android:id="@+id/tv_mine_waiting_travel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_dcx"
+                android:gravity="center"
+                android:text="@string/need_trip"/>
+
+            <TextView
+                android:id="@+id/tv_mine_waiting_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_ddp"
+                android:gravity="center"
+                android:text="@string/need_say"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/tv_mine_my_collection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_wodeshoucang"
+                android:gravity="center"
+                android:text="@string/my_collect"/>
+
+            <TextView
+                android:id="@+id/tv_mine_common_information"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_cyxx"
+                android:gravity="center"
+                android:text="@string/common_message"/>
+
+            <TextView
+                android:id="@+id/tv_mine_browse_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_liulamlishi"
+                android:gravity="center"
+                android:text="@string/history"/>
+
+            <TextView
+                android:id="@+id/tv_mine_safe_setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:drawablePadding="9dp"
+                android:drawableTop="@mipmap/me_anquanshezhi"
+                android:gravity="center"
+                android:text="@string/safe_setting"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cooperation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/cooperation"
+                android:textColor="@color/blue_text"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/cooperation_detail"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

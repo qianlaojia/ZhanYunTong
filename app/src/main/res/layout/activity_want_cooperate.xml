@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.WantCooperateActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <ImageView
+        android:id="@+id/iv_cooper_image"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:src="@mipmap/image"/>
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_applier"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_white_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/supplier"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_applier_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@mipmap/woyaohezuo_xiala"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_applier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/rl_applier"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test"/>
+
+                    <Button
+                        android:id="@+id/btn_applier"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/shape_button_orange"
+                        android:text="@string/connect_us"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_distributor"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:background="@drawable/shape_white_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/distributor"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_distributor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@mipmap/woyaohezuo_xiala"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_distributor"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/rl_distributor"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test"/>
+
+                    <Button
+                        android:id="@+id/btn_distributor"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/shape_button_orange"
+                        android:text="@string/connect_us"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_advertise"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:background="@drawable/shape_white_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/advertise"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_advertise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@mipmap/woyaohezuo_xiala"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_advertise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/rl_advertise"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test"/>
+
+                    <Button
+                        android:id="@+id/btn_advertise"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/shape_button_orange"
+                        android:text="@string/connect_us"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_spot"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:background="@drawable/shape_white_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/spot"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_spot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@mipmap/woyaohezuo_xiala"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_spot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/rl_spot"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test"/>
+
+                    <Button
+                        android:id="@+id/btn_spot"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/shape_button_orange"
+                        android:text="@string/connect_us"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_through_train"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:background="@drawable/shape_white_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/throughTrain"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_through_train"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@mipmap/woyaohezuo_xiala"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll__through_train"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/rl_through_train"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test"/>
+
+                    <Button
+                        android:id="@+id/btn__through_train"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/shape_button_orange"
+                        android:text="@string/connect_us"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

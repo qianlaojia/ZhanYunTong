@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_white_normal">
+
+    <TextView
+        android:id="@+id/tv_bus_ticket_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/bus_ticket"
+        android:textColor="@color/black"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_order_num_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/tv_order_num_details"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="18dp"
+        android:layout_toStartOf="@id/tv_order_num_details"
+        android:text="@string/order_num"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_bus_ticket_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_bus_ticket_text"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/zhengzhou"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_bus_ticket_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_bus_ticket_text"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/tv_bus_ticket_from"
+        android:text="@string/xian"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_bus_ticket_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_bus_ticket_from"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/date"
+        android:textSize="12sp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button3"
+        android:layout_alignTop="@+id/tv_bus_ticket_to"
+        android:contentDescription="@string/already_cancel"
+        android:src="@mipmap/dingdan_fenxiang"/>
+
+    <ImageView
+
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_share"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/tv_share"
+        android:contentDescription="@string/already_cancel"
+        android:src="@mipmap/dingdan_shanchu"/>
+
+    <TextView
+
+        android:id="@+id/tv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/iv_share"
+        android:layout_alignTop="@+id/tv_bus_ticket_date"
+        android:text="@string/share"/>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_share"
+        android:layout_alignBottom="@+id/tv_share"
+        android:layout_alignStart="@+id/iv_delete"
+        android:text="@string/delete"/>
+
+    <include
+        android:id="@+id/line"
+        layout="@layout/layout_division_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_bus_ticket_date"/>
+
+    <TextView
+        android:id="@+id/tv_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
+        android:layout_marginBottom="18dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/need_trip"
+        android:textColor="@color/blue_text"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="78dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/line"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_button_blue"
+        android:text="@string/btn_details"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+</RelativeLayout>

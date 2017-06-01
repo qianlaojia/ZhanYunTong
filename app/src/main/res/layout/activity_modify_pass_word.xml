@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.ModifyPassWordActivity">
+
+    <include layout="@layout/layout_message_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="153dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/shape_white_normal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/old_pwd"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:background="@null"
+                android:hint="请输入原密码"
+                android:maxLines="1"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include
+            layout="@layout/layout_division_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/new_pwd"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:background="@null"
+                android:hint="请输入6-16位字母和数字的组合"
+                android:maxLines="1"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include
+            layout="@layout/layout_division_line"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/new_pwd_again"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:background="@null"
+                android:hint="请再次输入新密码"
+                android:maxLines="1"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_modify_pwd_ok"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/selector_button_normal_blue"
+        android:text="@string/ok_modify"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+</LinearLayout>

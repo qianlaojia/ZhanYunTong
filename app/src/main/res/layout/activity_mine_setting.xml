@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.mine.MineSettingActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_white_normal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_personal_information"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="@string/personal_information"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/jiantou_huise"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_push_message"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="@string/push_message"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+
+            <RadioGroup
+                android:id="@+id/rg_on_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_mine_setting_on_off"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/rb_on_off_left"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_mine_setting_on_off_left"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/open"
+                    android:textColor="@color/selector_text_service_title"/>
+
+                <RadioButton
+                    android:id="@+id/rb_mine_setting_on_off_right"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_mine_setting_on_off_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/off"
+                    android:textColor="@color/selector_text_service_title"/>
+            </RadioGroup>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rl_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="@string/pwd"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/jiantou_huise"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_white_normal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_about"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="@string/about"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/jiantou_huise"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rl_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="@string/clear_cache"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/jiantou_huise"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_log_off"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/shape_button_orange"
+        android:text="@string/log_off"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+</LinearLayout>

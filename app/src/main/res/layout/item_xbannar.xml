@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.stx.xhb.xbanner.XBanner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/XBanner"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:AutoPlayTime="3000"
+        app:isShowIndicatorOnlyOne="true"
+        app:isShowNumberIndicator="true"
+        app:pageChangeDuration="800"
+        app:pointsContainerBackground="#44aaaaaa"
+        app:pointsPosition="RIGHT"
+        app:tipTextSize="12sp"/>
+
+</LinearLayout>

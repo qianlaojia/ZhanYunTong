@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_service_order"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:background="@drawable/shape_white_normal"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="汽车票"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:text="待出行"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="西安"
+            android:textColor="@color/gray99"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:text="郑州"
+            android:textColor="@color/gray99"
+            android:textSize="17sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="02-24"
+            android:textColor="@color/gray99"
+
+            android:textSize="17sp"
+            />
+
+        <TextView
+android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:text="出行人数："
+            android:textColor="@color/gray99"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_people_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+       android:layout_marginEnd="15dp"
+            android:text="1"
+            android:textColor="@color/gray99"
+            android:textSize="17sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="13dp"
+        android:background="@color/gray99"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="热门咨询"
+        android:textColor="@color/gray99"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_question_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="车票在什么地方取?"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tv_question_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="坐车需要提前多长时间?"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:id="@+id/tv_service_details"
+            android:layout_width="80dp"
+            android:layout_height="29dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/shape_service_order_detail"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="@color/blue_text"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_service_consult"
+            android:layout_width="80dp"
+            android:layout_height="29dp"
+            android:layout_marginRight="15dp"
+            android:layout_toStartOf="@id/tv_service_details"
+            android:background="@drawable/shape_service_order_consult"
+            android:gravity="center"
+            android:text="咨询"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

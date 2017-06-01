@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.GroupTourActivity">
+
+
+  <include
+      layout="@layout/layout_search_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.stx.xhb.xbanner.XBanner
+                android:id="@+id/xb_group_trip_XBanner"
+                android:layout_width="match_parent"
+                android:layout_height="137dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_hot_pots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/hot_pots"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_hot_pots"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <GridView
+                            android:id="@+id/gv_hot_pots"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:numColumns="auto_fit"
+                            android:stretchMode="spacingWidthUniform">
+
+                        </GridView>
+                    </LinearLayout>
+
+
+                </HorizontalScrollView>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/popular_destination"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+                <com.dsgj.youyuntong.Utils.view.GridViewTableLine
+                    android:id="@+id/lgv_group_trip_hot_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="154dp"
+                    android:layout_marginTop="8dp"
+                    android:numColumns="4"/>
+            </LinearLayout>
+
+            <RadioGroup
+                android:layout_marginTop="10dp"
+                android:id="@+id/rg_Group_tour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/rb_travel_around"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_gridview"
+                    android:button="@null"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/gentuanyou_zhoubianyou"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/ZHouBianYou"
+                    android:textSize="12sp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_inbound_tourism"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_gridview"
+                    android:button="@null"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/gentuanyou_guoneiyou"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/guoneiyou"
+                    android:textSize="12sp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_travel_abroad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_gridview"
+                    android:button="@null"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/gentuanyou_chujingyou"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/chuguoyou"
+                    android:textSize="12sp"/>
+
+            </RadioGroup>
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_group_trip"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

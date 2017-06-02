@@ -2,16 +2,16 @@ package com.dsgj.youyuntong.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.JavaBean.GroupTourBean;
-import com.dsgj.youyuntong.JavaBean.HomePageBean;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
@@ -19,10 +19,13 @@ import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
-import com.dsgj.youyuntong.Utils.view.GridViewOneLineRoll;
 import com.dsgj.youyuntong.Utils.view.GridViewTableLine;
+import com.dsgj.youyuntong.activity.Message.MessageActivity;
+import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity;
+import com.dsgj.youyuntong.adapter.GroupTripRecycleViewAdapter;
 import com.dsgj.youyuntong.adapter.LineGridViewAdapter;
 import com.dsgj.youyuntong.adapter.MainViewPagerAdapter;
+import com.dsgj.youyuntong.adapter.ThoughTrainRecycleViewAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
 import com.dsgj.youyuntong.fragment.fragment.TravelAbordFragment;
 import com.dsgj.youyuntong.fragment.fragment.TravelAroundFragment;
@@ -31,6 +34,7 @@ import com.jauker.widget.BadgeView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,16 +44,6 @@ public class GroupTourActivity extends BaseActivity {
     private XBanner mXBanner;
     private GridViewTableLine mLineGridView;
     private String[] mStrings = {"张三", "张三", "李四", "王五", "赵六", "李四", "李四", "王五", "赵六", "李四", "王五", "赵六", "李四", "王五", "赵六", "更多"};
-    private GridView mScollGridView;
-    private String[] mMstrings = new String[]{"张三", "李四", "王五", "赵六", "李四", "王五", "赵六"
-            , "李四", "王五", "赵六", "李四", "王五", "赵六", "李四"
-            , "王五", "赵六", "李四", "王五", "赵六", "李四", "王五", "赵六"};
-    private int[] mImages = new int[]{R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
-            , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
-            , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
-            , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
-            , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
-            , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu};
     private RadioButton mTravel_around;
     private RadioButton mInbound_tourism;
     private RadioButton mTravel_abroad;
@@ -60,6 +54,9 @@ public class GroupTourActivity extends BaseActivity {
     private TextView mSearchTips;
     private ImageView mMessage;
     private BadgeView mMBadgeView;
+    private RecyclerView mRecyclerView;
+    private List<Integer> mImage;
+    private GroupTripRecycleViewAdapter mMAdapter;
 
     @Override
     protected int getLayoutID() {
@@ -74,7 +71,6 @@ public class GroupTourActivity extends BaseActivity {
         mMessage = (ImageView) findViewById(R.id.iv_news_Image);
         mXBanner = (XBanner) findViewById(R.id.xb_group_trip_XBanner);
         mLineGridView = (GridViewTableLine) findViewById(R.id.lgv_group_trip_hot_city);
-        mScollGridView = (GridView) findViewById(R.id.gv_hot_pots);
         mTravel_around = (RadioButton) findViewById(R.id.rb_travel_around);
         mInbound_tourism = (RadioButton) findViewById(R.id.rb_inbound_tourism);
         mTravel_abroad = (RadioButton) findViewById(R.id.rb_travel_abroad);
@@ -84,12 +80,26 @@ public class GroupTourActivity extends BaseActivity {
         mFragments.add(new TravelAroundFragment());
         mFragments.add(new TravelInCountryFragment());
         mFragments.add(new TravelAbordFragment());
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_Group_trip_hot_pots);
 
     }
 
     @Override
     protected void initData() {
         GetServerData();
+        ImageAndData();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        //设置适配器
+        mMAdapter = new GroupTripRecycleViewAdapter(this, mImage);
+        mMAdapter.setOnItemClickListener(new GroupTripRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastUtils.show(GroupTourActivity.this, "第" + position + "个被点击！");
+            }
+        });
+        mRecyclerView.setAdapter(mMAdapter);
         mMBadgeView.setTargetView(mMessage);
         String MMessage = SPUtils.with(this).get("message_unread", "0");
         if (MMessage.equals("1")) {
@@ -107,8 +117,7 @@ public class GroupTourActivity extends BaseActivity {
                 ToastUtils.show(GroupTourActivity.this, "第" + position + "被点击！！");
             }
         });
-        new GridViewOneLineRoll(GroupTourActivity.this
-                , mScollGridView, mMstrings, mImages);
+
         //默认周边游被点击
         mRadioGroup.check(R.id.rb_travel_around);
 
@@ -155,6 +164,14 @@ public class GroupTourActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void ImageAndData() {
+        mImage = new ArrayList<>(Arrays.asList(R.mipmap.shilitu, R.mipmap.shilitu
+                , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
+                , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
+                , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu));
+
     }
 
     private void GetServerData() {

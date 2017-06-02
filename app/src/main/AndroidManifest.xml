@@ -55,7 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MessageActivity">
+        <activity android:name=".activity.Message.MessageActivity">
         </activity>
         <activity android:name=".activity.TicketActivity">
         </activity>
@@ -72,7 +72,7 @@
         </activity>
         <activity android:name=".activity.TicketDetailsActivity">
         </activity>
-        <activity android:name=".activity.ThroughTrainActivity">
+        <activity android:name=".activity.ThroughTrain.ThroughTrainActivity">
         </activity>
         <activity android:name=".activity.mine.MineSettingActivity">
         </activity>
@@ -92,6 +92,12 @@
         <activity android:name=".activity.mine.AboutActivity">
         </activity>
         <activity android:name=".activity.mine.AboutDetailActivity">
+        </activity>
+        <activity android:name=".activity.Message.OrderMessageActivity">
+        </activity>
+        <activity android:name=".activity.Message.CheapMessageActivity">
+        </activity>
+        <activity android:name=".activity.ThroughTrainInquiryActivity">
         </activity>
     </application>
 

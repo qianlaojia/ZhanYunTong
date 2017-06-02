@@ -24,7 +24,7 @@ import com.dsgj.youyuntong.Utils.recyclerview.LinearLayoutUtils;
 import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
 import com.dsgj.youyuntong.Utils.system.callPhoneUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.activity.MessageActivity;
+import com.dsgj.youyuntong.activity.Message.MessageActivity;
 import com.dsgj.youyuntong.adapter.HomePageRecyclerViewAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.google.gson.Gson;

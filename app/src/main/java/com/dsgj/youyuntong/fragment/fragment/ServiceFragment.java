@@ -11,10 +11,8 @@ import android.widget.RadioGroup;
 
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
-import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.system.callPhoneUtils;
-import com.dsgj.youyuntong.Utils.view.RedPotUtils;
-import com.dsgj.youyuntong.activity.MessageActivity;
+import com.dsgj.youyuntong.activity.Message.MessageActivity;
 import com.dsgj.youyuntong.adapter.MainViewPagerAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.jauker.widget.BadgeView;

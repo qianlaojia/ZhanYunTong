@@ -1,25 +1,26 @@
-package com.dsgj.youyuntong.activity;
+package com.dsgj.youyuntong.activity.ThroughTrain;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
-import com.dsgj.youyuntong.Utils.view.GridViewOneLineRoll;
 import com.dsgj.youyuntong.Utils.view.GridViewTableLine;
 import com.dsgj.youyuntong.Utils.view.ListViewForScrollView;
+import com.dsgj.youyuntong.adapter.ThoughTrainRecycleViewAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
 import com.stx.xhb.xbanner.XBanner;
-import com.stx.xhb.xbanner.XBannerUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ThroughTrainActivity extends BaseActivity {
 
@@ -28,7 +29,7 @@ public class ThroughTrainActivity extends BaseActivity {
     private TextView mMiddleText;
     private XBanner mXBanner;
     private ListViewForScrollView mListView;
-    private ScrollView mScrollView;
+
     private GridViewTableLine mGridview;
     private String[] mMstrings = new String[]{"张三", "李四", "王五", "赵六", "李四", "王五", "赵六"
             , "李四", "王五", "赵六", "李四", "王五", "赵六", "李四"
@@ -39,6 +40,9 @@ public class ThroughTrainActivity extends BaseActivity {
             , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
             , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu
             , R.mipmap.shilitu, R.mipmap.shilitu, R.mipmap.shilitu};
+    private RecyclerView mRecyclerView;
+    private ThoughTrainRecycleViewAdapter mMAdapter;
+    private List<Integer> mMData;
 
     @Override
     protected int getLayoutID() {
@@ -51,15 +55,25 @@ public class ThroughTrainActivity extends BaseActivity {
         mMiddleText = (TextView) findViewById(R.id.tv_middle_text);
         mXBanner = (XBanner) findViewById(R.id.XB_through_trip);
         mListView = (ListViewForScrollView) findViewById(R.id.lv_local_though_trip);
-        mScrollView = (ScrollView) findViewById(R.id.sv_through_trip);
-        mGridview = (GridViewTableLine) findViewById(R.id.gv_through_trip_hot_pots);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_tt_hot_spots);
     }
 
     @Override
     protected void initData() {
+        RvImageAndText();//data
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        //设置适配器
+        mMAdapter = new ThoughTrainRecycleViewAdapter(this, mMData);
+        mMAdapter.setOnItemClickListener(new ThoughTrainRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastUtils.show(ThroughTrainActivity.this, "第" + position + "个被点击！");
+            }
+        });
+        mRecyclerView.setAdapter(mMAdapter);
         XBannerUtils.setBannerHolder(this, mXBanner);
-        new GridViewOneLineRoll(ThroughTrainActivity.this, mGridview, mMstrings, mImages);
-        mScrollView.smoothScrollTo(0, 0);
         mMiddleText.setText("直通车");
         mListView.setAdapter(new MyAdapter());
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,6 +82,14 @@ public class ThroughTrainActivity extends BaseActivity {
                 ToastUtils.show(ThroughTrainActivity.this, "第" + position + "被点击！！！");
             }
         });
+    }
+
+    private void RvImageAndText() {
+        mMData = new ArrayList<>(Arrays.asList(R.mipmap.shilitu,
+                R.mipmap.shilitu, R.mipmap.shilitu,
+                R.mipmap.shilitu, R.mipmap.shilitu,
+                R.mipmap.shilitu, R.mipmap.shilitu,
+                R.mipmap.shilitu, R.mipmap.shilitu));
     }
 
     @Override

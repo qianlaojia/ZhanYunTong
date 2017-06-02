@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dsgj.youyuntong.activity.MessageActivity">
+    tools:context="com.dsgj.youyuntong.activity.Message.MessageActivity">
 
     <include
         layout="@layout/layout_message_title"/>
 
 
     <LinearLayout
+        android:id="@+id/ll_message_service_message"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_marginTop="3dp"
@@ -19,7 +20,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView_s"
+            android:id="@+id/iv_message_service_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -41,16 +42,17 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tv_message_service_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tv_ser"
                 android:layout_alignParentBottom="true"
-
                 android:layout_marginBottom="18dp"
                 android:text="@string/message_service_detail"
                 android:textColor="@color/textColor_s"/>
 
             <TextView
+                android:id="@+id/tv_message_service_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -62,6 +64,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_message_order_message"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_marginTop="13dp"
@@ -69,7 +72,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView_menu"
+            android:id="@+id/iv_order_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -91,16 +94,16 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tv_message_order_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_alignParentBottom="true"
-
                 android:layout_marginBottom="18dp"
                 android:text="@string/message_order_detail"
                 android:textColor="@color/textColor_s"/>
 
             <TextView
+                android:id="@+id/tv_message_order_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -115,6 +118,7 @@
         layout="@layout/layout_division_line"/>
 
     <LinearLayout
+        android:id="@+id/ll_message_cheap_message"
         android:layout_width="match_parent"
         android:layout_height="78dp"
 
@@ -122,7 +126,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView_cheap"
+            android:id="@+id/iv_cheap_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -144,16 +148,16 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tv_message_cheap_massage_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_alignParentBottom="true"
-
                 android:layout_marginBottom="18dp"
                 android:text="@string/message_order_cheap"
                 android:textColor="@color/textColor_s"/>
 
             <TextView
+                android:id="@+id/tv_message_cheap_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

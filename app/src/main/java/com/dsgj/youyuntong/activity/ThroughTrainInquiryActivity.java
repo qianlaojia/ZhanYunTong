@@ -1,34 +1,33 @@
 package com.dsgj.youyuntong.activity;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.view.RedPotUtils;
 import com.dsgj.youyuntong.base.BaseActivity;
 
-public class MessageActivity extends BaseActivity {
+public class ThroughTrainInquiryActivity extends BaseActivity {
 
 
     private RelativeLayout mBack;
-    private ImageView mImageCheap;
+    private TextView mMiddleText;
 
     @Override
     protected int getLayoutID() {
-        return R.layout.activity_message;
+        return R.layout.activity_through_train_inquiry;
     }
 
     @Override
     protected void initView() {
         mBack = (RelativeLayout) findViewById(R.id.rl_title_back);
-        mImageCheap = (ImageView) findViewById(R.id.imageView_cheap);//优惠活动图片
-        ImageView imageView = (ImageView) findViewById(R.id.imageView_s);
-       // RedPotUtils.onlyShowPot(this, mImageCheap, 1,true);
+        mMiddleText = (TextView) findViewById(R.id.tv_middle_text);
+
     }
 
     @Override
     protected void initData() {
+        mMiddleText.setText("出发地-目的地");
 
     }
 
@@ -42,9 +41,8 @@ public class MessageActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_title_back:
-                finish();
+                this.finish();
                 break;
         }
-
     }
 }

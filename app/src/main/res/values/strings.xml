@@ -10,7 +10,7 @@
     <string name="message">消息</string>
     <string name="message_service">客服消息</string>
     <string name="message_service_detail">暂无客服消息</string>
-    <string name="message_order">订单详情</string>
+    <string name="message_order">订单服务</string>
     <string name="message_order_detail">你的三亚五日游已经完成</string>
     <string name="message_cheap">优惠活动</string>
     <string name="message_order_cheap">最新西安一日游</string>
@@ -185,6 +185,8 @@
     <string name="prise">￥198</string>
     <string name="tv_register_toLogin">返回登录</string>
     <string name="one_people">1人</string>
-    <string name="date2">2017-04-15</string>
+    <string name="date2">2017–04–15</string>
     <string name="need_id">请输入身份证</string>
+    <string name="yesterday">前一天</string>
+    <string name="tomorrow">后一天</string>
 </resources>

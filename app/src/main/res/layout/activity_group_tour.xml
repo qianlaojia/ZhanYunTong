@@ -8,8 +8,8 @@
     tools:context="com.dsgj.youyuntong.activity.GroupTourActivity">
 
 
-  <include
-      layout="@layout/layout_search_title"/>
+    <include
+        layout="@layout/layout_search_title"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,11 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="137dp"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_hot_pots"
@@ -42,32 +43,14 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"/>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_Group_trip_hot_pots"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/tv_hot_pots"
-                    android:scrollbars="none">
+                    android:layout_centerVertical="true"
+                    android:scrollbars="none"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-
-                        <GridView
-                            android:id="@+id/gv_hot_pots"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:numColumns="auto_fit"
-                            android:stretchMode="spacingWidthUniform">
-
-                        </GridView>
-                    </LinearLayout>
-
-
-                </HorizontalScrollView>
-
-
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,10 +77,10 @@
             </LinearLayout>
 
             <RadioGroup
-                android:layout_marginTop="10dp"
                 android:id="@+id/rg_Group_tour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:weightSum="3">
 

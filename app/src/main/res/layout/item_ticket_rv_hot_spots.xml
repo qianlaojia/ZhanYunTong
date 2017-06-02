@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="120dp"
+              android:layout_height="140dp"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_through_train_rv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/shilitu"/>
+
+    <TextView
+        android:id="@+id/tv_through_train_rv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/travel_text"
+        android:textColor="@color/gray"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_through_train_rv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/money_details"
+        android:textColor="@color/colorTextOrange"
+        android:textSize="14sp"/>
+
+</LinearLayout>

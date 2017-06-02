@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dsgj.youyuntong.activity.ThroughTrainActivity">
+    tools:context="com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity">
 
     <include
         layout="@layout/layout_message_title"/>
@@ -59,12 +59,13 @@
                 android:id="@+id/XB_through_trip"
                 android:layout_width="match_parent"
                 android:layout_height="138dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="12dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="138dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <TextView
@@ -76,22 +77,18 @@
                     android:textColor="@color/gray"
                     android:textSize="15sp"/>
 
-                <com.dsgj.youyuntong.Utils.view.GridViewTableLine
-
-                    android:id="@+id/gv_through_trip_hot_pots"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_tt_hot_spots"
                     android:layout_width="wrap_content"
-                    android:layout_height="154dp"
-                    android:layout_marginTop="8dp"
-                    android:numColumns="4">
-
-                </com.dsgj.youyuntong.Utils.view.GridViewTableLine>
-
-
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <TextView

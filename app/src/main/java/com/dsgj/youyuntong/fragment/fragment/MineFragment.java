@@ -1,6 +1,5 @@
 package com.dsgj.youyuntong.fragment.fragment;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,13 +11,12 @@ import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.activity.LogOnAndRegisterActivity;
-import com.dsgj.youyuntong.activity.MessageActivity;
+import com.dsgj.youyuntong.activity.Message.MessageActivity;
 import com.dsgj.youyuntong.activity.mine.CommonInformationActivity;
 import com.dsgj.youyuntong.activity.mine.MineAllOrdersActivity;
 import com.dsgj.youyuntong.activity.mine.MineSettingActivity;
 import com.dsgj.youyuntong.activity.mine.MyCollectionActivity;
 import com.dsgj.youyuntong.activity.mine.ScannerHistoryActivity;
-import com.dsgj.youyuntong.activity.mine.SecuritySettingActivity;
 import com.dsgj.youyuntong.activity.mine.WantCooperateActivity;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.jauker.widget.BadgeView;

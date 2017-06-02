@@ -15,10 +15,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
 import com.dsgj.youyuntong.activity.GroupTourActivity;
-import com.dsgj.youyuntong.activity.ThroughTrainActivity;
+import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity;
+import com.dsgj.youyuntong.activity.ThroughTrainInquiryActivity;
 import com.dsgj.youyuntong.activity.TicketActivity;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -300,7 +300,8 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show(mContext, "查询被点击");
+                Intent intent = new Intent(mContext, ThroughTrainInquiryActivity.class);
+                mContext.startActivity(intent);
             }
         });
 

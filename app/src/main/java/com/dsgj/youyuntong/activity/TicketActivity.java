@@ -13,12 +13,13 @@ import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
-import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
+import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
+import com.dsgj.youyuntong.activity.Search.SearchActivity;
 import com.dsgj.youyuntong.adapter.GroupTripRecycleViewAdapter;
 import com.dsgj.youyuntong.adapter.TicketRecycleViewAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
-import com.dsgj.zhanyuntong.adapter.VerticalRecycleViewAdapter;
+import com.dsgj.youyuntong.adapter.VerticalRecycleViewAdapter;
 import com.jauker.widget.BadgeView;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -170,8 +171,8 @@ public class TicketActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_search_tips:
-                ToastUtils.show(this, "跳转到搜索的界面！");
-                jumpToActivity(TicketDetailsActivity.class);
+
+                jumpToActivity(SearchActivity.class);
                 break;
             case R.id.iv_news_Image:
                 SPUtils.with(this).save("message_unread", "0");

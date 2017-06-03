@@ -21,10 +21,12 @@ import com.dsgj.youyuntong.Utils.Http.HttpUtils;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.recyclerview.LinearLayoutUtils;
-import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
+import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.system.callPhoneUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.activity.LocationActivity;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
+import com.dsgj.youyuntong.activity.Search.SearchActivity;
 import com.dsgj.youyuntong.adapter.HomePageRecyclerViewAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.google.gson.Gson;
@@ -203,8 +205,8 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_Location:
+                jumpToActivity(LocationActivity.class);
 
-                ToastUtils.show(getActivity(), "点击了位置的控件");
                 break;
             case R.id.iv_phone:
                 String phoneNumber = "13623717683";
@@ -213,6 +215,10 @@ public class HomeFragment extends BaseFragment {
             case R.id.iv_message://跳转到消息页面（完成）
                 SPUtils.with(getActivity()).save("message_unread", "0");
                 jumpToActivity(MessageActivity.class);
+                break;
+            case R.id.et_search://跳转到消息页面（完成）
+
+                jumpToActivity(SearchActivity.class);
                 break;
         }
     }

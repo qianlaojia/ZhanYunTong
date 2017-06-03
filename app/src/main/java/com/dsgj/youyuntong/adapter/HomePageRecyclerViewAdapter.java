@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
+import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.activity.GroupTourActivity;
 import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity;
 import com.dsgj.youyuntong.activity.ThroughTrainInquiryActivity;

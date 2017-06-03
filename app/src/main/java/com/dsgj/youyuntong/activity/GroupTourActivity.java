@@ -18,14 +18,13 @@ import com.dsgj.youyuntong.Utils.Http.HttpUtils;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
-import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
+import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.view.GridViewTableLine;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
-import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity;
+import com.dsgj.youyuntong.activity.Search.SearchActivity;
 import com.dsgj.youyuntong.adapter.GroupTripRecycleViewAdapter;
 import com.dsgj.youyuntong.adapter.LineGridViewAdapter;
 import com.dsgj.youyuntong.adapter.MainViewPagerAdapter;
-import com.dsgj.youyuntong.adapter.ThoughTrainRecycleViewAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
 import com.dsgj.youyuntong.fragment.fragment.TravelAbordFragment;
 import com.dsgj.youyuntong.fragment.fragment.TravelAroundFragment;
@@ -57,6 +56,7 @@ public class GroupTourActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private List<Integer> mImage;
     private GroupTripRecycleViewAdapter mMAdapter;
+    private TextView mSearchTitle;
 
     @Override
     protected int getLayoutID() {
@@ -76,6 +76,7 @@ public class GroupTourActivity extends BaseActivity {
         mTravel_abroad = (RadioButton) findViewById(R.id.rb_travel_abroad);
         mRadioGroup = (RadioGroup) findViewById(R.id.rg_Group_tour);
         mViewPager = (ViewPager) findViewById(R.id.vp_group_trip);
+        mSearchTitle = (TextView) findViewById(R.id.tv_search_tips);
         mFragments = new ArrayList<>();
         mFragments.add(new TravelAroundFragment());
         mFragments.add(new TravelInCountryFragment());
@@ -120,7 +121,6 @@ public class GroupTourActivity extends BaseActivity {
 
         //默认周边游被点击
         mRadioGroup.check(R.id.rb_travel_around);
-
         mViewPager.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager(), mFragments));
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -219,6 +219,7 @@ public class GroupTourActivity extends BaseActivity {
     protected void initListener() {
         mBack.setOnClickListener(this);
         mMessage.setOnClickListener(this);
+        mSearchTitle.setOnClickListener(this);
     }
 
     @Override
@@ -230,6 +231,9 @@ public class GroupTourActivity extends BaseActivity {
             case R.id.iv_news_Image:
                 SPUtils.with(this).save("message_unread", "0");
                 jumpToActivity(MessageActivity.class);
+                break;
+            case R.id.tv_search_tips:
+                jumpToActivity(SearchActivity.class);
                 break;
         }
 

@@ -10,12 +10,15 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dsgj.youyuntong.R;
+import com.gyf.barlibrary.ImmersionBar;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.Map;
 
 /**
- * Created by zhangyunhao on 2017/4/19.
+ *TODO:
+ * Created by 张云浩  on 2017/4/19.
+ *邮箱：943332771@qq.com
  */
 
 public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
@@ -24,6 +27,10 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.titleColor)
+                .fitsSystemWindows(true)  //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看
+                .init();
         setContentView(getLayoutID());
         //处理公共逻辑
         dealCommonPart();
@@ -63,7 +70,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     /**
      * 不带参数跳转到clz的Activity
      *
-     * @param clz
+     * @param clz   Activity名称
      */
     public void jumpToActivity(Class<? extends BaseActivity> clz) {
         jumpToActivity(clz, null);
@@ -134,7 +141,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        ImmersionBar.with(this).destroy();
     }
 
 }

@@ -39,6 +39,7 @@
                     android:text="@string/zhengzhou"/>
 
                 <TextView
+                    android:id="@+id/tv_through_train_search"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="5dp"

@@ -1,4 +1,4 @@
-package com.dsgj.zhanyuntong.adapter;
+package com.dsgj.youyuntong.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.adapter.GroupTripRecycleViewAdapter;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class VerticalRecycleViewAdapter extends
     /**
      * ItemClick的回调接口
      *
-     * @author
+     * @author   张云浩
      */
     public interface OnItemClickListener {
         void onItemClick(View view, int position);

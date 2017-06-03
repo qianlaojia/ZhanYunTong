@@ -189,4 +189,8 @@
     <string name="need_id">请输入身份证</string>
     <string name="yesterday">前一天</string>
     <string name="tomorrow">后一天</string>
+    <string name="currentLocation">当前位置</string>
+    <string name="startLocation">出发位置</string>
+    <string name="search_history">历史记录</string>
+    <string name="hotRecommend">热门推荐</string>
 </resources>

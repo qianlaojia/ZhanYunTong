@@ -47,7 +47,7 @@
                     android:id="@+id/rv_Group_trip_hot_pots"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
+                   android:layout_gravity="center"
                     android:scrollbars="none"/>
 
             </LinearLayout>

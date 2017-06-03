@@ -1,4 +1,4 @@
-package com.dsgj.youyuntong.Utils.recyclerview;
+package com.dsgj.youyuntong.Utils.view;
 
 import android.content.Context;
 import android.view.View;
@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.stx.xhb.xbanner.XBanner;
 
 
@@ -44,18 +43,34 @@ public class XBannerUtils {
                 Glide.with(context).load(getImageUrl().get(position)).into((ImageView) view);
             }
         });
-/**
- * 这个可以对每个点击事件进行设置：9
- */
+        /**
+         * 这个可以对每个点击事件进行设置：9
+         */
         xbanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, int position) {
                 Toast.makeText(context, "点击了第" + position + "图片", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
-
+    public static void setBannerHolderFromInternet(final Context context
+            , XBanner xbanner,List<String>  imageUrl) {
+        xbanner.setData(imageUrl, null);
+        xbanner.setmAdapter(new XBanner.XBannerAdapter() {
+            @Override
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                Glide.with(context).load(getImageUrl().get(position)).into((ImageView) view);
+            }
+        });
+        /**
+         * 这个可以对每个点击事件进行设置：9
+         */
+        xbanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(XBanner banner, int position) {
+                Toast.makeText(context, "点击了第" + position + "图片", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }

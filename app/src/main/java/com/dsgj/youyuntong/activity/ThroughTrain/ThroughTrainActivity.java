@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.Utils.recyclerview.XBannerUtils;
+import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.view.GridViewTableLine;
 import com.dsgj.youyuntong.Utils.view.ListViewForScrollView;
+import com.dsgj.youyuntong.activity.Search.SearchActivity;
 import com.dsgj.youyuntong.adapter.ThoughTrainRecycleViewAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
 import com.stx.xhb.xbanner.XBanner;
@@ -43,6 +44,7 @@ public class ThroughTrainActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private ThoughTrainRecycleViewAdapter mMAdapter;
     private List<Integer> mMData;
+    private TextView mSearch;
 
     @Override
     protected int getLayoutID() {
@@ -56,6 +58,7 @@ public class ThroughTrainActivity extends BaseActivity {
         mXBanner = (XBanner) findViewById(R.id.XB_through_trip);
         mListView = (ListViewForScrollView) findViewById(R.id.lv_local_though_trip);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_tt_hot_spots);
+        mSearch = (TextView) findViewById(R.id.tv_through_train_search);
     }
 
     @Override
@@ -95,6 +98,7 @@ public class ThroughTrainActivity extends BaseActivity {
     @Override
     protected void initListener() {
         mBack.setOnClickListener(this);
+        mSearch.setOnClickListener(this);
 
     }
 
@@ -104,6 +108,10 @@ public class ThroughTrainActivity extends BaseActivity {
             case R.id.rl_title_back:
                 this.finish();
                 break;
+            case  R.id.tv_through_train_search:
+                jumpToActivity(SearchActivity.class);
+                break;
+
         }
 
     }

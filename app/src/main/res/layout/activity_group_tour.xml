@@ -11,9 +11,10 @@
     <include
         layout="@layout/layout_search_title"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <LinearLayout
@@ -28,7 +29,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="132dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:orientation="vertical">
@@ -46,8 +47,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_Group_trip_hot_pots"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                   android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:scrollbars="none"/>
 
             </LinearLayout>
@@ -131,17 +132,14 @@
                     android:paddingTop="15dp"
                     android:text="@string/chuguoyou"
                     android:textSize="12sp"/>
-
             </RadioGroup>
-
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_group_trip"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="750dp"
                 android:layout_marginTop="15dp"/>
-
         </LinearLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

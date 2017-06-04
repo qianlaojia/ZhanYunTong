@@ -3,13 +3,13 @@
               android:id="@+id/ll_home_search"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_home_four_background"
+
               android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="34dp"
-        android:background="@color/blue_text">
+        android:background="@color/grayT">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -53,6 +53,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/shape_home_four_background"
         android:layout_width="match_parent"
         android:layout_height="62dp">
 
@@ -95,6 +96,7 @@
         android:background="@color/line_color"/>
 
     <RelativeLayout
+        android:background="@drawable/shape_home_four_background"
         android:layout_width="match_parent"
         android:layout_height="62dp">
 
@@ -116,6 +118,7 @@
         android:background="@color/line_color"/>
 
     <RelativeLayout
+        android:background="@drawable/shape_home_four_background"
         android:layout_width="match_parent"
         android:layout_height="73dp">
 

@@ -1,4 +1,4 @@
-package com.dsgj.youyuntong.adapter;
+package com.dsgj.youyuntong.adapter.Ticket;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,13 +18,9 @@ import java.util.List;
  * 邮箱：943332771@qq.com
  */
 
-public class ThoughTrainRecycleViewAdapter extends
-        RecyclerView.Adapter<ThoughTrainRecycleViewAdapter.ViewHolder> {
-    /**
-     * ItemClick的回调接口
-     *
-     * @author
-     */
+public class TicketRecycleViewAdapter extends
+        RecyclerView.Adapter<TicketRecycleViewAdapter.ViewHolder> {
+
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
@@ -38,7 +34,7 @@ public class ThoughTrainRecycleViewAdapter extends
     private LayoutInflater mInflater;
     private List<Integer> mData;
 
-    public ThoughTrainRecycleViewAdapter(Context context, List<Integer> data) {
+    public TicketRecycleViewAdapter(Context context, List<Integer> data) {
         mInflater = LayoutInflater.from(context);
         mData = data;
     }
@@ -62,12 +58,12 @@ public class ThoughTrainRecycleViewAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.item_though_train_rv_hot_spots,
+        View view = mInflater.inflate(R.layout.item_ticket_rv_hot_spots,
                 viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         viewHolder.mImg = (ImageView) view
-                .findViewById(R.id.iv_through_train_rv_image);
+                .findViewById(R.id.iv_ticket_rv_image);
         return viewHolder;
     }
 

@@ -40,7 +40,7 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private List<Map<String, Object>> mGridViewList;
     //常规的item
     private List<String> normalList;
-    private final int X_BANNER_VIEW_TYPE = 0;//轮播图
+
     private final int FOUR_SELECT_VIEW_TYPE = 2;//四个选项的按钮
     private final int SEARCH_VIEW_TYPE = 1;//选择的item
     private final int MIDDLE_TITLE_VIEW_TYPE = 3;//中间的猜你喜欢item
@@ -66,12 +66,10 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
-            return X_BANNER_VIEW_TYPE;//轮播图
-        } else if (position == 1) {
             return SEARCH_VIEW_TYPE;//查询的item
-        } else if (position == 2) {
+        } else if (position == 1) {
             return FOUR_SELECT_VIEW_TYPE;//四个按钮
-        } else if (position == 3) {
+        } else if (position == 2) {
             return MIDDLE_TITLE_VIEW_TYPE;//图标
         } else
             return NORMAL_VIEW_TYPE;//剩下的都是布局相同的
@@ -88,10 +86,7 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;//根据类型的不同创建不同的viewHolder
-        if (viewType == X_BANNER_VIEW_TYPE) {
-            view = View.inflate(mContext, R.layout.item_xbannar, null);
-            return new XBannerHolder(view);
-        } else if (viewType == SEARCH_VIEW_TYPE) {
+        if (viewType == SEARCH_VIEW_TYPE) {
             view = View.inflate(mContext, R.layout.item_home_search, null);
             return new SearchHolder(view);
         } else if (viewType == FOUR_SELECT_VIEW_TYPE) {
@@ -123,11 +118,7 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //强制禁止复用
         holder.setIsRecyclable(false);
-        if (holder instanceof XBannerHolder) {
-            //这是绑定轮播框的
-            XBanner xbanner = ((XBannerHolder) holder).banner;
-            XBannerUtils.setBannerHolder(mContext, xbanner);
-        } else if (holder instanceof SearchHolder) {
+        if (holder instanceof SearchHolder) {
             SearchHolder Holder = (SearchHolder) holder;
             setSearch(Holder.linearlayout);
         } else if (holder instanceof FourSelectHolder) {
@@ -148,20 +139,9 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
      */
     @Override
     public int getItemCount() {
-        return normalList.size() + 4;
+        return normalList.size() + 3;
     }
 
-    /**
-     * 轮播图的ViewHolder
-     */
-    private static class XBannerHolder extends RecyclerView.ViewHolder {
-        XBanner banner;
-
-        XBannerHolder(View itemView) {
-            super(itemView);
-            banner = (XBanner) itemView.findViewById(R.id.XBanner);
-        }
-    }
 
     /**
      * 四个gridView

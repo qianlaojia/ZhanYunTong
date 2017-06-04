@@ -3,6 +3,7 @@ package com.dsgj.youyuntong.fragment.fragment;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.dsgj.youyuntong.adapter.HomePageRecyclerViewAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.google.gson.Gson;
 import com.jauker.widget.BadgeView;
+import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +65,8 @@ public class HomeFragment extends BaseFragment {
     private String Location = " ";
     private BadgeView mMBadgeView;
     private LinearLayout mLlTitle;
+    private XBanner mXBannerHomePage;
+    private NestedScrollView mNsvHomepager;
 
     @Override
     protected int getLayoutID() {
@@ -78,7 +82,9 @@ public class HomeFragment extends BaseFragment {
         mMessages = (ImageView) view.findViewById(R.id.iv_message);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recyclerView);
         mLlTitle = (LinearLayout) view.findViewById(R.id.home_fragment_title);
-
+        mXBannerHomePage = (XBanner) view.findViewById(R.id.xb_homePage_xb);
+        mNsvHomepager = (NestedScrollView) view.findViewById(R.id.nsv_home_pager);
+        mNsvHomepager.scrollTo(0, 0);
     }
 
     @Override
@@ -114,19 +120,18 @@ public class HomeFragment extends BaseFragment {
                 , mImageList
                 , mGridViewList
                 , normalList);
-
+        mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(adapter);
+        XBannerUtils.setBannerHolder(getActivity(), mXBannerHomePage);//处理轮播图
         //标题栏变色
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mNsvHomepager.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
+            public void onScrollChange(NestedScrollView v,
+                                       int scrollX, int scrollY,
+                                       int oldScrollX, int oldScrollY) {
 
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                overallXScroll = overallXScroll + dy;// 累加y值 解决滑动一半y值为0
+
+                overallXScroll = overallXScroll + scrollY - oldScrollY;// 累加y值 解决滑动一半y值为0
                 if (overallXScroll <= 0) {   //设置标题的背景颜色
                     mLlTitle.setBackgroundColor(Color.argb(0, 41, 193, 246));
                 } else if (overallXScroll > 0 && overallXScroll <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
@@ -217,7 +222,6 @@ public class HomeFragment extends BaseFragment {
                 jumpToActivity(MessageActivity.class);
                 break;
             case R.id.et_search://跳转到消息页面（完成）
-
                 jumpToActivity(SearchActivity.class);
                 break;
         }

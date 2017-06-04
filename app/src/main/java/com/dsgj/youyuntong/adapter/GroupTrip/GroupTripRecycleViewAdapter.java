@@ -1,8 +1,7 @@
-package com.dsgj.youyuntong.adapter;
+package com.dsgj.youyuntong.adapter.GroupTrip;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,12 +17,12 @@ import java.util.List;
  * 邮箱：943332771@qq.com
  */
 
-public class TicketRecycleViewAdapter extends
-        RecyclerView.Adapter<TicketRecycleViewAdapter.ViewHolder> {
+public class GroupTripRecycleViewAdapter extends
+        RecyclerView.Adapter<GroupTripRecycleViewAdapter.ViewHolder> {
     /**
      * ItemClick的回调接口
      *
-     * @author
+     * @author 张云浩
      */
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -35,21 +34,23 @@ public class TicketRecycleViewAdapter extends
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    private LayoutInflater mInflater;
+    private Context mContext;
     private List<Integer> mData;
 
-    public TicketRecycleViewAdapter(Context context, List<Integer> data) {
-        mInflater = LayoutInflater.from(context);
+    public GroupTripRecycleViewAdapter(Context context, List<Integer> data) {
+        this.mContext = context;
         mData = data;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(View arg0) {
-            super(arg0);
-        }
+        ImageView mImageView;
+        TextView mTextView;
 
-        ImageView mImg;
-        TextView mTxt;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            mImageView = (ImageView) itemView.findViewById(R.id.iv_group_trip_hot_pots);
+            mTextView = (TextView) itemView.findViewById(R.id.tv_group_trip_hot_pots);
+        }
     }
 
     @Override
@@ -62,13 +63,8 @@ public class TicketRecycleViewAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.item_though_train_rv_hot_spots,
-                viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        viewHolder.mImg = (ImageView) view
-                .findViewById(R.id.iv_through_train_rv_image);
-        return viewHolder;
+        View view = View.inflate(mContext, R.layout.item_group_trip_hot_pots, null);
+        return new ViewHolder(view);
     }
 
     /**
@@ -76,7 +72,8 @@ public class TicketRecycleViewAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        viewHolder.mImg.setImageResource(mData.get(i));
+        viewHolder.mImageView.setImageResource(mData.get(i));
+        viewHolder.mTextView.setText("中华人民共和国");
         //如果设置了回调，则设置点击事件
         if (mOnItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

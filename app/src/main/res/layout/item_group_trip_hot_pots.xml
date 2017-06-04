@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
               android:orientation="vertical">
 
     <ImageView
-        android:background="@mipmap/shilitu"
         android:id="@+id/iv_group_trip_hot_pots"
         android:layout_width="109dp"
         android:layout_height="67dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/shilitu"
+        android:contentDescription="@string/already_cancel"/>
 
     <TextView
         android:id="@+id/tv_group_trip_hot_pots"
@@ -19,7 +20,7 @@
         android:layout_marginBottom="12dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="新乡八里沟"
+        android:text="@string/qingMing"
         android:textColor="#333333"
         android:textSize="14sp"/>
 </LinearLayout>

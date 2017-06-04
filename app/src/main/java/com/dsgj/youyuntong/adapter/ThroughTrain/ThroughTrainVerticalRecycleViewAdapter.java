@@ -1,4 +1,4 @@
-package com.dsgj.youyuntong.adapter;
+package com.dsgj.youyuntong.adapter.ThroughTrain;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,17 +18,12 @@ import java.util.List;
  * 邮箱：943332771@qq.com
  */
 
-public class GroupTripRecycleViewAdapter extends
-        RecyclerView.Adapter<GroupTripRecycleViewAdapter.ViewHolder> {
-    /**
-     * ItemClick的回调接口
-     *
-     * @author
-     */
+public class ThroughTrainVerticalRecycleViewAdapter extends
+        RecyclerView.Adapter<ThroughTrainVerticalRecycleViewAdapter.ViewHolder> {
+
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-
     private OnItemClickListener mOnItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
@@ -38,7 +33,7 @@ public class GroupTripRecycleViewAdapter extends
     private LayoutInflater mInflater;
     private List<Integer> mData;
 
-    public GroupTripRecycleViewAdapter(Context context, List<Integer> data) {
+    public ThroughTrainVerticalRecycleViewAdapter(Context context, List<Integer> data) {
         mInflater = LayoutInflater.from(context);
         mData = data;
     }
@@ -62,12 +57,12 @@ public class GroupTripRecycleViewAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.item_though_train_rv_hot_spots,
+        View view = mInflater.inflate(R.layout.item_through_train_vertical_rv,
                 viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         viewHolder.mImg = (ImageView) view
-                .findViewById(R.id.iv_through_train_rv_image);
+                .findViewById(R.id.iv_right_image);
         return viewHolder;
     }
 

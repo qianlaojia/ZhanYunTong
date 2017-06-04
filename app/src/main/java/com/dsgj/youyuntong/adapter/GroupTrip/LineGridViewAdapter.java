@@ -1,4 +1,4 @@
-package com.dsgj.youyuntong.adapter;
+package com.dsgj.youyuntong.adapter.GroupTrip;
 
 
 import android.content.Context;

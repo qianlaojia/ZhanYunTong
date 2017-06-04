@@ -10,10 +10,11 @@
     <include
         layout="@layout/layout_message_title"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/sv_through_trip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,18 +102,14 @@
                     android:textColor="@color/gray"
                     android:textSize="15sp"/>
 
-                <com.dsgj.youyuntong.Utils.view.ListViewForScrollView
-                    android:id="@+id/lv_local_though_trip"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_through_train_vrv_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="12dp"
-                    android:divider="#00000000"
-                    android:dividerHeight="18dp">
-                </com.dsgj.youyuntong.Utils.view.ListViewForScrollView>
-
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

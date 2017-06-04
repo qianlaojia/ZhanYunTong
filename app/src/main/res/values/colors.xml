@@ -23,7 +23,7 @@
     <color name="line_color">#dfdfdf</color>
     <color name="text_color_6">#666666</color>
     <color name="checked_color_blue">#0091e2</color>
-
+    <color name="grayT">#55333333</color>
     <color name="gray_line">#999999</color>
     <color name="gray11">#eff4f7</color>
     <color name="black33">#333333</color>

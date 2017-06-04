@@ -4,11 +4,9 @@
              android:layout_height="match_parent"
              tools:context="com.dsgj.youyuntong.fragment.fragment.TravelInCountryFragment">
 
-    <com.dsgj.youyuntong.Utils.view.ListViewForScrollView
-        android:id="@+id/lv_travel_around"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_Group_trip_travel_in"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.dsgj.youyuntong.Utils.view.ListViewForScrollView>
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

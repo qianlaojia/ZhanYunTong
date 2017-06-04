@@ -96,7 +96,7 @@
     <string name="pay_style">支付方式：</string>
     <string name="pay_style_details">余额</string>
     <string name="money_string">金额：</string>
-    <string name="money_details">¥985元</string>
+    <string name="money_details">¥985</string>
     <string name="visitor_info">出游人信息</string>
     <string name="visitor_name">姓名：</string>
     <string name="visitor_name_details">李晓敏</string>
@@ -193,4 +193,11 @@
     <string name="startLocation">出发位置</string>
     <string name="search_history">历史记录</string>
     <string name="hotRecommend">热门推荐</string>
+
+    <string name="qingMing">开封清明上河园</string>
+    <string name="introduce">豪华大巴景区直达，一路畅通无阻！</string>
+    <string name="qi">起</string>
+    <string name="fromZZ">郑州出发</string>
+    <string name="scenicIntroduce">三步一泉，五步一瀑，十步一潭</string>
+    <string name="scenicName">云台山二日一晚跟团游</string>
 </resources>

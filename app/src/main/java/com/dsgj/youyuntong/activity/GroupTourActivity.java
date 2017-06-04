@@ -22,8 +22,8 @@ import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.view.GridViewTableLine;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
 import com.dsgj.youyuntong.activity.Search.SearchActivity;
-import com.dsgj.youyuntong.adapter.GroupTripRecycleViewAdapter;
-import com.dsgj.youyuntong.adapter.LineGridViewAdapter;
+import com.dsgj.youyuntong.adapter.GroupTrip.GroupTripRecycleViewAdapter;
+import com.dsgj.youyuntong.adapter.GroupTrip.LineGridViewAdapter;
 import com.dsgj.youyuntong.adapter.MainViewPagerAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
 import com.dsgj.youyuntong.fragment.fragment.TravelAbordFragment;
@@ -101,6 +101,7 @@ public class GroupTourActivity extends BaseActivity {
             }
         });
         mRecyclerView.setAdapter(mMAdapter);
+        mRecyclerView.setNestedScrollingEnabled(false);
         mMBadgeView.setTargetView(mMessage);
         String MMessage = SPUtils.with(this).get("message_unread", "0");
         if (MMessage.equals("1")) {

@@ -1,4 +1,4 @@
-package com.dsgj.youyuntong.adapter;
+package com.dsgj.youyuntong.adapter.Ticket;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
+import com.dsgj.youyuntong.adapter.GroupTrip.GroupTripRecycleViewAdapter;
 
 import java.util.List;
 
@@ -18,12 +19,12 @@ import java.util.List;
  * 邮箱：943332771@qq.com
  */
 
-public class VerticalRecycleViewAdapter extends
-        RecyclerView.Adapter<VerticalRecycleViewAdapter.ViewHolder>{
+public class TicketVerticalRecycleViewAdapter extends
+        RecyclerView.Adapter<TicketVerticalRecycleViewAdapter.ViewHolder> {
     /**
      * ItemClick的回调接口
      *
-     * @author   张云浩
+     * @author 张云浩
      */
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -38,7 +39,7 @@ public class VerticalRecycleViewAdapter extends
     private LayoutInflater mInflater;
     private List<Integer> mData;
 
-    public VerticalRecycleViewAdapter(Context context, List<Integer> data) {
+    public TicketVerticalRecycleViewAdapter(Context context, List<Integer> data) {
         mInflater = LayoutInflater.from(context);
         mData = data;
     }
@@ -61,23 +62,22 @@ public class VerticalRecycleViewAdapter extends
      * 创建ViewHolder
      */
     @Override
-    public VerticalRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.item_though_train_rv_hot_spots,
+    public TicketVerticalRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = mInflater.inflate(R.layout.item_ticket_rv_ticket,
                 viewGroup, false);
-        VerticalRecycleViewAdapter.ViewHolder viewHolder = new VerticalRecycleViewAdapter.ViewHolder(view);
+        TicketVerticalRecycleViewAdapter.ViewHolder viewHolder = new TicketVerticalRecycleViewAdapter.ViewHolder(view);
 
         viewHolder.mImg = (ImageView) view
-                .findViewById(R.id.iv_through_train_rv_image);
+                .findViewById(R.id.iv_ticket_vrv_item);
         return viewHolder;
     }
-
 
 
     /**
      * 设置值
      */
     @Override
-    public void onBindViewHolder(final VerticalRecycleViewAdapter.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(final TicketVerticalRecycleViewAdapter.ViewHolder viewHolder, final int i) {
         viewHolder.mImg.setImageResource(mData.get(i));
         //如果设置了回调，则设置点击事件
         if (mOnItemClickListener != null) {

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+               android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="66dp">
+                android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_right_image"
         android:layout_width="68dp"
         android:layout_height="62dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
-        android:contentDescription="@string/app_name"
-        android:background="@mipmap/shilitu"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/tv_though_trip_name"
+        android:background="@mipmap/shilitu"
+        android:contentDescription="@string/app_name"/>
 
     <TextView
         android:id="@+id/tv_though_trip_name"
@@ -24,25 +25,28 @@
         android:textSize="15sp"/>
 
     <TextView
-        android:id="@+id/tv_though_trip_name_details"
+        android:id="@+id/tv_though_trip_introduce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/tv_though_trip_name"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"
         android:layout_toEndOf="@id/iv_right_image"
         android:text="@string/zhengzhoufly"
         android:textColor="@color/gray"
         android:textSize="15sp"/>
 
     <TextView
+
         android:id="@+id/tv_though_trip_prise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/tv_though_trip_name"
         android:layout_marginBottom="5dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginTop="25dp"
         android:text="@string/prise"
         android:textColor="@color/colorTextOrange"
         android:textSize="18sp"/>

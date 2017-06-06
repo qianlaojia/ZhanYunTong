@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.R;
+import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.Utils.view.XBannerUtils;
+import com.dsgj.youyuntong.activity.CitiesActivity;
 import com.dsgj.youyuntong.activity.GroupTourActivity;
 import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity;
-import com.dsgj.youyuntong.activity.ThroughTrainInquiryActivity;
+import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainInquiryActivity;
 import com.dsgj.youyuntong.activity.TicketActivity;
-import com.stx.xhb.xbanner.XBanner;
 
 import java.util.List;
 import java.util.Map;
@@ -128,6 +128,14 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             MiddleTitleHolder middletitleholder = (MiddleTitleHolder) holder;
         } else if (holder instanceof NormalHolder) {//正常布局
             NormalHolder normalHolder = (NormalHolder) holder;
+            normalHolder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtils.show(mContext, "第" + position + "个被点击！");
+
+                }
+            });
+
 
         }
     }
@@ -165,6 +173,7 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         NormalHolder(View itemView) {
             super(itemView);
             mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.home_item_RelativeLayout);
+
         }
     }
 
@@ -174,10 +183,10 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private static class SearchHolder extends RecyclerView.ViewHolder {
         LinearLayout linearlayout;
 
-
         SearchHolder(View itemView) {
             super(itemView);
             linearlayout = (LinearLayout) itemView.findViewById(R.id.ll_home_search);
+
         }
     }
 
@@ -247,28 +256,34 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private void setSearch(LinearLayout view) {
         TextView mBusTicket = (TextView) view.findViewById(R.id.bus_ticket);
         TextView fromLocation = (TextView) view.findViewById(R.id.from_location);
-        TextView toLocation = (TextView) view.findViewById(R.id.to_location);
+        final TextView toLocation = (TextView) view.findViewById(R.id.to_location);
         TextView goOfTime = (TextView) view.findViewById(R.id.go_of_time);
         Button queryButton = (Button) view.findViewById(R.id.btn_home_query);
+        final String start = SPUtils.with(mContext).get("出发位置", "郑州");
+        fromLocation.setText(start);
+        final String end = SPUtils.with(mContext).get("目的位置", "郑州");
+        toLocation.setText(end);
         mBusTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 ToastUtils.show(mContext, "跳转到客车票查询Activity");
-
             }
 
         });
         fromLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show(mContext, "出发位置被点击");
+                Intent StartLocation = new Intent(mContext, CitiesActivity.class);
+                StartLocation.putExtra("Location", "出发位置");
+                mContext.startActivity(StartLocation);
             }
         });
         toLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show(mContext, "目的地被点击");
+                Intent ToLocation = new Intent(mContext, CitiesActivity.class);
+                ToLocation.putExtra("Location", "目的位置");
+                mContext.startActivity(ToLocation);
             }
         });
         goOfTime.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +296,8 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ThroughTrainInquiryActivity.class);
+                intent.putExtra("startLocation", start);
+                intent.putExtra("endLocation", end);
                 mContext.startActivity(intent);
             }
         });

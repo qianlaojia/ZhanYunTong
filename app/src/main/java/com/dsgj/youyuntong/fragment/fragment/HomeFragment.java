@@ -25,7 +25,7 @@ import com.dsgj.youyuntong.Utils.recyclerview.LinearLayoutUtils;
 import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.system.callPhoneUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.activity.LocationActivity;
+import com.dsgj.youyuntong.activity.CitiesActivity;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
 import com.dsgj.youyuntong.activity.Search.SearchActivity;
 import com.dsgj.youyuntong.adapter.HomePageRecyclerViewAdapter;
@@ -84,11 +84,11 @@ public class HomeFragment extends BaseFragment {
         mLlTitle = (LinearLayout) view.findViewById(R.id.home_fragment_title);
         mXBannerHomePage = (XBanner) view.findViewById(R.id.xb_homePage_xb);
         mNsvHomepager = (NestedScrollView) view.findViewById(R.id.nsv_home_pager);
-        mNsvHomepager.scrollTo(0, 0);
     }
 
     @Override
     protected void initData() {
+        mRecyclerView.setFocusable(false);
         GetInternetData();
         mImageList = new ArrayList<>();
         mGridViewList = new ArrayList<>();
@@ -144,6 +144,7 @@ public class HomeFragment extends BaseFragment {
             }
 
         });
+
     }
 
     private void GetInternetData() {
@@ -210,10 +211,10 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_Location:
-                jumpToActivity(LocationActivity.class);
+                jumpToActivity(CitiesActivity.class);
 
                 break;
-            case R.id.iv_phone:
+            case R.id.iv_phone://电话（完成）
                 String phoneNumber = "13623717683";
                 callPhoneUtils.MakePhone(getActivity(), phoneNumber);
                 break;

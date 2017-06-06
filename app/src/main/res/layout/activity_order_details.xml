@@ -587,7 +587,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="9dp"
                         android:layout_toEndOf="@id/card_number"
-                        android:text="@string/card_nymber_details"
+                        android:text="@string/card_number_details"
                         android:textColor="#333333"
                         android:textSize="15sp"/>
 

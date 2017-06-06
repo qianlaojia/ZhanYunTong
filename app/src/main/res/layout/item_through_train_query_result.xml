@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_through_train_query_result"
+        android:layout_width="68dp"
+        android:layout_height="61dp"
+        android:background="@mipmap/shilitu"
+        android:contentDescription="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/tv_though_train_query_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_through_train_query_result"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/iv_through_train_query_result"
+        android:text="@string/zhengzhou"
+        android:textColor="@color/black33"/>
+
+    <TextView
+        android:id="@+id/tv_though_train_query_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_through_train_query_result"
+        android:layout_alignStart="@+id/tv_though_train_query_from"
+        android:text="@string/fromZZ"
+        android:textColor="@color/black33"/>
+
+    <TextView
+        android:id="@+id/tv_though_train_query_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_through_train_query_result"
+        android:layout_alignParentEnd="true"
+        android:text="@string/prise"
+        android:textColor="@color/colorTextOrange"/>
+</RelativeLayout>

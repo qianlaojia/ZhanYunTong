@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dsgj.youyuntong.activity.CommonVisitorActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_insert_visitor"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/white"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/tv_insert_visitor"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+
+            android:drawablePadding="10dp"
+            android:drawableStart="@mipmap/changyongchengke_tianjia"
+            android:gravity="center"
+            android:text="@string/tv_insert_visitor"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_common_visitor_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="106dp"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <include
+            layout="@layout/layout_message_title"/>
+
+        <TextView
+            android:id="@+id/tv_common_visitor_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15sp"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:id="@+id/ll_id_insert_visitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:id="@+id/tv_insert_visitor_unchangeable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/name"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_insert_name_insert_visitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/tv_insert_visitor_unchangeable"
+                    android:background="@null"
+                    android:hint="@string/must_insert"
+                    android:inputType="text"
+                    android:maxLength="12"
+                    android:maxLines="1"
+                    android:paddingStart="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/layout_division_line"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:id="@+id/tv_person_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/ID"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_insert_ID_insert_visitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/tv_person_id"
+                    android:background="@null"
+                    android:hint="@string/must_insert"
+                    android:inputType="text"
+                    android:maxLength="18"
+
+                    android:maxLines="1"
+                    android:paddingStart="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save_visitor"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="78dp"
+            android:background="@drawable/selector_button_normal_blue"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="45dp"
+            android:background="@color/colorOrange"
+            android:text="@string/return_to_visitor"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

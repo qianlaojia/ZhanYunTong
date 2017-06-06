@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_division_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/tv_custom_service"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawablePadding="0.5dp"
+            android:drawableTop="@mipmap/service"
+            android:gravity="center"
+            android:text="@string/service"/>
+
+        <TextView
+            android:id="@+id/tv_tt_detail_share"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawablePadding="0.5dp"
+            android:drawableTop="@mipmap/xiangqingye_fenxiang"
+            android:gravity="center"
+            android:text="@string/share"/>
+
+        <TextView
+            android:id="@+id/tv_tt_detail_collect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawablePadding="0.5dp"
+            android:drawableTop="@mipmap/xiangqingye_shoucang"
+            android:gravity="center"
+            android:text="@string/collect"/>
+
+        <TextView
+            android:id="@+id/tv_tt_detail_destine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:background="@color/colorOrange"
+            android:gravity="center"
+            android:text="@string/destine"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:background="@color/white"
+              android:orientation="horizontal"
+              android:weightSum="3">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:text="@string/total"
+            android:textColor="@color/gray"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_input_info_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/tv_total"
+            android:text="@string/prise"
+            android:textColor="@color/colorOrange"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_pay_at_once"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorOrange"
+        android:gravity="center"
+        android:text="@string/pay_at_once"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

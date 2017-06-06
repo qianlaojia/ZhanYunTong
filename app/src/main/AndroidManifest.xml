@@ -97,13 +97,19 @@
         </activity>
         <activity android:name=".activity.Message.CheapMessageActivity">
         </activity>
-        <activity android:name=".activity.ThroughTrainInquiryActivity">
+        <activity android:name=".activity.ThroughTrain.ThroughTrainInquiryActivity">
         </activity>
-        <activity android:name=".activity.LocationActivity">
+        <activity android:name=".activity.CitiesActivity">
         </activity>
         <activity android:name=".activity.Search.SearchActivity">
         </activity>
         <activity android:name=".activity.Search.SearchResultActivity">
+        </activity>
+        <activity android:name=".activity.ThroughTrain.ThroughTrainDetailActivity">
+        </activity>
+        <activity android:name=".activity.ThroughTrain.ThroughTrainInputInfoActivity">
+        </activity>
+        <activity android:name=".activity.CommonVisitorActivity">
         </activity>
     </application>
 

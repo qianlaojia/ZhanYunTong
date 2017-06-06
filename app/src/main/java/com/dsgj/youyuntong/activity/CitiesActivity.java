@@ -1,5 +1,6 @@
 package com.dsgj.youyuntong.activity;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
+import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.activity.Search.SearchActivity;
 import com.dsgj.youyuntong.base.BaseActivity;
@@ -15,15 +17,15 @@ import com.dsgj.youyuntong.adapter.StartLocationAdapter;
 
 import java.util.HashMap;
 
-public class LocationActivity extends BaseActivity {
-
-
+public class CitiesActivity extends BaseActivity {
     private ImageView mBack;
     private TextView mCurrentLocation;
     private RecyclerView mStartLocation;
     private String[] startLocation = {"郑州", "开封", "洛阳", "焦作", "新乡", "商丘", "许昌"
             , "濮阳", "平顶山", "南阳", "信阳", "安阳", "驻马店", "周口", "漯河", "鹤壁", "济源", "三门峡",};
     private TextView mSearch;
+    private TextView mHintText;
+    private String city;
 
     @Override
     protected int getLayoutID() {
@@ -36,11 +38,14 @@ public class LocationActivity extends BaseActivity {
         mCurrentLocation = (TextView) findViewById(R.id.tv_current_location);
         mStartLocation = (RecyclerView) findViewById(R.id.rv_start_location);
         mSearch = (TextView) findViewById(R.id.tv_Location_search);
-
+        mHintText = (TextView) findViewById(R.id.tv_hint_text);
     }
 
     @Override
     protected void initData() {
+        Intent intent = getIntent();
+        city = intent.getStringExtra("Location");
+        mHintText.setText(city);
         mCurrentLocation.setText("河南郑州");
         //设置recyclerView的相关事项
         //配置布局方式GridView格式
@@ -50,14 +55,19 @@ public class LocationActivity extends BaseActivity {
         adapter.setOnItemClickListener(new StartLocationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.show(LocationActivity.this, "第" + startLocation[position] + "个被点击！");
+                if (city.equals("出发位置")) {
+                    SPUtils.with(CitiesActivity.this).save("出发位置", startLocation[position]);
+                    finish();
+                } else if (city.equals("目的位置")) {
+                    SPUtils.with(CitiesActivity.this).save("目的位置", startLocation[position]);
+                    finish();
+                }
+
             }
         });
         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
         stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.TOP_DECORATION, 15);//top间距
         stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION, 15);//底部间距
-        // stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.LEFT_DECORATION, 5);//左间距
-        // stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION, 5);//右间距
         mStartLocation.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
         mStartLocation.setAdapter(adapter);
 
@@ -79,7 +89,7 @@ public class LocationActivity extends BaseActivity {
                 break;
             case R.id.tv_Location_search:
                 jumpToActivity(SearchActivity.class);
-                ToastUtils.show(LocationActivity.this, "跳转到搜索页面！");
+                ToastUtils.show(CitiesActivity.this, "跳转到搜索页面！");
                 break;
         }
 

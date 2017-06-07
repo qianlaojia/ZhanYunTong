@@ -208,14 +208,14 @@
     <string name="departureTime">出发日期</string>
     <string name="introduce_trip">行程介绍</string>
     <string name="wantShow">看了又看</string>
-    <string name="pay_at_once">立即付款</string>
+    <string name="pay_at_once">提交订单</string>
     <string name="total">总价:</string>
     <string name="go_of_time">出发时间：</string>
     <string name="fromLocations">出发地点</string>
     <string name="fromLocations2">出发地点：</string>
     <string name="orderPersonInformation">预订人信息</string>
     <string name="Visitor_info">出游人信息</string>
-    <string name="common_visitor">常用游客</string>
+    <string name="common_visitor">添加游客</string>
     <string name="notice">预订须知</string>
     <string name="tv_insert_visitor">添加游客</string>
     <string name="name">姓名：</string>

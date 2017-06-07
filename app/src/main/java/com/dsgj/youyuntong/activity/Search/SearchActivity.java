@@ -2,6 +2,7 @@ package com.dsgj.youyuntong.activity.Search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -65,9 +66,15 @@ public class SearchActivity extends BaseActivity {
                             .hideSoftInputFromWindow(mInputSearchKey.getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
                     String keyToSearch = mInputSearchKey.getText().toString().trim();
-                    ToastUtils.show(SearchActivity.this, "获得关键字\n" + keyToSearch + "\n去搜索处理相关的逻辑！");
+                    if (TextUtils.isEmpty(keyToSearch)) {
+                        ToastUtils.show(SearchActivity.this, "请输入要搜索的关键字！");
+                        mInputSearchKey.setText("");
+                        mInputSearchKey.requestFocus();
+                    }else{
                     Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                    intent.putExtra("searchKey", keyToSearch);
                     startActivity(intent);
+                    }
                     return true;
                 }
                 return false;

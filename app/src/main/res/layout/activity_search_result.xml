@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,6 +41,29 @@
             android:textSize="15sp"/>
 
     </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_search_result_table"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/blue_text"
+        app:tabSelectedTextColor="@color/blue_text"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabTextColor="@color/black"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="-1.5dp"
+        android:background="@color/division_line_color">
+    </View>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </LinearLayout>

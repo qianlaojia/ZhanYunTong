@@ -34,5 +34,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/tabLayout_textSize</item>
+
+    </style>
+
 
 </resources>

@@ -8,10 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.adapter.ThroughTrain.ThroughTrainQueryResultRVAdapter;
-
-import static com.dsgj.youyuntong.R.mipmap.changyongchengke_weixuanze;
 
 /**
  * TODO:
@@ -46,7 +42,8 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final CommonViewHolder commonViewHolder = (CommonViewHolder) holder;
         commonViewHolder.nameText.setText("张云浩");
-        if (mOnItemClickListener != null) {
+        commonViewHolder.chooseImageView.setTag(position);
+       /* if (mOnItemClickListener != null) {
             commonViewHolder.chooseImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -55,7 +52,7 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
 
                 }
             });
-        }
+        }*/
     }
 
     @Override
@@ -67,10 +64,22 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
         TextView nameText;
         ImageView chooseImageView;
 
-        public CommonViewHolder(View itemView) {
+        private CommonViewHolder(View itemView) {
             super(itemView);
             nameText = (TextView) itemView.findViewById(R.id.tv_item_common_visitor_name_details);
             chooseImageView = (ImageView) itemView.findViewById(R.id.iv_common_visitor_item_choose);
+            if (mOnItemClickListener != null) {
+                chooseImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemClickListener.onItemClick(chooseImageView, getAdapterPosition());
+                        chooseImageView.setImageResource(R.mipmap.changyongchengke_gouxuan);
+
+                    }
+                });
+            }
+
+
         }
     }
 }

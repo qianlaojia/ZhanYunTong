@@ -164,7 +164,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="45dp"
-            android:background="@color/colorOrange"
+            android:background="@drawable/selector_button_normal_orange"
             android:text="@string/return_to_visitor"
             android:textColor="@color/white"
             android:textSize="18sp"

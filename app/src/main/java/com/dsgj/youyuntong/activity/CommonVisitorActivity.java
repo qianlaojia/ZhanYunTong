@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.IDCardValidateUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.Utils.view.DividerItemDecoration;
 import com.dsgj.youyuntong.adapter.CommonVisitorAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
 
@@ -67,16 +68,11 @@ public class CommonVisitorActivity extends BaseActivity {
         adapter.setOnItemClickListener(new CommonVisitorAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                switch (view.getId()){
-                    case R.id.iv_common_visitor_item_choose:
-                       // view.setImageResource(R.mipmap.changyongchengke_gouxuan);
-                        ToastUtils.show(CommonVisitorActivity.this,"hahah  xuanze beidianji ");
-                        break;
-
-                }
 
             }
         });
+        mVisitorList.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST));
         mVisitorList.setAdapter(adapter);
 
     }
@@ -87,6 +83,7 @@ public class CommonVisitorActivity extends BaseActivity {
         mInsertVisitor.setOnClickListener(this);
         mReturn.setOnClickListener(this);
         mSave.setOnClickListener(this);
+        mConfirm.setOnClickListener(this);
 
     }
 
@@ -95,6 +92,10 @@ public class CommonVisitorActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.rl_title_back:
                 this.finish();
+                break;
+            case R.id.tv_common_visitor_ok:
+                this.finish();
+             //// TODO: 2017/6/7  添加数据的保存和返回
                 break;
             case R.id.tv_insert_visitor:
                 mMiddleText.setText("添加乘客");

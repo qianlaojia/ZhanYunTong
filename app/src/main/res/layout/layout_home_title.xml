@@ -18,32 +18,31 @@
             android:id="@+id/tv_Location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableEnd="@mipmap/positioning_icon"
+            android:drawablePadding="5dp"
             android:text="@string/location"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="normal"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:src="@mipmap/positioning_icon"
-            android:contentDescription="@string/app_name"/>
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/et_search"
         android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_height="29dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="5dp"
         android:layout_weight="3"
         android:background="@drawable/shape_edit_text"
-        android:drawableStart="@mipmap/sousuo_baise"
+        android:drawablePadding="2dp"
+        android:drawableStart="@mipmap/sousuo_sousuo"
         android:gravity="center"
         android:hint="@string/searchTips"
-        android:textColor="@color/gray"
+        android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="5dp"
+        android:textColor="@color/gray1"
         android:textSize="12sp"/>
 
     <ImageView
@@ -51,21 +50,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="15dp"
         android:layout_weight="0.5"
-        android:background="@mipmap/phone_icon"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@mipmap/phone_icon"/>
 
     <ImageView
         android:id="@+id/iv_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginStart="15dp"
         android:layout_weight="0.5"
-        android:background="@mipmap/news_icon"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@mipmap/news_icon"/>
 </LinearLayout>

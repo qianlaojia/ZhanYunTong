@@ -57,7 +57,7 @@
         </activity>
         <activity android:name=".activity.Message.MessageActivity">
         </activity>
-        <activity android:name=".activity.TicketActivity">
+        <activity android:name=".activity.Ticket.TicketActivity">
         </activity>
         <activity android:name=".activity.LogOnAndRegisterActivity">
         </activity>
@@ -68,9 +68,7 @@
         </activity>
         <activity android:name=".activity.OrderDetailsActivity">
         </activity>
-        <activity android:name=".activity.GroupTourActivity">
-        </activity>
-        <activity android:name=".activity.TicketDetailsActivity">
+        <activity android:name=".activity.GroupTour.GroupTourActivity">
         </activity>
         <activity android:name=".activity.ThroughTrain.ThroughTrainActivity">
         </activity>
@@ -105,11 +103,13 @@
         </activity>
         <activity android:name=".activity.Search.SearchResultActivity">
         </activity>
-        <activity android:name=".activity.ThroughTrain.ThroughTrainDetailActivity">
+        <activity android:name=".activity.ProductDetailActivity">
         </activity>
         <activity android:name=".activity.ThroughTrain.ThroughTrainInputInfoActivity">
         </activity>
         <activity android:name=".activity.CommonVisitorActivity">
+        </activity>
+        <activity android:name=".activity.CalendarActivity">
         </activity>
     </application>
 

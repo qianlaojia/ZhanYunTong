@@ -221,4 +221,5 @@
     <string name="name">姓名：</string>
     <string name="must_insert">必填</string>
     <string name="return_to_visitor">返回乘客列表</string>
+    <string name="no_through_trip">对不起，当天暂未有直通车发出！</string>
 </resources>

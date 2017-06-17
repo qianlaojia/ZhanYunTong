@@ -8,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.dsgj.youyuntong.JavaBean.Ticket.TicketBean;
+import com.dsgj.youyuntong.JavaBean.Ticket.TicketHotPotsImageBean;
 import com.dsgj.youyuntong.R;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -32,11 +36,13 @@ public class TicketRecycleViewAdapter extends
     }
 
     private LayoutInflater mInflater;
-    private List<Integer> mData;
+    private List<TicketBean.ResultBean.ScenicHotBean> mScenicHotBean;
+    private Context mContext;
 
-    public TicketRecycleViewAdapter(Context context, List<Integer> data) {
+    public TicketRecycleViewAdapter(Context context, List<TicketBean.ResultBean.ScenicHotBean> mScenicHotBean) {
+        this.mContext = context;
         mInflater = LayoutInflater.from(context);
-        mData = data;
+        this.mScenicHotBean = mScenicHotBean;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,12 +51,13 @@ public class TicketRecycleViewAdapter extends
         }
 
         ImageView mImg;
-        TextView mTxt;
+        TextView name;
+        TextView prise;
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mScenicHotBean.size();
     }
 
     /**
@@ -61,9 +68,13 @@ public class TicketRecycleViewAdapter extends
         View view = mInflater.inflate(R.layout.item_ticket_rv_hot_spots,
                 viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
-
         viewHolder.mImg = (ImageView) view
                 .findViewById(R.id.iv_ticket_rv_image);
+        viewHolder.name = (TextView) view
+                .findViewById(R.id.tv_ticket_rv_text);
+        viewHolder.prise = (TextView) view
+                .findViewById(R.id.tv_ticket_rv_price);
+
         return viewHolder;
     }
 
@@ -72,7 +83,10 @@ public class TicketRecycleViewAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        viewHolder.mImg.setImageResource(mData.get(i));
+        Gson gson = new Gson();
+        Glide.with(mContext).load(gson.fromJson(mScenicHotBean.get(i).getSmeta(), TicketHotPotsImageBean.class).getThumb()).into(viewHolder.mImg);
+        viewHolder.prise.setText("¥" + mScenicHotBean.get(i).getPrice());
+        viewHolder.name.setText(mScenicHotBean.get(i).getTitle());
         //如果设置了回调，则设置点击事件
         if (mOnItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -84,3 +98,4 @@ public class TicketRecycleViewAdapter extends
         }
     }
 }
+

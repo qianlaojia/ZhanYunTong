@@ -35,12 +35,12 @@ public class XBannerUtils {
         return imageUrls;
     }
 
-    public static void setBannerHolder(final Context context, XBanner xbanner) {
-        xbanner.setData(getImageUrl(), null);
+    public static void setBannerHolder(final Context context, XBanner xbanner, final List<String> url) {
+        xbanner.setData(url, null);
         xbanner.setmAdapter(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
-                Glide.with(context).load(getImageUrl().get(position)).into((ImageView) view);
+                Glide.with(context).load(url.get(position)).into((ImageView) view);
             }
         });
         /**
@@ -53,24 +53,6 @@ public class XBannerUtils {
             }
         });
     }
-    public static void setBannerHolderFromInternet(final Context context
-            , XBanner xbanner,List<String>  imageUrl) {
-        xbanner.setData(imageUrl, null);
-        xbanner.setmAdapter(new XBanner.XBannerAdapter() {
-            @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
-                Glide.with(context).load(getImageUrl().get(position)).into((ImageView) view);
-            }
-        });
-        /**
-         * 这个可以对每个点击事件进行设置：9
-         */
-        xbanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
-            @Override
-            public void onItemClick(XBanner banner, int position) {
-                Toast.makeText(context, "点击了第" + position + "图片", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+
 
 }

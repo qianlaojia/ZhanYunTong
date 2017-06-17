@@ -1,37 +1,49 @@
 package com.dsgj.youyuntong.base;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.dsgj.youyuntong.R;
-import com.gyf.barlibrary.ImmersionBar;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
+import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- *TODO:
+ * TODO:
  * Created by 张云浩  on 2017/4/19.
- *邮箱：943332771@qq.com
+ * 邮箱：943332771@qq.com
  */
 
 public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
     private BaseActivity ctx;
+    private View decorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImmersionBar.with(this)
-                .statusBarColor(R.color.titleColor)
-                .fitsSystemWindows(true)  //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看
-                .init();
+
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.GRAY);
+        }
         setContentView(getLayoutID());
+       decorView = getWindow().getDecorView();
+
+
         //处理公共逻辑
         dealCommonPart();
         initView();
@@ -70,7 +82,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     /**
      * 不带参数跳转到clz的Activity
      *
-     * @param clz   Activity名称
+     * @param clz Activity名称
      */
     public void jumpToActivity(Class<? extends BaseActivity> clz) {
         jumpToActivity(clz, null);
@@ -135,13 +147,61 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    protected void onStart() {
+        //调用配置
+       init();
+        super.onStart();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void init() {
+        int flag = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+
+        //判断当前版本在4.0以上并且存在虚拟按键，否则不做操作
+        if (Build.VERSION.SDK_INT < 19 || !checkDeviceHasNavigationBar()) {
+            //一定要判断是否存在按键，否则在没有按键的手机调用会影响别的功能。如之前没有考虑到，导致图传全屏变成小屏显示。
+            return;
+        } else {
+            // 获取属性
+           decorView.setSystemUiVisibility(flag);
+        }
+    }
+
+    /**
+     * 判断是否存在虚拟按键
+     *
+     * @return
+     */
+    public boolean checkDeviceHasNavigationBar() {
+        boolean hasNavigationBar = false;
+        Resources rs = getResources();
+        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (id > 0) {
+            hasNavigationBar = rs.getBoolean(id);
+        }
+        try {
+            Class<?> systemPropertiesClass = Class.forName("android.os.SystemProperties");
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+            if ("1".equals(navBarOverride)) {
+                hasNavigationBar = false;
+            } else if ("0".equals(navBarOverride)) {
+                hasNavigationBar = true;
+            }
+        } catch (Exception e) {
+
+        }
+        return hasNavigationBar;
+    }
     /**
      * 摧毁
      */
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ImmersionBar.with(this).destroy();
+
     }
+
 
 }

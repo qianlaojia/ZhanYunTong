@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- *TODO:
  * Created by 张云浩  on 2017/4/19.
  *邮箱：943332771@qq.com
  */

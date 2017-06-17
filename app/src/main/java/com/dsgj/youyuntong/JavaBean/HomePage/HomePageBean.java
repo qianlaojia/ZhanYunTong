@@ -1,4 +1,4 @@
-package com.dsgj.youyuntong.JavaBean;
+package com.dsgj.youyuntong.JavaBean.HomePage;
 
 import java.util.List;
 
@@ -8,8 +8,7 @@ import java.util.List;
  * 邮箱：943332771@qq.com
  */
 
-public class GroupTourBean {
-
+public class HomePageBean {
     /**
      * retCode : 200
      * retDese : 接口请求成功!
@@ -44,7 +43,7 @@ public class GroupTourBean {
         this.result = result;
     }
 
-    private static class ResultBean {
+    public static class ResultBean {
         private List<SlideListBean> slide_list;
         private List<ProductListBean> product_list;
 
@@ -64,7 +63,7 @@ public class GroupTourBean {
             this.product_list = product_list;
         }
 
-        static class SlideListBean {
+        public static class SlideListBean {
             /**
              * slide_name : 古城印象
              * slide_pic : /data/upload/20160929183603-57ecee93d23f2.jpg
@@ -100,7 +99,7 @@ public class GroupTourBean {
             }
         }
 
-        static class ProductListBean {
+        public static class ProductListBean {
             /**
              * product_id : 6
              * product_code : TP00006
@@ -118,7 +117,7 @@ public class GroupTourBean {
             private String summary;
             private String title;
             private String smeta;
-            private String price;
+            private long price;
             private String city;
 
             public String getProduct_id() {
@@ -169,11 +168,11 @@ public class GroupTourBean {
                 this.smeta = smeta;
             }
 
-            public String getPrice() {
+            public long getPrice() {
                 return price;
             }
 
-            public void setPrice(String price) {
+            public void setPrice(long price) {
                 this.price = price;
             }
 

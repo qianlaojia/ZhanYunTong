@@ -5,9 +5,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.mapapi.map.Text;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.activity.TicketActivity;
 import com.dsgj.youyuntong.base.BaseActivity;
 
 public class CheapMessageActivity extends BaseActivity {

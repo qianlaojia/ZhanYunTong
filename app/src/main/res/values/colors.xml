@@ -30,4 +30,5 @@
     <color name="black33">#333333</color>
     <color name="division_line_color">#eff4f7</color>
     <color name="top_bg_color">#009ff2</color>
+    <color name="page_front_color">#33000000</color>
 </resources>

@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/transparent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="68dp"
+              android:background="@color/transparent"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
 
     <RelativeLayout
-        android:id="@+id/mine_set"
-        android:layout_width="48dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/me_sz"/>
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/mine_set"
+            android:layout_width="48dp"
+            android:layout_height="48dp">
 
-    <RelativeLayout
-        android:id="@+id/mine_my_message"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentEnd="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/me_sz"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_mine_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="15dp"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/news_icon"/>
+        <RelativeLayout
+            android:id="@+id/mine_my_message"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/iv_mine_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/news_icon"/>
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

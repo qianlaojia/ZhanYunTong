@@ -3,7 +3,12 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.dsgj.youyuntong.fragment.fragment.TravelAbordFragment">
-
+<TextView
+    android:text="暂无数据，敬请期待"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_Group_trip_travel_out"
         android:layout_width="match_parent"

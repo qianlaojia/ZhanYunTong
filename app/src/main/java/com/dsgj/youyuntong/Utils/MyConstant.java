@@ -16,6 +16,7 @@ import java.util.Date;
  */
 
 public class MyConstant {
+
     //手机内部或外部内存卡的地址，也就是一定会有这个路径的
     public static String PhotoDir = getExternalSdCardPath() + "/zhanyuntong/image/";
 

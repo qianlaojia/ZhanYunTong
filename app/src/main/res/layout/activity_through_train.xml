@@ -1,115 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity">
 
-    <include
-        layout="@layout/layout_message_title"/>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/sv_through_trip"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            layout="@layout/layout_message_title"/>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_through_trip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawableEnd="@mipmap/woyaohezuo_xiala"
-                    android:gravity="center"
-                    android:text="@string/zhengzhou"/>
-
-                <TextView
-                    android:id="@+id/tv_through_train_search"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="4"
-                    android:background="@drawable/shape_white_normal"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@mipmap/sousuo_lanse"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="@dimen/fab_margin"
-                    android:paddingStart="10dp"
-
-                    android:text="@string/input_city_name"
-                    android:textSize="16sp"/>
-
-            </LinearLayout>
-
-            <com.stx.xhb.xbanner.XBanner
-                android:id="@+id/XB_through_trip"
-                android:layout_width="match_parent"
-                android:layout_height="138dp"
-                android:layout_marginTop="12dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/hot_pots"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_tt_hot_spots"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/white"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:drawableEnd="@mipmap/woyaohezuo_xiala"
+                        android:gravity="center"
+                        android:text="@string/zhengzhou"/>
+
+                    <TextView
+                        android:id="@+id/tv_through_train_search"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/shape_white_normal"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@mipmap/sousuo_lanse"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="@dimen/fab_margin"
+                        android:paddingStart="10dp"
+
+                        android:text="@string/input_city_name"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <com.stx.xhb.xbanner.XBanner
+                    android:id="@+id/XB_through_trip"
+                    android:layout_width="match_parent"
+                    android:layout_height="138dp"
+                    android:layout_marginTop="12dp"/>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:layout_marginTop="12dp"
-                    android:text="@string/location_trip"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp"/>
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_through_train_vrv_location"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/hot_pots"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_tt_hot_spots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/location_trip"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_through_train_vrv_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_Through_trip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_front_color"/>
+
+    <ProgressBar
+        android:id="@+id/pb_through_trip_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/progress_bar_color"/>
+</FrameLayout>

@@ -7,16 +7,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- *
+ * TabLayout+ViewPager+Fragment相结合布局。
  * Created by 张云浩  on 2017/6/7.
  * 邮箱：943332771@qq.com
  */
 
-public class SearchResultViewPagerAdapter extends FragmentPagerAdapter {
+public class TabLayoutViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> mFragments;
     private String[] mStrings;
 
-    public SearchResultViewPagerAdapter(FragmentManager fm
+    /**
+     * 通过构造函数将参数传递
+     *
+     * @param fm        Fragment管理器
+     * @param fragments Fragment的集合
+     * @param strings   String 数组
+     */
+    public TabLayoutViewPagerAdapter(FragmentManager fm
             , List<Fragment> fragments
             , String[] strings) {
         super(fm);
@@ -26,16 +33,7 @@ public class SearchResultViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return mFragments.get(0);
-        } else if (position == 1) {
-            return mFragments.get(1);
-        } else if (position == 2) {
-            return mFragments.get(2);
-        } else if (position == 3) {
-            return mFragments.get(3);
-        } else
-            return mFragments.get(0);
+        return mFragments.get(position);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.dsgj.youyuntong.adapter.ThroughTrain;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.R;
 
 import java.util.List;
@@ -36,11 +38,17 @@ public class ThroughTrainRecycleViewAdapter extends
     }
 
     private LayoutInflater mInflater;
-    private List<Integer> mData;
+    private List<String> image;
+    private List<String> name;
+    private List<String> price;
+    private Activity mActivity;
 
-    public ThroughTrainRecycleViewAdapter(Context context, List<Integer> data) {
+    public ThroughTrainRecycleViewAdapter(Activity context, List<String> image, List<String> name, List<String> price) {
         mInflater = LayoutInflater.from(context);
-        mData = data;
+        this.image = image;
+        this.name = name;
+        this.price = price;
+        this.mActivity = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,12 +57,13 @@ public class ThroughTrainRecycleViewAdapter extends
         }
 
         ImageView mImg;
-        TextView mTxt;
+        TextView name;
+        TextView price;
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return image.size();
     }
 
     /**
@@ -65,9 +74,13 @@ public class ThroughTrainRecycleViewAdapter extends
         View view = mInflater.inflate(R.layout.item_though_train_rv_hot_spots,
                 viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
-
         viewHolder.mImg = (ImageView) view
                 .findViewById(R.id.iv_though_train_rv_image);
+        viewHolder.name = (TextView) view
+                .findViewById(R.id.tv_though_train_rv_text);
+        viewHolder.price = (TextView) view
+                .findViewById(R.id.tv_though_train_rv_price);
+
         return viewHolder;
     }
 
@@ -76,7 +89,9 @@ public class ThroughTrainRecycleViewAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        viewHolder.mImg.setImageResource(mData.get(i));
+        Glide.with(mActivity).load(image.get(i)).into(viewHolder.mImg);
+        viewHolder.name.setText(name.get(i));
+        viewHolder.price.setText(price.get(i));
         //如果设置了回调，则设置点击事件
         if (mOnItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

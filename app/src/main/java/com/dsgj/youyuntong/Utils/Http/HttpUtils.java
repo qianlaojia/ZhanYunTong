@@ -152,7 +152,7 @@ public class HttpUtils {
         call.execute(new StringCallback() {
             @Override
             public void onResponse(String json, int arg1) {
-                LogUtils.e("请求的json数据：：" + json + "------------------------------------------");
+                LogUtils.e("请求的json数据：：-----------" + json + "-------");
                 if (tag != null) connMap.remove(tag);
                 int resultCode = JsonUtils.getInt(json, "retCode");
                 switch (resultCode) {
@@ -161,9 +161,7 @@ public class HttpUtils {
                         callBack.onSuccess(resultData);
                         break;
                     default:
-
                         callBack.onFailure(resultCode);
-
                         break;
                 }
             }

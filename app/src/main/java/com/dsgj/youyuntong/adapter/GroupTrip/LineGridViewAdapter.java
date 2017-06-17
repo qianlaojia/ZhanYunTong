@@ -1,7 +1,8 @@
 package com.dsgj.youyuntong.adapter.GroupTrip;
 
 
-import android.content.Context;
+import android.app.Activity;
+
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -12,24 +13,26 @@ import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
 
+import java.util.List;
+
 
 public class LineGridViewAdapter extends BaseAdapter {
-    private String[] mStrings;
-    private Context mContext;
+    private List<String> strings;
+    private Activity mContext;
 
-    public LineGridViewAdapter(Context contexts, String[] strings) {
-        this.mStrings = strings;
+    public LineGridViewAdapter(Activity contexts, List<String> strings) {
+        this.strings = strings;
         this.mContext = contexts;
     }
 
     @Override
     public int getCount() {
-        return mStrings.length;
+        return strings.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mStrings[position];
+        return strings.get(position);
     }
 
     @Override
@@ -50,19 +53,19 @@ public class LineGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         if (position == 0) {
-            Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.gentuanyou_n1);
+            Drawable drawable = ContextCompat.getDrawable(mContext, R.mipmap.gentuanyou_n1);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             holder.textview.setCompoundDrawables(drawable, null, null, null);
         } else if (position == 1) {
-            Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.gentuanyou_n2);
+            Drawable drawable = ContextCompat.getDrawable(mContext, R.mipmap.gentuanyou_n2);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             holder.textview.setCompoundDrawables(drawable, null, null, null);
         } else if (position == 2) {
-            Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.gentuanyou_n3);
+            Drawable drawable = ContextCompat.getDrawable(mContext, R.mipmap.gentuanyou_n3);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             holder.textview.setCompoundDrawables(drawable, null, null, null);
         }
-        holder.textview.setText(mStrings[position]);
+        holder.textview.setText(strings.get(position));
         return convertView;
     }
 

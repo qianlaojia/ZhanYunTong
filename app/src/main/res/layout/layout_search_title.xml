@@ -1,40 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="48dp"
+              android:layout_height="68dp"
               android:background="@color/titleColor"
-              android:gravity="center"
-              android:orientation="horizontal"
-              android:weightSum="8">
+              android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_return"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:contentDescription="@string/app_name"
-        android:src="@mipmap/fanhui"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
 
-    <TextView
-        android:id="@+id/tv_search_tips"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_weight="6"
-        android:background="@drawable/shape_blue_normal"
-        android:drawablePadding="5dp"
-        android:drawableStart="@mipmap/sousuo_baise"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:gravity="center"
-        android:paddingEnd="50dp"
-        android:paddingStart="10dp"
-        android:text="@string/searchTips"
-        android:textColor="@color/white"
-        android:textSize="12sp"/>
+        android:orientation="horizontal"
+        android:weightSum="8">
 
-    <ImageView
-        android:id="@+id/iv_news_Image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:contentDescription="@string/app_name"
-        android:src="@mipmap/news_icon"/>
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@mipmap/fanhui"/>
+
+        <TextView
+            android:id="@+id/tv_search_tips"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="6"
+            android:background="@drawable/shape_blue_normal"
+            android:drawablePadding="5dp"
+            android:drawableStart="@mipmap/sousuo_baise"
+            android:gravity="center"
+            android:paddingEnd="50dp"
+            android:paddingStart="10dp"
+            android:text="@string/searchTips"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <ImageView
+
+            android:id="@+id/iv_news_Image"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@mipmap/news_icon"/>
+    </LinearLayout>
 </LinearLayout>

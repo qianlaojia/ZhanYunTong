@@ -1,21 +1,28 @@
 package com.dsgj.youyuntong.fragment.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.dsgj.youyuntong.JavaBean.HomePageBean;
+import com.bumptech.glide.Glide;
+import com.dsgj.youyuntong.JavaBean.HomePage.HomePageBean;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
@@ -25,19 +32,26 @@ import com.dsgj.youyuntong.Utils.recyclerview.LinearLayoutUtils;
 import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.system.callPhoneUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.activity.CalendarActivity;
 import com.dsgj.youyuntong.activity.CitiesActivity;
+import com.dsgj.youyuntong.activity.GroupTour.GroupTourActivity;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
 import com.dsgj.youyuntong.activity.Search.SearchActivity;
+import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainActivity;
+import com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainInquiryActivity;
+import com.dsgj.youyuntong.activity.Ticket.TicketActivity;
 import com.dsgj.youyuntong.adapter.HomePageRecyclerViewAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.google.gson.Gson;
 import com.jauker.widget.BadgeView;
 import com.stx.xhb.xbanner.XBanner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * 主页
@@ -47,15 +61,15 @@ import java.util.Map;
 
 public class HomeFragment extends BaseFragment {
 
+    private static final int MSG_UPDATE_TEXT = 1;
+    private static final int INTERNET_ERROR = 2;
     public String s;
     public TextView mLocation;
     private TextView mSearch;
     private ImageView mPhone;
     private ImageView mMessages;
     private RecyclerView mRecyclerView;
-    private List<String> mImageList;
     private List<Map<String, Object>> mGridViewList;
-    private List<String> normalList;
     private int height = 458;// 滑动开始变色的高,真实项目中此高度是由广告轮播或其他首页view高度决定
     private int overallXScroll = 0;
     private List<String> mImageUrl;
@@ -66,7 +80,80 @@ public class HomeFragment extends BaseFragment {
     private BadgeView mMBadgeView;
     private LinearLayout mLlTitle;
     private XBanner mXBannerHomePage;
-    private NestedScrollView mNsvHomepager;
+    private NestedScrollView mNsvHomePager;
+    private ProgressBar mProgressBar;
+    private Handler handler = new Handler() {
+        // 该方法运行在主线程中
+        // 接收到handler发送的消息，对UI进行操作
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_UPDATE_TEXT:
+                    mSearch1.setVisibility(View.VISIBLE);
+                    fourItem.setVisibility(View.VISIBLE);
+                    mGridViewList = LinearLayoutUtils.getStringAndLogo();
+                    setSearch(mSearch1);
+                    setFourSelect(fourItem);
+                    mGridViewList = new ArrayList<>();
+                    //初始化定位服务：
+                    mLocationClient = new LocationClient(getActivity());
+                    mLocationClient.registerLocationListener(mBDLocationListener);
+                    mLocationClient.start();
+                    initLocation();
+                    mMBadgeView.setTargetView(mMessages);
+                    String MMessage = SPUtils.with(getActivity()).get("message_unread", "0");
+                    if (MMessage.equals("1")) {
+                        mMBadgeView.setBadgeCount(1);
+                    } else {
+                        mMBadgeView.setBadgeCount(0);
+                    }
+                    mLocation.setText("郑州市");
+                    XBannerUtils.setBannerHolder(getActivity(), mXBannerHomePage, mImageUrl);//处理轮播图
+                    //获得门票等四个布局
+
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    HomePageRecyclerViewAdapter adapter = new HomePageRecyclerViewAdapter(getActivity()
+                            , mGridViewList
+                            , mProductListBean);
+                    mRecyclerView.setNestedScrollingEnabled(false);
+                    mRecyclerView.setAdapter(adapter);
+
+                    //标题栏变色
+                    mNsvHomePager.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+                        @Override
+                        public void onScrollChange(NestedScrollView v,
+                                                   int scrollX, int scrollY,
+                                                   int oldScrollX, int oldScrollY) {
+                            overallXScroll = overallXScroll + scrollY - oldScrollY;// 累加y值 解决滑动一半y值为0
+                            if (overallXScroll <= 0) {   //设置标题的背景颜色
+                                mLlTitle.setBackgroundResource(R.drawable.shape_title_back);
+                            } else if (overallXScroll > 0 && overallXScroll <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                                float scale = (float) overallXScroll / height;
+                                float alpha = (255 * scale);
+                                mLlTitle.setBackgroundColor(Color.argb((int) alpha, 0, 145, 242));
+                            } else {
+                                mLlTitle.setBackgroundColor(Color.argb(255, 0, 145, 242));
+                            }
+                        }
+
+                    });
+                    ProgressBarDismiss();
+                    mCoverView.setVisibility(View.GONE);
+                    break;
+                case INTERNET_ERROR:
+                    ToastUtils.show(getActivity(), "网络已断开!");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    private List<HomePageBean.ResultBean.ProductListBean> mProductListBean;
+    private View mCoverView;
+    private LinearLayout mSearch1;
+    private LinearLayout fourItem;
+    private String mThatTime;
 
     @Override
     protected int getLayoutID() {
@@ -83,86 +170,38 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recyclerView);
         mLlTitle = (LinearLayout) view.findViewById(R.id.home_fragment_title);
         mXBannerHomePage = (XBanner) view.findViewById(R.id.xb_homePage_xb);
-        mNsvHomepager = (NestedScrollView) view.findViewById(R.id.nsv_home_pager);
+        mNsvHomePager = (NestedScrollView) view.findViewById(R.id.nsv_home_pager);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.pb_load);
+        mCoverView = view.findViewById(R.id.view_home_fragment);
+        mSearch1 = (LinearLayout) view.findViewById(R.id.ll_home_page_search);
+        fourItem = (LinearLayout) view.findViewById(R.id.ll_home_four_item);
+
     }
 
     @Override
     protected void initData() {
+
         mRecyclerView.setFocusable(false);
         GetInternetData();
-        mImageList = new ArrayList<>();
-        mGridViewList = new ArrayList<>();
-        normalList = new ArrayList<>();
-        //设置布局管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //初始化定位服务：
-        mLocationClient = new LocationClient(getActivity());
-        mLocationClient.registerLocationListener(mBDLocationListener);
-        mLocationClient.start();
-        initLocation();
-        mMBadgeView.setTargetView(mMessages);
-        String MMessage = SPUtils.with(getActivity()).get("message_unread", "0");
-        if (MMessage.equals("1")) {
-            mMBadgeView.setBadgeCount(1);
-        } else {
-            mMBadgeView.setBadgeCount(0);
-        }
 
-        mLocation.setText("郑州市");
-        mImageList = XBannerUtils.getImageUrl();
-        //获得门票等四个布局
-        mGridViewList = LinearLayoutUtils.getStringAndLogo();
-        //获得普通布局
-        for (int i = 0; i < 20; i++) {
-            normalList.add("正常布局" + i);
-        }
-        HomePageRecyclerViewAdapter adapter = new HomePageRecyclerViewAdapter(getActivity()
-                , mImageList
-                , mGridViewList
-                , normalList);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setAdapter(adapter);
-        XBannerUtils.setBannerHolder(getActivity(), mXBannerHomePage);//处理轮播图
-        //标题栏变色
-        mNsvHomepager.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v,
-                                       int scrollX, int scrollY,
-                                       int oldScrollX, int oldScrollY) {
-
-
-                overallXScroll = overallXScroll + scrollY - oldScrollY;// 累加y值 解决滑动一半y值为0
-                if (overallXScroll <= 0) {   //设置标题的背景颜色
-                    mLlTitle.setBackgroundColor(Color.argb(0, 41, 193, 246));
-                } else if (overallXScroll > 0 && overallXScroll <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-                    float scale = (float) overallXScroll / height;
-                    float alpha = (255 * scale);
-                    mLlTitle.setBackgroundColor(Color.argb((int) alpha, 0, 145, 242));
-                } else {
-                    mLlTitle.setBackgroundColor(Color.argb(255, 0, 145, 242));
-                }
-            }
-
-        });
 
     }
 
     private void GetInternetData() {
+        mProgressBar.setVisibility(View.VISIBLE);
         new Thread() {
+
             @Override
             public void run() {
                 super.run();
                 Map<String, String> map = new HashMap<>();
                 map.put("page", "");
-                map.put("city", "郑州市");
-                map.put("page_size", "6");
+                map.put("city", "西安");
+                map.put("page_size", "15");
                 HttpUtils.post(getActivity(), new HomePageBean(), HttpUtils.URL_BASE + "home", map, new RequestCallBack() {
-
-
                     @Override
                     public void onOutNet() {
-                        LogUtils.e("网络出现错误");
-                        ToastUtils.show(getActivity(), "网络已断开!");
+                        handler.sendEmptyMessage(INTERNET_ERROR);//发送消息
                     }
 
                     @Override
@@ -174,10 +213,9 @@ public class HomeFragment extends BaseFragment {
                         mImageUrl = new ArrayList<>();
                         for (int i = 0; i < slideListBean.size(); i++) {
                             mImageUrl.add("http://59.110.106.1" + slideListBean.get(i).getSlide_pic());
-                            LogUtils.e("这个是homepage的轮播图的地址：\n" + "http://59.110.106.1" + slideListBean.get(i).getSlide_pic() + "\n000000000000000000000000000000000000");
                         }
-
-
+                        mProductListBean = homepageBean.getProduct_list();
+                        handler.sendEmptyMessage(MSG_UPDATE_TEXT);//发送消息
                     }
 
                     @Override
@@ -205,6 +243,10 @@ public class HomeFragment extends BaseFragment {
         mPhone.setOnClickListener(this);
         mSearch.setOnClickListener(this);
 
+    }
+
+    private void ProgressBarDismiss() {
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -277,5 +319,149 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
+    private Activity mContext = getActivity();
+
+    private void setSearch(LinearLayout view) {
+        final TextView mBusTicket = (TextView) view.findViewById(R.id.bus_ticket);
+        TextView fromLocation = (TextView) view.findViewById(R.id.from_location);
+        final TextView toLocation = (TextView) view.findViewById(R.id.to_location);
+        final TextView goOfTime = (TextView) view.findViewById(R.id.go_of_time);
+        long today = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd EEEE");
+        String now = sdf.format(today);
+        mThatTime = SPUtils.with(mContext).get("selectedDate", now);
+        LogUtils.e("这个是今天的时间戳  可以使用：" + today);
+        goOfTime.setText(mThatTime);
+        Button queryButton = (Button) view.findViewById(R.id.btn_home_query);
+        final String start = SPUtils.with(mContext).get("出发位置", "郑州");
+        final String end = SPUtils.with(mContext).get("目的位置", "郑州");
+        fromLocation.setText(start);
+        toLocation.setText(end);
+        mBusTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtils.e("汽车票");
+            }
+        });
+        fromLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent StartLocation = new Intent(getActivity(), CitiesActivity.class);
+                StartLocation.putExtra("Location", "出发位置");
+                getActivity().startActivity(StartLocation);
+
+            }
+        });
+        toLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ToLocation = new Intent(getActivity(), CitiesActivity.class);
+                ToLocation.putExtra("Location", "目的位置");
+                getActivity().startActivity(ToLocation);
+
+            }
+        });
+        goOfTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent time = new Intent(getActivity(), CalendarActivity.class);
+                getActivity().startActivity(time);
+
+            }
+        });
+
+        queryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (start.equals(end)) {
+                    ToastUtils.show(getActivity(), "出发地和目的地不能相同，请重新设置！");
+                } else {
+                    Intent intent = new Intent(getActivity(), ThroughTrainInquiryActivity.class);
+                    intent.putExtra("startLocation", start);
+                    intent.putExtra("endLocation", end);
+                    intent.putExtra("time", mThatTime);
+                    getActivity().startActivity(intent);
+                    SPUtils.with(mContext).remove("selectedDate");
+                    SPUtils.with(getActivity()).remove("出发位置");
+                    SPUtils.with(getActivity()).remove("目的位置");
+                }
+            }
+        });
+
+    }
+
+    private void setFourSelect(LinearLayout fourItem) {
+        LinearLayout llTicket = (LinearLayout)
+                fourItem.findViewById(R.id.ll_home_ticket);
+        ImageView IvTicket = (ImageView)
+                fourItem.findViewById(R.id.iv_home_ticket);
+        TextView tvTicket = (TextView)
+                fourItem.findViewById(R.id.tv_home_ticket);
+        Glide.with(getActivity())
+                .load(mGridViewList.get(0).get("pic"))
+                .into(IvTicket);
+        tvTicket.setText(mGridViewList.get(0).get("title").toString());
+        llTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //门票
+                Intent intent = new Intent(getActivity(), TicketActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        LinearLayout llThroughTrain = (LinearLayout)
+                fourItem.findViewById(R.id.ll_home_through_train_search);
+        ImageView ivThroughTrain = (ImageView)
+                fourItem.findViewById(R.id.iv_home_through_train);
+        TextView tvThroughTrain = (TextView)
+                fourItem.findViewById(R.id.tv_home_through_train);
+        Glide.with(getActivity())
+                .load(mGridViewList.get(1).get("pic"))
+                .into(ivThroughTrain);
+        tvThroughTrain.setText(mGridViewList.get(1).get("title").toString());
+        llThroughTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //直通车
+                Intent intent1 = new Intent(getActivity(), ThroughTrainActivity.class);
+                getActivity().startActivity(intent1);
+            }
+        });
+        LinearLayout llGroupTrip = (LinearLayout)
+                fourItem.findViewById(R.id.ll_home_group_trip);
+        ImageView ivGroupTrip = (ImageView)
+                fourItem.findViewById(R.id.iv_home_group_trip);
+        TextView tvGroupTrip = (TextView)
+                fourItem.findViewById(R.id.tv_home_group_trip);
+        Glide.with(getActivity())
+                .load(mGridViewList.get(2).get("pic"))
+                .into(ivGroupTrip);
+        tvGroupTrip.setText(mGridViewList.get(2).get("title").toString());
+        llGroupTrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跟团游
+                Intent intent2 = new Intent(getActivity(), GroupTourActivity.class);
+                getActivity().startActivity(intent2);
+            }
+        });
+        LinearLayout llGuide = (LinearLayout)
+                fourItem.findViewById(R.id.ll_home_guide);
+        ImageView ivGuide = (ImageView)
+                fourItem.findViewById(R.id.iv_home_guide);
+        TextView tvGuide = (TextView)
+                fourItem.findViewById(R.id.tv_home_guide);
+        Glide.with(getActivity())
+                .load(mGridViewList.get(3).get("pic"))
+                .into(ivGuide);
+        tvGuide.setText(mGridViewList.get(3).get("title").toString());
+        llGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //导游
+                ToastUtils.show(getActivity(), "功能正在开发中，敬请期待！");
+            }
+        });
+    }
 
 }

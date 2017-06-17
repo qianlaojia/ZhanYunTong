@@ -1,6 +1,6 @@
 package com.dsgj.youyuntong.adapter.ThroughTrain;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.dsgj.youyuntong.JavaBean.ThroughTrip.ThroughTripBean;
+import com.dsgj.youyuntong.JavaBean.ThroughTrip.ThroughTripLocationImageBean;
 import com.dsgj.youyuntong.R;
+import com.dsgj.youyuntong.Utils.log.LogUtils;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -24,6 +29,7 @@ public class ThroughTrainVerticalRecycleViewAdapter extends
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
+
     private OnItemClickListener mOnItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
@@ -31,11 +37,13 @@ public class ThroughTrainVerticalRecycleViewAdapter extends
     }
 
     private LayoutInflater mInflater;
-    private List<Integer> mData;
+    private Activity mActivity;
+    private List<ThroughTripBean.ResultBean.ProductListBean> mProduct;
 
-    public ThroughTrainVerticalRecycleViewAdapter(Context context, List<Integer> data) {
+    public ThroughTrainVerticalRecycleViewAdapter(Activity context, List<ThroughTripBean.ResultBean.ProductListBean> mProduct) {
         mInflater = LayoutInflater.from(context);
-        mData = data;
+        this.mProduct = mProduct;
+        this.mActivity = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -44,12 +52,14 @@ public class ThroughTrainVerticalRecycleViewAdapter extends
         }
 
         ImageView mImg;
-        TextView mTxt;
+        TextView mStart;
+        TextView mEnd;
+        TextView mPrice;
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mProduct.size();
     }
 
     /**
@@ -60,19 +70,27 @@ public class ThroughTrainVerticalRecycleViewAdapter extends
         View view = mInflater.inflate(R.layout.item_through_train_vertical_rv,
                 viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
-
         viewHolder.mImg = (ImageView) view
                 .findViewById(R.id.iv_right_image);
+        viewHolder.mStart = (TextView) view
+                .findViewById(R.id.tv_though_trip_name);
+        viewHolder.mEnd = (TextView) view
+                .findViewById(R.id.tv_though_trip_introduce);
+        viewHolder.mPrice = (TextView) view
+                .findViewById(R.id.tv_though_trip_price);
         return viewHolder;
     }
 
-    /**
-     * 设置值
-     */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        viewHolder.mImg.setImageResource(mData.get(i));
-        //如果设置了回调，则设置点击事件
+        Gson gson = new Gson();
+        ThroughTripLocationImageBean locationImageBean = gson.fromJson(mProduct.get(i).getSmeta()
+                , ThroughTripLocationImageBean.class);
+
+        Glide.with(mActivity).load(locationImageBean.getThumb()).into(viewHolder.mImg);
+        viewHolder.mStart.setText(mProduct.get(i).getFrom_city());
+        viewHolder.mEnd.setText(mProduct.get(i).getSummary());
+        viewHolder.mPrice.setText("¥"+mProduct.get(i).getPrice());
         if (mOnItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

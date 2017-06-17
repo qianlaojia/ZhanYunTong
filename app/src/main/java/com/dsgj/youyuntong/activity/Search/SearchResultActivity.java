@@ -10,9 +10,8 @@ import android.support.design.widget.TabLayout;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.adapter.SearchResultViewPagerAdapter;
+import com.dsgj.youyuntong.adapter.TabLayoutViewPagerAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
-import com.dsgj.youyuntong.fragment.fragment.SearchResultFragments.SearchResultBusTicketFragment;
 import com.dsgj.youyuntong.fragment.fragment.SearchResultFragments.SearchResultGroupFragment;
 import com.dsgj.youyuntong.fragment.fragment.SearchResultFragments.SearchResultTicketFragment;
 import com.dsgj.youyuntong.fragment.fragment.SearchResultFragments.SearchResultTrainFragment;
@@ -28,7 +27,7 @@ public class SearchResultActivity extends BaseActivity {
     private String mSearchKey;
     private TabLayout mTableLayout;
     private ViewPager mViewPager;
-    private SearchResultViewPagerAdapter mAdapter;
+    private TabLayoutViewPagerAdapter mAdapter;
 
     @Override
     protected int getLayoutID() {
@@ -41,7 +40,6 @@ public class SearchResultActivity extends BaseActivity {
         mInputKey = (TextView) findViewById(R.id.tv_all_search_result);
         mTableLayout = (TabLayout) findViewById(R.id.tl_search_result_table);
         mViewPager = (ViewPager) findViewById(R.id.vp_search_result);
-
     }
 
     @Override
@@ -52,9 +50,8 @@ public class SearchResultActivity extends BaseActivity {
         fragmentList.add(new SearchResultGroupFragment());
         fragmentList.add(new SearchResultTrainFragment());
         fragmentList.add(new SearchResultTicketFragment());
-        fragmentList.add(new SearchResultBusTicketFragment());
-        String[] strings = {"跟团游", "直通车", "门票", "客车票"};
-        mAdapter = new SearchResultViewPagerAdapter(getSupportFragmentManager()
+        String[] strings = {"跟团游", "直通车", "门票"};
+        mAdapter = new TabLayoutViewPagerAdapter(getSupportFragmentManager()
                 , fragmentList,strings);
         mViewPager.setAdapter(mAdapter);
         mTableLayout.setupWithViewPager(mViewPager);

@@ -1,5 +1,6 @@
 package com.dsgj.youyuntong.adapter.GroupTrip;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.dsgj.youyuntong.JavaBean.GroupTour.GroupTourBean;
+import com.dsgj.youyuntong.JavaBean.GroupTour.HotPotImageBean;
 import com.dsgj.youyuntong.R;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -35,11 +40,11 @@ public class GroupTripRecycleViewAdapter extends
     }
 
     private Context mContext;
-    private List<Integer> mData;
+    private List<GroupTourBean.ResultBean.ScenicHotBean> mScenicHotBeen;
 
-    public GroupTripRecycleViewAdapter(Context context, List<Integer> data) {
+    public GroupTripRecycleViewAdapter(Activity context, List<GroupTourBean.ResultBean.ScenicHotBean> mScenicHotBeen) {
         this.mContext = context;
-        mData = data;
+        this.mScenicHotBeen = mScenicHotBeen;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,7 +60,7 @@ public class GroupTripRecycleViewAdapter extends
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mScenicHotBeen.size();
     }
 
     /**
@@ -72,8 +77,12 @@ public class GroupTripRecycleViewAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        viewHolder.mImageView.setImageResource(mData.get(i));
-        viewHolder.mTextView.setText("中华人民共和国");
+
+        Gson gson = new Gson();
+        HotPotImageBean groupTourHotPotImageBean = gson.fromJson(mScenicHotBeen.get(i).getSmeta()
+                , HotPotImageBean.class);
+        Glide.with(mContext).load(groupTourHotPotImageBean.getThumb()).into(viewHolder.mImageView);
+        viewHolder.mTextView.setText(mScenicHotBeen.get(i).getTitle());
         //如果设置了回调，则设置点击事件
         if (mOnItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

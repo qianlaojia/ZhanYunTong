@@ -6,14 +6,16 @@
     <FrameLayout
         android:id="@+id/fl_no_use"
         android:layout_width="match_parent"
-        android:layout_height="151dp">
+        android:layout_height="151dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <ImageView
-            android:id="@+id/iv_group_trip_around_image"
+            android:id="@+id/iv_home_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/image"
-            android:contentDescription="@string/LogAndRegister"/>
+            android:layout_height="151dp"
+            android:contentDescription="@string/LogAndRegister"
+            android:scaleType="centerCrop"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,6 +24,7 @@
             android:background="@color/gray1">
 
             <TextView
+                android:id="@+id/tv_start_location"
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_marginStart="11dp"
@@ -31,6 +34,7 @@
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -49,7 +53,7 @@
             android:layout_marginBottom="30dp">
 
             <TextView
-                android:id="@+id/tv_scenic_rv_price"
+                android:id="@+id/tv_home_pager_scenic_rv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -60,14 +64,15 @@
                 android:paddingStart="10dp"
                 android:text="@string/money_details"
                 android:textColor="@color/white"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tv_scenic_rv_price"
+                android:layout_alignBaseline="@+id/tv_home_pager_scenic_rv_price"
                 android:layout_marginStart="-20dp"
-                android:layout_toEndOf="@+id/tv_scenic_rv_price"
+                android:layout_toEndOf="@+id/tv_home_pager_scenic_rv_price"
                 android:background="@drawable/shape_price_background"
                 android:text="@string/qi"
                 android:textColor="@color/white"
@@ -85,6 +90,8 @@
         android:layout_below="@id/fl_no_use"
         android:layout_marginStart="11dp"
         android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="@string/scenicName"
         android:textColor="@color/textColor"
         android:textSize="18sp"/>
@@ -96,7 +103,9 @@
         android:layout_below="@id/tv_scenic_name"
         android:layout_marginBottom="12dp"
         android:layout_marginStart="11dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="marquee"
+        android:maxLines="1"
         android:text="@string/scenicIntroduce"
         android:textColor="@color/text_color_6"/>
 

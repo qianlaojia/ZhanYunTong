@@ -4,10 +4,10 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * 禁止滑动的viewPager
- *
  */
 public class NoSlidingViewPager extends ViewPager {
     public NoSlidingViewPager(Context context) {
@@ -27,4 +27,6 @@ public class NoSlidingViewPager extends ViewPager {
     public boolean onInterceptTouchEvent(MotionEvent arg0) {
         return false;
     }
+
+
 }

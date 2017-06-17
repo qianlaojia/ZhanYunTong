@@ -1,87 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.dsgj.youyuntong.activity.TicketActivity">
+    tools:context="com.dsgj.youyuntong.activity.Ticket.TicketActivity">
 
-    <include
-        layout="@layout/layout_search_title"/>
-
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            layout="@layout/layout_search_title"/>
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.stx.xhb.xbanner.XBanner
-                android:id="@+id/XB_ticket"
-                android:layout_width="match_parent"
-                android:layout_height="138dp">
-
-            </com.stx.xhb.xbanner.XBanner>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/hot_pots"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp"/>
+                <com.stx.xhb.xbanner.XBanner
+                    android:id="@+id/XB_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="138dp">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_ticket_hot_spots"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                </com.stx.xhb.xbanner.XBanner>
 
-                    android:layout_marginTop="10dp"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:drawableEnd="@mipmap/home_bq_y"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@mipmap/home_bq_z"
-                    android:gravity="center"
-                    android:text="@string/ticket"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp"/>
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_ticket_detail"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/hot_pots"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_ticket_hot_spots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="14dp"/>
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:drawableEnd="@mipmap/home_bq_y"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@mipmap/home_bq_z"
+                        android:gravity="center"
+                        android:text="@string/ticket"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_ticket_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
 
+    <View
+        android:id="@+id/view_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_front_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
 
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_ticket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/progress_bar_color"/>
+</FrameLayout>

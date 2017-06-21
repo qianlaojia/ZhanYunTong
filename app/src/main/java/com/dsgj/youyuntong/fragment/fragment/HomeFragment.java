@@ -330,7 +330,7 @@ public class HomeFragment extends BaseFragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd EEEE");
         String now = sdf.format(today);
         mThatTime = SPUtils.with(mContext).get("selectedDate", now);
-        LogUtils.e("这个是今天的时间戳  可以使用：" + today);
+
         goOfTime.setText(mThatTime);
         Button queryButton = (Button) view.findViewById(R.id.btn_home_query);
         final String start = SPUtils.with(mContext).get("出发位置", "郑州");

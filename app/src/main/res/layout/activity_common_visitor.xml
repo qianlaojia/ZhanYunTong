@@ -10,16 +10,14 @@
         android:id="@+id/ll_insert_visitor"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="68dp"
         android:background="@color/white"
-        android:gravity="center"
-        >
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tv_insert_visitor"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-
             android:drawablePadding="10dp"
             android:drawableStart="@mipmap/changyongchengke_tianjia"
             android:gravity="center"
@@ -31,36 +29,43 @@
         android:id="@+id/rv_common_visitor_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="126dp"
 
         />
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="68dp">
 
         <include
-            layout="@layout/layout_message_title"/>
+            layout="@layout/layout_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            />
 
         <TextView
             android:id="@+id/tv_common_visitor_ok"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@string/ok"
             android:textColor="@color/white"
             android:textSize="18sp"/>
     </RelativeLayout>
 
+
     <LinearLayout
 
         android:id="@+id/ll_id_insert_visitor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="78dp"
         android:orientation="vertical"
         android:visibility="gone">
 

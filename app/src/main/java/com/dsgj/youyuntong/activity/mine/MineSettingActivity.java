@@ -13,6 +13,7 @@ import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.activity.LogOnAndRegisterActivity;
 import com.dsgj.youyuntong.base.BaseActivity;
 
 import java.util.HashMap;
@@ -137,6 +138,13 @@ public class MineSettingActivity extends BaseActivity {
                         ToastUtils.show(MineSettingActivity.this, "退出成功！");
                         SPUtils.with(MineSettingActivity.this).save("IsLogoIn", false);
                         SPUtils.with(MineSettingActivity.this).save("message_unread", "0");
+                        SPUtils.remove(MineSettingActivity.this, "userName");
+                        SPUtils.remove(MineSettingActivity.this, "nickName");
+                        SPUtils.remove(MineSettingActivity.this, "userEmail");
+                        SPUtils.remove(MineSettingActivity.this, "ID");
+                        SPUtils.remove(MineSettingActivity.this, "HeadImageUrl");
+                        SPUtils.remove(MineSettingActivity.this, "message_unread");
+                        SPUtils.remove(MineSettingActivity.this, "token");
                         MineSettingActivity.this.finish();
                     }
 

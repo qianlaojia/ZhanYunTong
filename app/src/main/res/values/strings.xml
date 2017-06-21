@@ -200,7 +200,7 @@
     <string name="fromZZ">郑州出发</string>
     <string name="scenicIntroduce">三步一泉，五步一瀑，十步一潭</string>
     <string name="scenicName">云台山二日一晚跟团游</string>
-    <string name="destine">立即预定</string>
+    <string name="destine">下一步</string>
     <string name="collect">收藏</string>
     <string name="item_number">产品编号：</string>
     <string name="item_number_detail">DSLV00047859</string>
@@ -222,4 +222,16 @@
     <string name="must_insert">必填</string>
     <string name="return_to_visitor">返回乘客列表</string>
     <string name="no_through_trip">对不起，当天暂未有直通车发出！</string>
+    <string name="visitor_number">出行人数</string>
+    <string name="jian">—</string>
+    <string name="reduce">—</string>
+    <string name="one">1</string>
+    <string name="add">+</string>
+    <string name="price">门票价格：</string>
+    <string name="danjia">元/每人</string>
+    <string name="tv_visitor_counter">出发人数：</string>
+    <string name="startTime">出发时间：</string>
+    <string name="payOnline">在线支付：</string>
+    <string name="orderNumber">订单编号：</string>
+    <string name="visitorNumber">出行人数：</string>
 </resources>

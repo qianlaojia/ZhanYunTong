@@ -125,7 +125,7 @@ public class TicketBean {
             private String summary;
             private String smeta;
             private String title;
-            private int price;
+            private String price;
             private String city;
 
             public String getProduct_id() {
@@ -168,11 +168,11 @@ public class TicketBean {
                 this.title = title;
             }
 
-            public int getPrice() {
+            public String getPrice() {
                 return price;
             }
 
-            public void setPrice(int price) {
+            public void setPrice(String price) {
                 this.price = price;
             }
 
@@ -201,7 +201,7 @@ public class TicketBean {
             private String product_code;
             private String summary;
             private String smeta;
-            private int price;
+            private String price;
             private String city;
 
             public String getProduct_id() {
@@ -244,11 +244,11 @@ public class TicketBean {
                 this.smeta = smeta;
             }
 
-            public int getPrice() {
+            public String getPrice() {
                 return price;
             }
 
-            public void setPrice(int price) {
+            public void setPrice(String price) {
                 this.price = price;
             }
 

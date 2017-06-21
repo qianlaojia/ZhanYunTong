@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dsgj.youyuntong.activity.OrderPayActivity">
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="68dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_order_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tv_pay_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/payOnline"
+                android:textColor="@color/gray"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_pay_money_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/tv_pay_hint"
+                android:text="@string/price"
+                android:textColor="@color/colorOrange"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_pay_order_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pay_hint"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/orderNumber"
+                android:textColor="@color/gray"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_order_number_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pay_hint"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/tv_pay_order_number"
+                android:text="@string/about"
+                android:textColor="@color/gray"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_pay_order_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_order_number_pay"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/about"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/tv_pay_visitor_number_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pay_order_name"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/visitorNumber"
+                android:textColor="@color/gray"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_visitor_number_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pay_order_name"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/tv_pay_visitor_number_hint"
+                android:text="@string/one"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/tv_start_time_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_visitor_number_detail"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/startTime"
+                android:textColor="@color/gray"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_start_time_detail_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_visitor_number_detail"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/tv_start_time_hint"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</LinearLayout>
+    </FrameLayout>

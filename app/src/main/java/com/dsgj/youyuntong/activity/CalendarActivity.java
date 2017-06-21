@@ -1,13 +1,9 @@
 package com.dsgj.youyuntong.activity;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.RelativeLayout;
@@ -15,29 +11,33 @@ import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
-import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.base.BaseActivity;
 
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-@SuppressLint("SimpleDateFormat")
-public class CalendarActivity extends Activity {
+
+public class CalendarActivity extends BaseActivity {
     private RelativeLayout mRlTitleBack;
     private TextView mTvMiddleText;
     private CalendarView mCalendarView;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
-        initView();
+    protected int getLayoutID() {
+        return R.layout.activity_calendar;
     }
 
-
-    private void initView() {
+    @Override
+    protected void initView() {
         mRlTitleBack = (RelativeLayout) findViewById(R.id.rl_title_back);
         mTvMiddleText = (TextView) findViewById(R.id.tv_middle_text);
+
+    }
+
+    @Override
+    protected void initData() {
         mTvMiddleText.setText("选择日期");
         mRlTitleBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +46,7 @@ public class CalendarActivity extends Activity {
             }
         });
         mCalendarView = (CalendarView) findViewById(R.id.calendar_view);
-        mCalendarView.setMinDate(System.currentTimeMillis());
+        mCalendarView.setMinDate(System.currentTimeMillis() - 1000);
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -71,4 +71,13 @@ public class CalendarActivity extends Activity {
         });
     }
 
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

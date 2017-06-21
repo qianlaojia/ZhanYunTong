@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dsgj.youyuntong.activity.ThroughTrain.ThroughTrainInputInfoActivity">
+    tools:context="com.dsgj.youyuntong.activity.OrderInputInfoActivity">
+
+
+    <include
+        layout="@layout/layout_message_title"/>
+
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,25 +39,71 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/tv_go_of_time"
+                    android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_input_info_spot_name"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/go_of_time"
+                    android:layout_marginTop="9dp"
+                    android:text="@string/pay_style_details"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/tv_price"
+                    android:layout_below="@id/tv_input_info_spot_name"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@id/tv_price"
+                    android:text="@string/danjia"
+                    android:textColor="@color/colorOrange"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/tv_go_of_time_detail"
+                    android:id="@+id/tv_visitor_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_input_info_spot_name"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toEndOf="@id/tv_go_of_time"
-                    android:text="@string/date2"/>
+                    android:layout_below="@id/tv_price"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="9sp"
+                    android:text="@string/tv_visitor_counter"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_visitor_counter_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_price"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@id/tv_visitor_counter"
+                    android:text="@string/one_people"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_start_time_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_visitor_counter"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="9dp"
+                    android:text="@string/startTime"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_start_time_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_visitor_counter"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toEndOf="@id/tv_start_time_info"
+                    android:text="@string/startTime"
+                    android:textSize="12sp"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -81,6 +133,7 @@
                     android:text="@string/fromLocations2"/>
 
                 <TextView
+                    android:id="@+id/tv_start_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_input_info_from_location"
@@ -200,17 +253,10 @@
                     android:textColor="@color/gray"
                     android:textSize="15sp"/>
 
-                <WebView
-                    android:id="@+id/wv_order_notice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+
             </RelativeLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
-    <include
-        layout="@layout/layout_message_title"/>
 
     <include
         layout="@layout/layout_through_train_input_info_bottom"
@@ -218,5 +264,4 @@
         android:layout_height="48dp"
         android:layout_gravity="bottom"
         />
-
 </FrameLayout>

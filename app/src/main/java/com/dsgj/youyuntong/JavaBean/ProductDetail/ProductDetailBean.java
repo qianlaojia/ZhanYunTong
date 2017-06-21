@@ -134,7 +134,7 @@ public class ProductDetailBean {
         private String title;
         private String summary;
         private String smeta;
-        private int price;
+        private String price;
         private String product_code;
         private String city;
         private String address;
@@ -173,11 +173,11 @@ public class ProductDetailBean {
             this.smeta = smeta;
         }
 
-        public int getPrice() {
+        public String getPrice() {
             return price;
         }
 
-        public void setPrice(int price) {
+        public void setPrice(String price) {
             this.price = price;
         }
 

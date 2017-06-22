@@ -30,6 +30,7 @@ public class HttpUtils {
     public static final String URL_BASE = "http://api.yezi6.com/dev/interface.php/v1/index/";
     public static final String URL_BASE_USER = "http://api.yezi6.com/dev/interface.php/v1/User/";
     public static final String URL_BASE_TOURISM = "http://api.yezi6.com/dev/interface.php/v1/Tourism/";
+    public static final String URL_BASE_ORDER = "http://api.yezi6.com/dev/interface.php/v1/Order/";
     /**
      * 基础上传文件链接地址
      */

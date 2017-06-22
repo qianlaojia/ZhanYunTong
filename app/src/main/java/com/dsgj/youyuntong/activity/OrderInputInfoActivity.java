@@ -30,6 +30,7 @@ public class OrderInputInfoActivity extends BaseActivity {
     private TextView mVisitor;
     private TextView mOrderName;
     private TextView mOrderPhone;
+    private double mTotal1;
 
 
     @Override
@@ -70,8 +71,8 @@ public class OrderInputInfoActivity extends BaseActivity {
         mStartCity.setText(startCity);
         mSceneryName.setText(sceneryName);
         double i = Double.parseDouble(sceneryPrice);
-        double total = visitorCount * i;
-        mTotal.setText(total + "元");
+        mTotal1 = visitorCount * i;
+        mTotal.setText(mTotal1 + "元");
         mMiddleText.setText("填写资料");
         //预订人信息
         String number = SPUtils.with(OrderInputInfoActivity.this).get("userName", "");
@@ -95,10 +96,16 @@ public class OrderInputInfoActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_to_common_visitor:
-                jumpToActivity(CommonVisitorActivity.class);
+                Intent intent = new Intent(OrderInputInfoActivity.this, CommonVisitorActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.tv_pay_at_once:
-                jumpToActivity(OrderPayActivity.class);
+                //传递相关的参数到下一个界面：
+                Intent intentToPay = new Intent(this, OrderPayActivity.class);
+                intentToPay.putExtra("totalPrice", mTotal1);
+                intentToPay.putExtra("", "");
+                intentToPay.putExtra("", "");
+                intentToPay.putExtra("", "");
                 this.finish();
                 break;
         }

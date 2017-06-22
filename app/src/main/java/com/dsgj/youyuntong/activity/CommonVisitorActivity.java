@@ -1,5 +1,7 @@
 package com.dsgj.youyuntong.activity;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,12 +12,28 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dsgj.youyuntong.JavaBean.newVisitorBean;
 import com.dsgj.youyuntong.R;
+import com.dsgj.youyuntong.Utils.Http.HttpUtils;
+import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.IDCardValidateUtils;
+import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.view.DividerItemDecoration;
 import com.dsgj.youyuntong.adapter.CommonVisitorAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
+import com.dsgj.youyuntong.base.BaseJavaBean;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
 
 public class CommonVisitorActivity extends BaseActivity {
 
@@ -31,7 +49,14 @@ public class CommonVisitorActivity extends BaseActivity {
     private Button mSave;
     private EditText mInputName;
     private EditText mInputID;
-
+    private CommonVisitorAdapter mAdapter;
+    public static final int INTERNET_SUCCESS = 1;
+    private static final int NET_OUT = 2;
+    private static final int ERROR = 3;
+    private String mNewVisitorName;
+    private String mNewVisitorId;
+    private List<String> mVisitorName;
+    private List<String> mVisitorId;
 
     @Override
     protected int getLayoutID() {
@@ -51,30 +76,63 @@ public class CommonVisitorActivity extends BaseActivity {
         mSave = (Button) findViewById(R.id.btn_save_visitor);
         mInputName = (EditText) findViewById(R.id.et_insert_name_insert_visitor);
         mInputID = (EditText) findViewById(R.id.et_insert_ID_insert_visitor);
+
     }
 
     @Override
     protected void initData() {
+        getServerData();
         mMiddleText.setText("常用游客");
         mInputVisitor.setVisibility(View.GONE);
         mConfirm.setVisibility(View.VISIBLE);
         mVisitorList.setVisibility(View.VISIBLE);
         mInsertVisitor1.setVisibility(View.VISIBLE);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mVisitorList.setLayoutManager(layoutManager);
 
-        CommonVisitorAdapter adapter = new CommonVisitorAdapter(this);
-        adapter.setOnItemClickListener(new CommonVisitorAdapter.OnItemClickListener() {
+
+    }
+
+    private void getServerData() {
+        new Thread() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void run() {
+                super.run();
+                String logName = SPUtils.with(CommonVisitorActivity.this)
+                        .get("userName", "13623717683");
+                String token = SPUtils.with(CommonVisitorActivity.this)
+                        .get("token", "");
+                Map<String, String> map = new HashMap<>();
+                map.put("type", "phone");
+                map.put("access_token", "");
+                map.put("userName", logName);
+                map.put("token", token);
+                OkHttpUtils.post()
+                        .url(HttpUtils.URL_BASE_ORDER + "travelers")
+                        .params(map)
+                        .build()
+                        .execute(new StringCallback() {
 
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Gson gson = new Gson();
+                                newVisitorBean newVisitorBean = gson.fromJson(response
+                                        , newVisitorBean.class);
+                                List<newVisitorBean.ResultBean> resultBeanList = newVisitorBean.getResult();
+                                mVisitorName = new ArrayList<>();
+                                mVisitorId = new ArrayList<>();
+                                for (int i = 0; i < resultBeanList.size(); i++) {
+                                    mVisitorName.add(resultBeanList.get(i).getContact_name());
+                                    mVisitorId.add(resultBeanList.get(i).getIdnumber());
+                                }
+                                mHandler.sendEmptyMessage(INTERNET_SUCCESS);
+                            }
+                        });
             }
-        });
-        mVisitorList.addItemDecoration(new DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL_LIST));
-        mVisitorList.setAdapter(adapter);
-
+        }.start();
     }
 
     @Override
@@ -84,7 +142,6 @@ public class CommonVisitorActivity extends BaseActivity {
         mReturn.setOnClickListener(this);
         mSave.setOnClickListener(this);
         mConfirm.setOnClickListener(this);
-
     }
 
     @Override
@@ -94,8 +151,6 @@ public class CommonVisitorActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_common_visitor_ok:
-                this.finish();
-             //// TODO: 2017/6/7  添加数据的保存和返回
                 break;
             case R.id.tv_insert_visitor:
                 mMiddleText.setText("添加乘客");
@@ -112,30 +167,67 @@ public class CommonVisitorActivity extends BaseActivity {
                 mVisitorList.setVisibility(View.VISIBLE);
                 mInsertVisitor1.setVisibility(View.VISIBLE);
                 break;
-            case R.id.btn_save_visitor:
+            case R.id.btn_save_visitor://添加数据
                 if (saveVisitor()) {
                     mMiddleText.setText("常用游客");
-                    mInputVisitor.setVisibility(View.GONE);
-                    mConfirm.setVisibility(View.VISIBLE);
-                    mVisitorList.setVisibility(View.VISIBLE);
-                    mInsertVisitor1.setVisibility(View.VISIBLE);
+                    String logName = SPUtils.with(CommonVisitorActivity.this)
+                            .get("userName", "13623717683");
+                    String token = SPUtils.with(CommonVisitorActivity.this)
+                            .get("token", "");
+
+                    Map<String, String> map = new HashMap<>();
+                    map.put("type", "phone");
+                    map.put("access_token", "");
+                    map.put("userName", logName);
+                    map.put("name", mNewVisitorName);
+                    map.put("idnumber", mNewVisitorId);
+                    map.put("token", token);
+                    HttpUtils.post(CommonVisitorActivity.this
+                            , new BaseJavaBean()
+                            , HttpUtils.URL_BASE_ORDER + "add_traveler", map, new RequestCallBack() {
+                                @Override
+                                public void onOutNet() {
+                                    ToastUtils.show(CommonVisitorActivity.this, "网络已断开！");
+                                }
+
+                                @Override
+                                public void onSuccess(String data) {
+                                    ToastUtils.show(CommonVisitorActivity.this, "保存成功！");
+                                    mInputVisitor.setVisibility(View.GONE);
+                                    mConfirm.setVisibility(View.VISIBLE);
+                                    mVisitorList.setVisibility(View.VISIBLE);
+                                    mInsertVisitor1.setVisibility(View.VISIBLE);
+                                    getServerData();
+                                }
+
+                                @Override
+                                public void onFailure(int code) {
+                                    LogUtils.e("如果我出现  那么就上传失败了，失败的代码是：" + code);
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    LogUtils.e("如果我出现就出现错误了");
+                                }
+                            });
+
                 }
                 break;
         }
     }
 
     private boolean saveVisitor() {
-        String newVisitorName = mInputName.getText().toString().trim();
-        String newVisitorId = mInputID.getText().toString().trim();
-        if (TextUtils.isEmpty(newVisitorName)) {
+        mNewVisitorName = mInputName.getText().toString().trim();
+        mNewVisitorId = mInputID.getText().toString().trim();
+        if (TextUtils.isEmpty(mNewVisitorName)) {
             ToastUtils.show(this, "添加乘客的姓名不能为空");
             mInputName.requestFocus();
             return false;
-        } else if (TextUtils.isEmpty(newVisitorId)) {
+        } else if (TextUtils.isEmpty(mNewVisitorId)) {
             ToastUtils.show(this, "添加乘客的身份证号不能为空");
             mInputID.requestFocus();
             return false;
-        } else if (!new IDCardValidateUtils(this).IDCardValidate(newVisitorId)) {
+        } else if (!new IDCardValidateUtils(this).IDCardValidate(mNewVisitorId)) {
             mInputID.requestFocus();
             return false;
         } else {
@@ -143,5 +235,33 @@ public class CommonVisitorActivity extends BaseActivity {
             mInputID.setText("");
             return true;
         }
+    }
+
+    public Handler mHandler;
+
+    {
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                switch (msg.what) {
+                    case INTERNET_SUCCESS:
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(CommonVisitorActivity.this);
+                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                        mVisitorList.setLayoutManager(layoutManager);
+                        mAdapter = new CommonVisitorAdapter(CommonVisitorActivity.this,mVisitorName,mVisitorId);
+                        mAdapter.setOnItemClickListener(new CommonVisitorAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                            }
+                        });
+                        mVisitorList.addItemDecoration(new DividerItemDecoration(CommonVisitorActivity.this,
+                                DividerItemDecoration.VERTICAL_LIST));
+                        mVisitorList.setAdapter(mAdapter);
+                        break;
+                }
+            }
+        };
     }
 }

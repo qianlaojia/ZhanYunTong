@@ -79,7 +79,6 @@
         <activity android:name=".activity.mine.MineAllOrdersActivity"/>
         <activity android:name=".activity.mine.SecuritySettingActivity"/>
         <activity android:name=".activity.mine.MyCollectionActivity"/>
-        <activity android:name=".activity.mine.CommonInformationActivity"/>
         <activity android:name=".activity.mine.ScannerHistoryActivity"/>
         <activity android:name=".activity.mine.EditPersonalInfoActivity">
         </activity>

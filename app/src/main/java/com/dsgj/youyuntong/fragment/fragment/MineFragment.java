@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.activity.CommonVisitorActivity;
 import com.dsgj.youyuntong.activity.LogOnAndRegisterActivity;
 import com.dsgj.youyuntong.activity.Message.MessageActivity;
-import com.dsgj.youyuntong.activity.mine.CommonInformationActivity;
 import com.dsgj.youyuntong.activity.mine.MineAllOrdersActivity;
 import com.dsgj.youyuntong.activity.mine.MineSettingActivity;
 import com.dsgj.youyuntong.activity.mine.MyCollectionActivity;
@@ -155,7 +155,7 @@ public class MineFragment extends BaseFragment {
                 jumpToActivity(MessageActivity.class);
                 break;
             case R.id.civ_head_image:
-               //处理圆形头像的地方
+                //处理圆形头像的地方
                 break;
             case R.id.tv_nickname:
                 //登录
@@ -193,7 +193,9 @@ public class MineFragment extends BaseFragment {
 
                 break;
             case R.id.tv_mine_common_information:
-                jumpToActivity(CommonInformationActivity.class);
+                Map<String, String> map = new HashMap<>();
+                map.put("type", "MineJump");
+                jumpToActivity(CommonVisitorActivity.class,map);
 
                 break;
             case R.id.tv_mine_browse_history:

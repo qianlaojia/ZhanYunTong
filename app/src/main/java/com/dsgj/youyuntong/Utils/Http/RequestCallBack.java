@@ -26,4 +26,8 @@ public interface RequestCallBack {
      * @param e 错误信息
      */
     void onError(Exception e);
+    /**
+     * token失效的解决方法
+     */
+    //void onTokenOutTime(int code);
 }

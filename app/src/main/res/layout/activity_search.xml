@@ -8,44 +8,51 @@
     android:orientation="vertical"
     tools:context="com.dsgj.youyuntong.activity.Search.SearchActivity">
 
-    <LinearLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/titleColor"
-        android:orientation="horizontal">
+        android:layout_height="68dp"
+        android:background="@color/titleColor">
 
-        <ImageView
-            android:id="@+id/iv_search_back"
-            android:layout_width="48dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerInside"
-            android:src="@mipmap/fanhui"/>
+            android:layout_alignParentBottom="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
 
-        <EditText
-            android:id="@+id/et_all_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="15dp"
-            android:background="@drawable/shape_white_normal"
-            android:drawablePadding="5dp"
-            android:drawableStart="@mipmap/sousuo_sousuo"
-            android:hint="@string/searchTips"
-            android:imeOptions="actionSearch"
-            android:maxLines="1"
-            android:paddingBottom="5dp"
-            android:paddingEnd="15dp"
-            android:paddingStart="15dp"
-            android:paddingTop="5dp"
-            android:singleLine="true"
-            android:textColorHint="@color/gray99"
-            android:textSize="15sp"/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_search_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@mipmap/fanhui"/>
+
+            <EditText
+                android:id="@+id/et_all_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/shape_white_normal"
+                android:drawablePadding="5dp"
+                android:drawableStart="@mipmap/sousuo_sousuo"
+                android:hint="@string/searchTips"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:singleLine="true"
+                android:textColorHint="@color/gray99"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv_search"
@@ -78,15 +85,6 @@
             <include
                 layout="@layout/layout_division_line"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="14dp"
-                android:text="@string/throughTrain"
-                android:textColor="@color/gray99"
-                android:textSize="15sp"/>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_search_though_train"
                 android:layout_width="match_parent"
@@ -95,6 +93,15 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="14dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/throughTrain"
+                android:textColor="@color/gray99"
+                android:textSize="15sp"/>
 
             <include
                 layout="@layout/layout_division_line"/>

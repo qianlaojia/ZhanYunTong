@@ -1,8 +1,6 @@
 package com.dsgj.youyuntong.activity.GroupTour;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +14,8 @@ import android.widget.TextView;
 
 import com.dsgj.youyuntong.JavaBean.GroupTour.GroupTourBean;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
+import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.view.NoSlidingViewPagerFit;
@@ -78,9 +76,6 @@ public class GroupTourActivity extends BaseActivity {
         mMessage = (ImageView) findViewById(R.id.iv_news_Image);
         mXBanner = (XBanner) findViewById(R.id.xb_group_trip_XBanner);
         mLineGridView = (GridView) findViewById(R.id.lgv_group_trip_hot_city);
-        mTravel_around = (RadioButton) findViewById(R.id.rb_travel_around);
-        mInbound_tourism = (RadioButton) findViewById(R.id.rb_inbound_tourism);
-        mTravel_abroad = (RadioButton) findViewById(R.id.rb_travel_abroad);
         mRadioGroup = (RadioGroup) findViewById(R.id.rg_Group_tour);
         mViewPager = (NoSlidingViewPagerFit) findViewById(R.id.vp_group_trip);
         mSearchTitle = (TextView) findViewById(R.id.tv_search_tips);
@@ -125,8 +120,8 @@ public class GroupTourActivity extends BaseActivity {
 
     private void GetServerData() {
         final Map<String, String> map = new HashMap<>();
-        map.put("page", "");
-        map.put("city", "郑州");
+        map.put("page", "1");
+        map.put("city", "郑州市");
         map.put("page_size", "15");
         HttpUtils.post(GroupTourActivity.this, new GroupTourBean(), HttpUtils.URL_BASE_TOURISM + "home", map, new RequestCallBack() {
             @Override
@@ -175,7 +170,10 @@ public class GroupTourActivity extends BaseActivity {
                 mLineGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ToastUtils.show(GroupTourActivity.this, "第" + position + "被点击！！");
+                        String hotCity = mMHotName.get(position);
+                        Intent intent = new Intent(GroupTourActivity.this, SearchActivity.class);
+                        intent.putExtra("hotCity", hotCity);
+                        startActivity(intent);
                     }
                 });
                 ToastUtils.show(GroupTourActivity.this, "成功的获取数据！");

@@ -15,6 +15,9 @@ import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.activity.CommonVisitorActivity;
 import com.dsgj.youyuntong.base.BaseActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OrderInputInfoActivity extends BaseActivity {
 
 
@@ -34,6 +37,9 @@ public class OrderInputInfoActivity extends BaseActivity {
     private String mSceneryName1;
     private int mVisitorCount;
     private String mStartTime;
+    private String mNumber;
+    private String mName;
+    private String mMName;
 
 
     @Override
@@ -78,10 +84,10 @@ public class OrderInputInfoActivity extends BaseActivity {
         mTotal.setText(mTotal1 + "元");
         mMiddleText.setText("填写资料");
         //预订人信息
-        String number = SPUtils.with(OrderInputInfoActivity.this).get("userName", "");
-        String name = SPUtils.with(OrderInputInfoActivity.this).get("realName", "");
-        mOrderPhone.setText(number);
-        mOrderName.setText(name);
+        mNumber = SPUtils.with(OrderInputInfoActivity.this).get("userName", "");
+       mMName = SPUtils.with(OrderInputInfoActivity.this).get("realName", "");
+        mOrderPhone.setText(mNumber);
+        mOrderName.setText(mMName);
 
     }
 
@@ -103,6 +109,15 @@ public class OrderInputInfoActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
                 break;
             case R.id.tv_pay_at_once:
+                //生成订单接口
+                Map<String,String> map = new HashMap<>();
+                map.put("type","phone");
+                map.put("access_token","");
+                map.put("userName",mNumber);
+                map.put("token",SPUtils.with(OrderInputInfoActivity.this).get("token",""));
+
+                map.put("type","phone");
+
                 //传递相关的参数到下一个界面：
                 Intent intentToPay = new Intent(this, OrderPayActivity.class);
                 intentToPay.putExtra("totalPrice", mTotal1);//总价格

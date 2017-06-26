@@ -2,9 +2,9 @@ package com.dsgj.youyuntong.activity.Search;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -26,8 +25,10 @@ import java.util.List;
 public class SearchActivity extends BaseActivity {
     private ImageView mBack;
     private EditText mInputSearchKey;
-    private List<String> mHistoryKeys;
+
     private String mKeyToSearch;
+    private RecyclerView mHistory;
+    private List<String> mHistoryStrings;
 
     @Override
     protected int getLayoutID() {
@@ -38,10 +39,16 @@ public class SearchActivity extends BaseActivity {
     protected void initView() {
         mBack = (ImageView) findViewById(R.id.iv_search_back);
         mInputSearchKey = (EditText) findViewById(R.id.et_all_search);
+        mHistory = (RecyclerView) findViewById(R.id.rv_search_history);
     }
 
     @Override
     protected void initData() {
+        Intent intent = getIntent();
+        String hotCity = intent.getStringExtra("hotCity");
+        mInputSearchKey.setText(hotCity);
+        mHistoryStrings = new ArrayList<>();
+
 
     }
 
@@ -64,25 +71,7 @@ public class SearchActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         watchSearch();
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                mHistoryKeys = new ArrayList<>();
-                mHistoryKeys.add(mKeyToSearch);
-                saveArray(mHistoryKeys);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtils.show(SearchActivity.this, "12345679876543" + loadArray().size() + "12324354675432");
-                    }
-                });
-
-            }
-        };
-
-
-    }
+   }
 
     public void watchSearch() {
         mInputSearchKey.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -101,6 +90,8 @@ public class SearchActivity extends BaseActivity {
                     } else {
                         Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
                         intent.putExtra("searchKey", mKeyToSearch);
+                        mHistoryStrings.add(mKeyToSearch);
+                        SearchActivity.this.finish();
                         startActivity(intent);
                     }
                     return true;
@@ -111,8 +102,8 @@ public class SearchActivity extends BaseActivity {
     }
 
     public void saveArray(List<String> list) {
-        SPUtils.with(this).save("historyListSize", mHistoryKeys.size());
-        for (int i = 0; i < mHistoryKeys.size(); i++) {
+        SPUtils.with(this).save("historyListSize", mHistoryStrings.size());
+        for (int i = 0; i < mHistoryStrings.size(); i++) {
             SPUtils.with(this).save("historyList_" + i, list.get(1));
         }
     }

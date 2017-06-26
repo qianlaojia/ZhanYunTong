@@ -1,5 +1,6 @@
 package com.dsgj.youyuntong.Utils.Http;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -7,13 +8,12 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-
 import com.dsgj.youyuntong.Utils.APPContent;
 import com.dsgj.youyuntong.Utils.JsonUtils;
 import com.dsgj.youyuntong.Utils.SPUtils;
-import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.activity.LogOnAndRegisterActivity;
+import com.dsgj.youyuntong.adapter.GroupTrip.AroundTourAdapter;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
@@ -34,11 +34,12 @@ public class HttpUtils {
     public static final String URL_BASE_USER = "http://api.yezi6.com/dev/interface.php/v1/User/";
     public static final String URL_BASE_TOURISM = "http://api.yezi6.com/dev/interface.php/v1/Tourism/";
     public static final String URL_BASE_ORDER = "http://api.yezi6.com/dev/interface.php/v1/Order/";
+    public static final String URL_BASE_PAY = "http://api.yezi6.com/dev/interface.php/v1/Pay/";
     /**
      * 基础上传文件链接地址
      */
     public static final String URL_FILE_BASE = "";
-    private static final int TOKEN_OUT_TIME = 409;
+    private static final int TOKEN_OUT_TIME = 409;//token过期
     private static final int CODE_SUCCESS = 200;// 请求成功后返回的resultCode
     private static final String STRING_ERROR_IGN = "Canceled;Socket closed"; // 异常为此之一时，不进行操作
     private static HashMap<Object, RequestCall> connMap = new HashMap<>();
@@ -98,8 +99,9 @@ public class HttpUtils {
             @Override
             public void onResponse(String json, int id) {
                 if (tag != null) connMap.remove(tag);
-                LogUtils.writeLog(json);
+
                 int resultCode = JsonUtils.getInt(json, "retCode");
+
                 switch (resultCode) {
                     case CODE_SUCCESS:
                         String resultData = JsonUtils.getString(json, "result");
@@ -152,8 +154,6 @@ public class HttpUtils {
             } else {
                 urlWhole += "&" + entry.getKey() + "=" + entry.getValue();
             }
-
-
         // 网络连接
         RequestCall call;
         call = OkHttpUtils.post().url(url).params(params).build();
@@ -170,6 +170,13 @@ public class HttpUtils {
                         String resultData = JsonUtils.getString(json, "result");
                         callBack.onSuccess(resultData);
                         break;
+                    case TOKEN_OUT_TIME:
+                      //  callBack.onTokenOutTime(resultCode);
+                        LogUtils.e("token过期了");
+                        SPUtils.with(ctx).save("IsLogoIn", false);
+                        Intent intent = new Intent(ctx, LogOnAndRegisterActivity.class);
+                        ctx.startActivity(intent);
+                      break;
                     default:
                         callBack.onFailure(resultCode);
                         break;

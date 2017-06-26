@@ -1,5 +1,6 @@
 package com.dsgj.youyuntong.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -17,8 +18,8 @@ import com.dsgj.youyuntong.JavaBean.LogInBean;
 import com.dsgj.youyuntong.JavaBean.PhoneVerificationBean;
 import com.dsgj.youyuntong.JavaBean.RegisterSuccessBean;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
+import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.MatchPhoneNum;
 import com.dsgj.youyuntong.Utils.Md5Utils;
 import com.dsgj.youyuntong.Utils.PassWordMarchUtils;
@@ -187,7 +188,6 @@ public class LogOnAndRegisterActivity extends BaseActivity {
     //处理忘记密码逻辑
     private class forgetCodeOperation {
         private void sendCodeMessage() {
-
             String phoneNumber = mFrogetNumber.getText().toString().trim();
             Map<String, String> phoneMap = new HashMap<>();
             phoneMap.put("userName", phoneNumber);
@@ -466,6 +466,9 @@ public class LogOnAndRegisterActivity extends BaseActivity {
                             SPUtils.with(LogOnAndRegisterActivity.this).save("district", bean.getDistrict());
                             // 具体
                             SPUtils.with(LogOnAndRegisterActivity.this).save("addressDetail", bean.getAddress());
+
+                            Intent intent = new Intent(LogOnAndRegisterActivity.this, MainActivity.class);
+                            startActivity(intent);
                             LogOnAndRegisterActivity.this.finish();
                         }
 

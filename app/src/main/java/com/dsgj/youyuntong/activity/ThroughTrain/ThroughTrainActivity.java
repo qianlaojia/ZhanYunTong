@@ -91,9 +91,7 @@ public class ThroughTrainActivity extends BaseActivity {
             case R.id.tv_through_train_search:
                 jumpToActivity(SearchActivity.class);
                 break;
-
         }
-
     }
 
     private void getServerData() {

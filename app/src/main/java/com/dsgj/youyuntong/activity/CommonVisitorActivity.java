@@ -106,10 +106,8 @@ public class CommonVisitorActivity extends BaseActivity {
                 .params(map)
                 .build()
                 .execute(new StringCallback() {
-
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
                     }
 
                     @Override

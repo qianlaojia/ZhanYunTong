@@ -71,6 +71,7 @@ public class SearchResultActivity extends BaseActivity {
                 break;
             case R.id.tv_all_search_result:
                 jumpToActivity(SearchActivity.class);
+                this.finish();
                 break;
         }
 

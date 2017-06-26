@@ -8,39 +8,45 @@
     android:orientation="vertical"
     tools:context="com.dsgj.youyuntong.activity.Search.SearchResultActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/titleColor"
-        android:orientation="horizontal">
+        android:layout_height="68dp"
+        android:background="@color/titleColor">
 
-        <ImageView
-            android:id="@+id/iv_search_result_back"
-            android:layout_width="48dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerInside"
-            android:src="@mipmap/fanhui"/>
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_all_search_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="15dp"
-            android:background="@drawable/shape_white_normal"
-            android:drawablePadding="5dp"
-            android:drawableStart="@mipmap/sousuo_sousuo"
-            android:hint="@string/searchTips"
-            android:paddingBottom="5dp"
-            android:paddingEnd="15dp"
-            android:paddingStart="15dp"
-            android:paddingTop="5dp"
-            android:textColor="@color/gray99"
-            android:textSize="15sp"/>
+            <ImageView
+                android:id="@+id/iv_search_result_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@mipmap/fanhui"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_all_search_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/shape_white_normal"
+                android:drawablePadding="5dp"
+                android:drawableStart="@mipmap/sousuo_sousuo"
+                android:hint="@string/searchTips"
+                android:paddingBottom="5dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/gray99"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tl_search_result_table"

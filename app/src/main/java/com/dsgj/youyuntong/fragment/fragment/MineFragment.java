@@ -36,7 +36,7 @@ public class MineFragment extends BaseFragment {
 
 
     private RelativeLayout mSetting;
-    private RelativeLayout mMineMessager;
+    private RelativeLayout mMineMessage;
     private CircleImageView mCircleImageView;
     private TextView mNickname;
     private TextView mAllOrder;
@@ -50,11 +50,11 @@ public class MineFragment extends BaseFragment {
     private LinearLayout mMCooperation;
     private boolean mIsLogon;
     private String mURL;
-    private String mMessage;
+    private String mHaveMessage;
     private String mName;
     private BadgeView mMBadgeView;
 
-    private ImageView mMineMessage;
+    private ImageView mMessage;
 
 
     @Override
@@ -66,10 +66,10 @@ public class MineFragment extends BaseFragment {
     protected void initView(View view) {
         mMBadgeView = new BadgeView(getActivity());
         //设置
-        mMineMessage = (ImageView) view.findViewById(R.id.iv_mine_message);
+        mMessage = (ImageView) view.findViewById(R.id.iv_mine_message);
         mSetting = (RelativeLayout) view.findViewById(R.id.mine_set);
         //消息
-        mMineMessager = (RelativeLayout) view.findViewById(R.id.mine_my_message);
+        mMineMessage = (RelativeLayout) view.findViewById(R.id.mine_my_message);
         //圆形头像
         mCircleImageView = (CircleImageView) view.findViewById(R.id.civ_head_image);
         //昵称
@@ -112,7 +112,7 @@ public class MineFragment extends BaseFragment {
             } else {
                 Glide.with(this).load(mURL).into(mCircleImageView);
             }
-            mMessage = SPUtils.with(getActivity()).get("message_unread", "0");
+            mHaveMessage = SPUtils.with(getActivity()).get("message_unread", "0");
             if (mMessage.equals("1")) {
                 mMBadgeView.setBadgeCount(1);
             } else {
@@ -129,7 +129,7 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void initListener() {
         mSetting.setOnClickListener(this);
-        mMineMessager.setOnClickListener(this);
+        mMineMessage.setOnClickListener(this);
         mCircleImageView.setOnClickListener(this);
         mNickname.setOnClickListener(this);
         mAllOrder.setOnClickListener(this);
@@ -150,9 +150,15 @@ public class MineFragment extends BaseFragment {
                 jumpToActivity(MineSettingActivity.class);
                 break;
             case R.id.mine_my_message:
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
+
+
                 //消息
                 SPUtils.with(getActivity()).save("message_unread", "0");
                 jumpToActivity(MessageActivity.class);
+                }
                 break;
             case R.id.civ_head_image:
                 //处理圆形头像的地方
@@ -164,42 +170,75 @@ public class MineFragment extends BaseFragment {
                 }
                 break;
             case R.id.tv_mine_all_order:
-                //全部订单
-                Map<String, String> allOrders = new HashMap<>();
-                allOrders.put("style", "全部订单");
-                jumpToActivity(MineAllOrdersActivity.class, allOrders);
-
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
+                    //全部订单
+                    Map<String, String> allOrders = new HashMap<>();
+                    allOrders.put("style", "全部订单");
+                    jumpToActivity(MineAllOrdersActivity.class, allOrders);
+                }
                 break;
             case R.id.tv_mine_to_be_paid:
-                Map<String, String> toBeiPaid = new HashMap<>();
-                toBeiPaid.put("style", "待支付");
-                jumpToActivity(MineAllOrdersActivity.class, toBeiPaid);
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
 
+
+                    Map<String, String> toBeiPaid = new HashMap<>();
+                    toBeiPaid.put("style", "待支付");
+                    jumpToActivity(MineAllOrdersActivity.class, toBeiPaid);
+                }
                 break;
             case R.id.tv_mine_waiting_comment:
-                Map<String, String> waitingComment = new HashMap<>();
-                waitingComment.put("style", "待点评");
-                jumpToActivity(MineAllOrdersActivity.class, waitingComment);
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
 
+
+                    Map<String, String> waitingComment = new HashMap<>();
+                    waitingComment.put("style", "待点评");
+                    jumpToActivity(MineAllOrdersActivity.class, waitingComment);
+                }
                 break;
             case R.id.tv_mine_waiting_travel:
-                Map<String, String> waitingTravel = new HashMap<>();
-                waitingTravel.put("style", "待出行");
-                jumpToActivity(MineAllOrdersActivity.class, waitingTravel);
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
 
+
+                    Map<String, String> waitingTravel = new HashMap<>();
+                    waitingTravel.put("style", "待出行");
+                    jumpToActivity(MineAllOrdersActivity.class, waitingTravel);
+                }
                 break;
             case R.id.tv_mine_my_collection:
-                jumpToActivity(MyCollectionActivity.class);
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
+                    jumpToActivity(MyCollectionActivity.class);
+                }
 
                 break;
             case R.id.tv_mine_common_information:
-                Map<String, String> map = new HashMap<>();
-                map.put("type", "MineJump");
-                jumpToActivity(CommonVisitorActivity.class,map);
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
 
+
+                    Map<String, String> map = new HashMap<>();
+                    map.put("type", "MineJump");
+                    jumpToActivity(CommonVisitorActivity.class, map);
+                }
                 break;
             case R.id.tv_mine_browse_history:
-                jumpToActivity(ScannerHistoryActivity.class);
+                if (!mIsLogon) {
+                    jumpToActivity(LogOnAndRegisterActivity.class);
+                } else {
+
+                    jumpToActivity(ScannerHistoryActivity.class);
+                }
+
 
                 break;
             case R.id.tv_mine_safe_setting:

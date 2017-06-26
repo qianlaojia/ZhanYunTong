@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.JavaBean.ThroughTrip.ThroughTripBean;
 import com.dsgj.youyuntong.JavaBean.ThroughTrip.ThroughTripLocationImageBean;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.google.gson.Gson;
 
 import java.util.List;

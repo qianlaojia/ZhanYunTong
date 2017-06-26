@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="tabLayout_textSize">14sp</dimen>
+    <dimen name="collect_tabLayout_textSize">18sp</dimen>
 </resources>

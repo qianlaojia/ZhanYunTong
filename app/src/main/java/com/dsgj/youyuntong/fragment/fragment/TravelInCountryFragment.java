@@ -16,7 +16,6 @@ import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.view.DividerItemDecoration;
 import com.dsgj.youyuntong.activity.ProductDetailActivity;
-import com.dsgj.youyuntong.adapter.GroupTrip.AroundTourAdapter;
 import com.dsgj.youyuntong.adapter.GroupTrip.InCountryAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
 import com.google.gson.Gson;

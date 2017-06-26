@@ -92,48 +92,55 @@ public class CommonVisitorActivity extends BaseActivity {
     }
 
     private void getServerData() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                String logName = SPUtils.with(CommonVisitorActivity.this)
-                        .get("userName", "13623717683");
-                String token = SPUtils.with(CommonVisitorActivity.this)
-                        .get("token", "");
-                Map<String, String> map = new HashMap<>();
-                map.put("type", "phone");
-                map.put("access_token", "");
-                map.put("userName", logName);
-                map.put("token", token);
-                OkHttpUtils.post()
-                        .url(HttpUtils.URL_BASE_ORDER + "travelers")
-                        .params(map)
-                        .build()
-                        .execute(new StringCallback() {
+        String logName = SPUtils.with(CommonVisitorActivity.this)
+                .get("userName", "13623717683");
+        String token = SPUtils.with(CommonVisitorActivity.this)
+                .get("token", "");
+        Map<String, String> map = new HashMap<>();
+        map.put("type", "phone");
+        map.put("access_token", "");
+        map.put("userName", logName);
+        map.put("token", token);
+        OkHttpUtils.post()
+                .url(HttpUtils.URL_BASE_ORDER + "travelers")
+                .params(map)
+                .build()
+                .execute(new StringCallback() {
 
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Gson gson = new Gson();
+                        newVisitorBean newVisitorBean = gson.fromJson(response
+                                , newVisitorBean.class);
+                        List<newVisitorBean.ResultBean> resultBeanList = newVisitorBean.getResult();
+                        mVisitorName = new ArrayList<>();
+                        mVisitorId = new ArrayList<>();
+                        for (int i = 0; i < resultBeanList.size(); i++) {
+                            mVisitorName.add(resultBeanList.get(i).getContact_name());
+                            mVisitorId.add(resultBeanList.get(i).getIdnumber());
+                        }
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(CommonVisitorActivity.this);
+                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                        mVisitorList.setLayoutManager(layoutManager);
+                        mAdapter = new CommonVisitorAdapter(CommonVisitorActivity.this, mVisitorName, mVisitorId);
+                        mAdapter.setOnItemClickListener(new CommonVisitorAdapter.OnItemClickListener() {
                             @Override
-                            public void onError(Call call, Exception e, int id) {
+                            public void onItemClick(View view, int position) {
 
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                Gson gson = new Gson();
-                                newVisitorBean newVisitorBean = gson.fromJson(response
-                                        , newVisitorBean.class);
-                                List<newVisitorBean.ResultBean> resultBeanList = newVisitorBean.getResult();
-                                mVisitorName = new ArrayList<>();
-                                mVisitorId = new ArrayList<>();
-                                for (int i = 0; i < resultBeanList.size(); i++) {
-                                    mVisitorName.add(resultBeanList.get(i).getContact_name());
-                                    mVisitorId.add(resultBeanList.get(i).getIdnumber());
-                                }
-                                mHandler.sendEmptyMessage(INTERNET_SUCCESS);
                             }
                         });
-            }
-        }.start();
+                        mVisitorList.addItemDecoration(new DividerItemDecoration(CommonVisitorActivity.this,
+                                DividerItemDecoration.VERTICAL_LIST));
+                        mVisitorList.setAdapter(mAdapter);
+                    }
+                });
     }
+
 
     @Override
     protected void initListener() {
@@ -237,31 +244,5 @@ public class CommonVisitorActivity extends BaseActivity {
         }
     }
 
-    public Handler mHandler;
 
-    {
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-
-                switch (msg.what) {
-                    case INTERNET_SUCCESS:
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(CommonVisitorActivity.this);
-                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        mVisitorList.setLayoutManager(layoutManager);
-                        mAdapter = new CommonVisitorAdapter(CommonVisitorActivity.this,mVisitorName,mVisitorId);
-                        mAdapter.setOnItemClickListener(new CommonVisitorAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int position) {
-
-                            }
-                        });
-                        mVisitorList.addItemDecoration(new DividerItemDecoration(CommonVisitorActivity.this,
-                                DividerItemDecoration.VERTICAL_LIST));
-                        mVisitorList.setAdapter(mAdapter);
-                        break;
-                }
-            }
-        };
-    }
 }

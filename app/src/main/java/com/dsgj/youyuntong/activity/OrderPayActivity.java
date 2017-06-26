@@ -1,5 +1,6 @@
 package com.dsgj.youyuntong.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,8 +14,9 @@ public class OrderPayActivity extends BaseActivity {
     private TextView mMiddleText;
     private TextView mTotalPrice;
     private TextView mOrderNumber;
-    private TextView mSecneryName;
-    private TextView mVisitorName;
+    private TextView mSceneryName;
+    private TextView mVisitorNumber;
+    private TextView startTime;
 
     @Override
     protected int getLayoutID() {
@@ -30,16 +32,26 @@ public class OrderPayActivity extends BaseActivity {
         //订单编号
         mOrderNumber = (TextView) findViewById(R.id.tv_order_number_pay);
         //景区名称
-        mSecneryName = (TextView) findViewById(R.id.tv_pay_order_name);
+        mSceneryName = (TextView) findViewById(R.id.tv_pay_order_name);
         //出行人数
-        mVisitorName = (TextView) findViewById(R.id.tv_visitor_number_detail);
+        mVisitorNumber = (TextView) findViewById(R.id.tv_visitor_number_detail);
         //出发时间
-        mVisitorName = (TextView) findViewById(R.id.tv_start_time_detail_pay);
+        startTime = (TextView) findViewById(R.id.tv_start_time_detail_pay);
     }
 
     @Override
     protected void initData() {
         mMiddleText.setText("订单支付");
+        Intent intent = getIntent();
+        double totalMoney = intent.getDoubleExtra("totalPrice", 0.00);//总金额
+        String sceneryName = intent.getStringExtra("spotName"); //景区名称
+        int visitorCount = intent.getIntExtra("visitorCount", 0);//出行人数
+        String time = intent.getStringExtra("startTime");//出行时间
+        mTotalPrice.setText(totalMoney + "元");
+        mSceneryName.setText(sceneryName);
+        mVisitorNumber.setText(visitorCount + "人");
+        startTime.setText(time);
+
     }
 
     @Override

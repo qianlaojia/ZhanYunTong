@@ -114,6 +114,8 @@
         </activity>
         <activity android:name=".activity.OrderPayActivity">
         </activity>
+        <activity android:name=".activity.BusTicketActivity">
+        </activity>
     </application>
 
 </manifest>

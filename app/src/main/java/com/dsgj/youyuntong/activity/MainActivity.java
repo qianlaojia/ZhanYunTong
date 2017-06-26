@@ -1,15 +1,10 @@
 package com.dsgj.youyuntong.activity;
 
 
-import android.content.res.Resources;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.RadioGroup;
 
 import com.dsgj.youyuntong.R;
@@ -22,11 +17,8 @@ import com.dsgj.youyuntong.fragment.fragment.MineFragment;
 import com.dsgj.youyuntong.fragment.fragment.ServiceFragment;
 import com.dsgj.youyuntong.fragment.fragment.OrderFragment;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
 public class MainActivity extends BaseActivity {
 

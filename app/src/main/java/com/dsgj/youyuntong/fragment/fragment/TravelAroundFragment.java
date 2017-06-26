@@ -16,7 +16,6 @@ import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.view.DividerItemDecoration;
-import com.dsgj.youyuntong.activity.GroupTour.GroupTourActivity;
 import com.dsgj.youyuntong.activity.ProductDetailActivity;
 import com.dsgj.youyuntong.adapter.GroupTrip.AroundTourAdapter;
 import com.dsgj.youyuntong.base.BaseFragment;
@@ -70,57 +69,25 @@ public class TravelAroundFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            //相当于Fragment的onResume
-            new Thread() {
+
+            Map<String, String> map = new HashMap<>();
+            map.put("type", "周边游");
+            map.put("page", "");
+            map.put("city", "西安市");
+            map.put("page_size", "15");
+            HttpUtils.post(getActivity(), new LogInBean(), HttpUtils.URL_BASE_TOURISM + "package_tour", map, new RequestCallBack() {
+                @Override
+                public void onOutNet() {
+                    ToastUtils.show(getActivity(), "网络已断开！");
+                }
 
                 @Override
-                public void run() {
-                    super.run();
-                    Map<String, String> map = new HashMap<>();
-                    map.put("type", "周边游");
-                    map.put("page", "");
-                    map.put("city", "西安市");
-                    map.put("page_size", "15");
-                    HttpUtils.post(getActivity(), new LogInBean(), HttpUtils.URL_BASE_TOURISM + "package_tour", map, new RequestCallBack() {
-                        @Override
-                        public void onOutNet() {
-                            mHandler.sendEmptyMessage(NET_OUT);
-                        }
-
-                        @Override
-                        public void onSuccess(String data) {
-                            Gson gson = new Gson();
-                            AroundTripBean.ResultBean resultBean = gson.fromJson(data
-                                    , AroundTripBean.ResultBean.class);
-                            mProductListBeen = resultBean.getProduct_list();
-                            LogUtils.e("下边是周边游的个数：：：：" + mProductListBeen.size());
-
-                            mHandler.sendEmptyMessage(INTERNET_SUCCESS);
-                        }
-
-                        @Override
-                        public void onFailure(int code) {
-                            mHandler.sendEmptyMessage(FILURE);
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-                            mHandler.sendEmptyMessage(NET_ERROR);
-                        }
-                    });
-
-
-                }
-            }.start();
-        }
-    }
-
-    public Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case INTERNET_SUCCESS:
+                public void onSuccess(String data) {
+                    Gson gson = new Gson();
+                    AroundTripBean.ResultBean resultBean = gson.fromJson(data
+                            , AroundTripBean.ResultBean.class);
+                    mProductListBeen = resultBean.getProduct_list();
+                    LogUtils.e("下边是周边游的个数：：：：" + mProductListBeen.size());
                     ToastUtils.show(getActivity(), "下边的列表数据获取成功！");
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -141,17 +108,23 @@ public class TravelAroundFragment extends BaseFragment {
                     mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
                     mRecyclerView.setAdapter(groupTripAroundRecyclerViewAdapter);
                     mRecyclerView.setNestedScrollingEnabled(false);
-                    break;
-                case NET_OUT:
-                    ToastUtils.show(getActivity(), "网络已断开！");
-                    break;
-                case FILURE:
+                }
+
+                @Override
+                public void onFailure(int code) {
                     ToastUtils.show(getActivity(), "获取数据失败请稍后再试！");
-                    break;
-                case NET_ERROR:
+                }
+
+                @Override
+                public void onError(Exception e) {
                     ToastUtils.show(getActivity(), "获取数据失败请稍后再试！");
-                    break;
-            }
+                }
+            });
+
+
         }
-    };
+
+    }
+
+
 }

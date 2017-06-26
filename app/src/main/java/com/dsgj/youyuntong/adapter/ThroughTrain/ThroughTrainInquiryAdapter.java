@@ -1,7 +1,6 @@
 package com.dsgj.youyuntong.adapter.ThroughTrain;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.JavaBean.ThroughTrip.SearchTrip.SearchResultBean;
 import com.dsgj.youyuntong.JavaBean.ThroughTrip.SearchTrip.SearchResultImageBean;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.activity.ProductDetailActivity;
 import com.google.gson.Gson;
 
 import java.util.List;

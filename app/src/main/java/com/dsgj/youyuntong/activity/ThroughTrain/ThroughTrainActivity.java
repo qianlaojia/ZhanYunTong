@@ -20,7 +20,6 @@ import com.dsgj.youyuntong.Utils.view.DividerItemDecoration;
 import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.activity.ProductDetailActivity;
 import com.dsgj.youyuntong.activity.Search.SearchActivity;
-import com.dsgj.youyuntong.activity.Ticket.TicketActivity;
 import com.dsgj.youyuntong.adapter.ThroughTrain.ThroughTrainRecycleViewAdapter;
 import com.dsgj.youyuntong.adapter.ThroughTrain.ThroughTrainVerticalRecycleViewAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
@@ -98,68 +97,65 @@ public class ThroughTrainActivity extends BaseActivity {
     }
 
     private void getServerData() {
-        new Thread() {
+
+        mMap = new HashMap<>();
+        mMap.put("page", "");
+        mMap.put("city", "周口");
+        HttpUtils.post(ThroughTrainActivity.this, new ThroughTripBean(), HttpUtils.URL_BASE_TOURISM + "through", mMap, new RequestCallBack() {
+
+
             @Override
-            public void run() {
-                super.run();
-                mMap = new HashMap<>();
-                mMap.put("page", "");
-                mMap.put("city", "周口");
-                HttpUtils.post(ThroughTrainActivity.this, new ThroughTripBean(), HttpUtils.URL_BASE_TOURISM + "through", mMap, new RequestCallBack() {
+            public void onOutNet() {
+                ToastUtils.show(ThroughTrainActivity.this, "网络已断开！");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                Gson gson = new Gson();
+                ThroughTripBean.ResultBean resultBean = gson.fromJson(data
+                        , ThroughTripBean.ResultBean.class);
+                List<ThroughTripBean.ResultBean.SlideBean> slideBean = resultBean.getSlide();
+                //获取轮播图的图片：
+                mXBananaUrl = new ArrayList<>();
+                for (int i = 0; i < slideBean.size(); i++) {
+                    mXBananaUrl.add("http://59.110.106.1" + slideBean.get(i).getSlide_pic());
+                }
+                mScenicHotBeen = resultBean.getScenic_hot();
 
 
-                    @Override
-                    public void onOutNet() {
-                        mHandler.sendEmptyMessage(NET_OUT);
-                    }
-
-                    @Override
-                    public void onSuccess(String data) {
-                        Gson gson = new Gson();
-                        ThroughTripBean.ResultBean resultBean = gson.fromJson(data
-                                , ThroughTripBean.ResultBean.class);
-                        List<ThroughTripBean.ResultBean.SlideBean> slideBean = resultBean.getSlide();
-                        //获取轮播图的图片：
-                        mXBananaUrl = new ArrayList<>();
-                        for (int i = 0; i < slideBean.size(); i++) {
-                            mXBananaUrl.add("http://59.110.106.1" + slideBean.get(i).getSlide_pic());
-                        }
-                        mScenicHotBeen = resultBean.getScenic_hot();
-
-
-                        for (int j = 0; j < mScenicHotBeen.size(); j++) {
-                            mBean = gson.fromJson(mScenicHotBeen.get(j).getSmeta(), ThroughTripHotPotImageBean.class);
-                            mHotPotsImage.add(mBean.getThumb());
-                            mMHotPotsName.add(mScenicHotBeen.get(j).getTitle());
-                            mHotPotsPrice.add(mScenicHotBeen.get(j).getPrice());
-                        }
-                        //当地直通车
-                        mProduct = resultBean.getProduct_list();
-
-                        mHandler.sendEmptyMessage(GET_INTERNET_SUCCESS);
-                    }
-
-                    @Override
-                    public void onFailure(int code) {
-                        mHandler.sendEmptyMessage(NET_OUT);
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        mHandler.sendEmptyMessage(NET_OUT);
-                    }
-                });
-
+                for (int j = 0; j < mScenicHotBeen.size(); j++) {
+                    mBean = gson.fromJson(mScenicHotBeen.get(j).getSmeta(), ThroughTripHotPotImageBean.class);
+                    mHotPotsImage.add(mBean.getThumb());
+                    mMHotPotsName.add(mScenicHotBeen.get(j).getTitle());
+                    mHotPotsPrice.add(mScenicHotBeen.get(j).getPrice());
+                }
+                //当地直通车
+                mProduct = resultBean.getProduct_list();
+                nextStep();
+                ToastUtils.show(ThroughTrainActivity.this, "获取数据成功！");
+                mCoverView.setVisibility(View.GONE);
+                mProgressBar.setVisibility(View.GONE);
 
             }
-        }.start();
+
+            @Override
+            public void onFailure(int code) {
+                ToastUtils.show(ThroughTrainActivity.this, "网络已断开！");
+            }
+
+            @Override
+            public void onError(Exception e) {
+                ToastUtils.show(ThroughTrainActivity.this, "网络已断开！");
+            }
+        });
+
+
     }
 
 
     private void nextStep() {
         //轮播图
         XBannerUtils.setBannerHolder(ThroughTrainActivity.this, mXBanner, mXBananaUrl);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -203,21 +199,5 @@ public class ThroughTrainActivity extends BaseActivity {
 
     }
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
 
-            switch (msg.what) {
-                case GET_INTERNET_SUCCESS:
-                    nextStep();
-                    ToastUtils.show(ThroughTrainActivity.this, "获取数据成功！");
-                    mCoverView.setVisibility(View.GONE);
-                    mProgressBar.setVisibility(View.GONE);
-                    break;
-                case NET_OUT:
-                    ToastUtils.show(ThroughTrainActivity.this, "网络已断开！");
-                    break;
-            }
-        }
-    };
 }

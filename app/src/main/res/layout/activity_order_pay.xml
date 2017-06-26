@@ -75,7 +75,8 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/about"
-                android:textColor="@color/gray"/>
+                android:textColor="@color/gray"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_pay_visitor_number_hint"

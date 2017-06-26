@@ -1,350 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sfl_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nsv_home_pager"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
-            <FrameLayout
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nsv_home_pager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
 
-                <com.stx.xhb.xbanner.XBanner
-                    android:id="@+id/xb_homePage_xb"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="229dp"/>
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:visibility="invisible"
-                    android:id="@+id/ll_home_page_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="195dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
+                    <com.stx.xhb.xbanner.XBanner
+                        android:id="@+id/xb_homePage_xb"
                         android:layout_width="match_parent"
-                        android:layout_height="34dp"
-                        android:background="@color/grayT">
+                        android:layout_height="229dp"/>
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="87dp">
+                    <LinearLayout
+                        android:id="@+id/ll_home_page_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="195dp"
+                        android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/direct_train"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="34dp"
+                            android:background="@color/grayT">
+
+                            <FrameLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/home_tixing"
-                                android:contentDescription="@string/app_name"/>
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="87dp">
+
+                                <ImageView
+                                    android:id="@+id/direct_train"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@mipmap/home_tixing"
+                                    android:contentDescription="@string/app_name"/>
+
+                                <TextView
+                                    android:id="@+id/textView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="23dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/direct_train"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+                            </FrameLayout>
+
 
                             <TextView
-                                android:id="@+id/textView2"
+                                android:id="@+id/bus_ticket_home_page"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="23dp"
-                                android:layout_marginTop="5dp"
-                                android:text="@string/direct_train"
-                                android:textColor="@color/black"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="86dp"
+
+                                android:text="@string/bus_ticket"
+                                android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"/>
-                        </FrameLayout>
+                        </RelativeLayout>
 
-
-                        <TextView
-                            android:id="@+id/bus_ticket"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="86dp"
-                            android:text="@string/bus_ticket"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:textStyle="bold"/>
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="62dp"
-                        android:background="@drawable/shape_home_four_background">
-
-                        <TextView
-                            android:id="@+id/from_location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10.5dp"
-                            android:background="@null"
-                            android:text="@string/zhengzhou"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"/>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/home_duifa"
-                            android:contentDescription="@string/already_cancel"/>
-
-                        <TextView
-                            android:id="@+id/to_location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10.5dp"
-                            android:text="@string/qingMing"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"/>
-
-
-                    </RelativeLayout>
-
-                    <View
-
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/line_color"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="62dp"
-                        android:background="@drawable/shape_home_four_background">
-
-                        <TextView
-                            android:id="@+id/go_of_time"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10.5dp"
-                            android:text="@string/date_small"
-                            android:textColor="@color/gray"
-                            android:textSize="18sp"/>
+                            android:layout_height="62dp"
+                            android:background="@drawable/shape_home_four_background">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/from_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10.5dp"
+                                android:background="@null"
+                                android:text="@string/zhengzhou"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"/>
 
-                    <View
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:background="@mipmap/home_duifa"
+                                android:contentDescription="@string/already_cancel"/>
+
+                            <TextView
+                                android:id="@+id/to_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="10.5dp"
+                                android:text="@string/qingMing"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"/>
+
+
+                        </RelativeLayout>
+
+                        <View
+
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/line_color"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="62dp"
+                            android:background="@drawable/shape_home_four_background">
+
+                            <TextView
+                                android:id="@+id/go_of_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10.5dp"
+                                android:text="@string/date_small"
+                                android:textColor="@color/gray"
+                                android:textSize="18sp"/>
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/line_color"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="73dp"
+                            android:background="@drawable/shape_home_four_background">
+
+                            <Button
+                                android:id="@+id/btn_home_query"
+                                android:layout_width="340dp"
+                                android:layout_height="44dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/shape_home_button"
+                                android:text="@string/query"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_home_four_item"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/line_color"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="440dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
 
-                    <RelativeLayout
+                        <LinearLayout
+                            android:id="@+id/ll_home_ticket"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_white_normal"
+                            android:orientation="vertical"
+                            android:paddingTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_home_ticket"
+                                android:layout_width="wrap_content"
+                                android:layout_height="54dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginEnd="9dp"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginTop="9dp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="centerInside"/>
+
+                            <TextView
+                                android:id="@+id/tv_home_ticket"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="3dp"
+                                android:text=""
+                                android:textColor="#999999"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_home_through_train_search"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_white_normal"
+                            android:orientation="vertical"
+                            android:paddingTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_home_through_train"
+                                android:layout_width="wrap_content"
+                                android:layout_height="54dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginEnd="9dp"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginTop="9dp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="centerInside"/>
+
+                            <TextView
+                                android:id="@+id/tv_home_through_train"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="3dp"
+                                android:text=""
+                                android:textColor="#999999"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_home_group_trip"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_white_normal"
+                            android:orientation="vertical"
+                            android:paddingTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_home_group_trip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="54dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginEnd="9dp"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginTop="9dp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="centerInside"/>
+
+                            <TextView
+                                android:id="@+id/tv_home_group_trip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="3dp"
+                                android:text=""
+                                android:textColor="#999999"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_home_guide"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_white_normal"
+                            android:orientation="vertical"
+                            android:paddingTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_home_guide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="54dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginEnd="9dp"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginTop="9dp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="centerInside"/>
+
+                            <TextView
+                                android:id="@+id/tv_home_guide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="3dp"
+                                android:text=""
+                                android:textColor="#999999"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="73dp"
-                        android:background="@drawable/shape_home_four_background">
-
-                        <Button
-                            android:id="@+id/btn_home_query"
-                            android:layout_width="340dp"
-                            android:layout_height="44dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/shape_home_button"
-                            android:text="@string/query"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:textStyle="bold"/>
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:visibility="invisible"
-                    android:id="@+id/ll_home_four_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="440dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/ll_home_ticket"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_white_normal"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-
-                        <ImageView
-                            android:id="@+id/iv_home_ticket"
-                            android:layout_width="wrap_content"
-                            android:layout_height="54dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="9dp"
-                            android:layout_marginStart="9dp"
-                            android:layout_marginTop="9dp"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerInside"/>
-
-                        <TextView
-                            android:id="@+id/tv_home_ticket"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="3dp"
-                            android:text=""
-                            android:textColor="#999999"
-                            android:textSize="14sp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_home_through_train_search"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_white_normal"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-
-                        <ImageView
-                            android:id="@+id/iv_home_through_train"
-                            android:layout_width="wrap_content"
-                            android:layout_height="54dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="9dp"
-                            android:layout_marginStart="9dp"
-                            android:layout_marginTop="9dp"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerInside"/>
-
-                        <TextView
-                            android:id="@+id/tv_home_through_train"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="3dp"
-                            android:text=""
-                            android:textColor="#999999"
-                            android:textSize="14sp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_home_group_trip"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_white_normal"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-
-                        <ImageView
-                            android:id="@+id/iv_home_group_trip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="54dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="9dp"
-                            android:layout_marginStart="9dp"
-                            android:layout_marginTop="9dp"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerInside"/>
-
-                        <TextView
-                            android:id="@+id/tv_home_group_trip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="3dp"
-                            android:text=""
-                            android:textColor="#999999"
-                            android:textSize="14sp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_home_guide"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_white_normal"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-
-                        <ImageView
-                            android:id="@+id/iv_home_guide"
-                            android:layout_width="wrap_content"
-                            android:layout_height="54dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="9dp"
-                            android:layout_marginStart="9dp"
-                            android:layout_marginTop="9dp"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerInside"/>
-
-                        <TextView
-                            android:id="@+id/tv_home_guide"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="3dp"
-                            android:text=""
-                            android:textColor="#999999"
-                            android:textSize="14sp"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="48dp"
-                    android:layout_marginTop="550dp"
-                    android:descendantFocusability="afterDescendants"/>
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="48dp"
+                        android:layout_marginTop="550dp"
+                        android:descendantFocusability="afterDescendants"/>
 
 
-            </FrameLayout>
+                </FrameLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+            </android.support.v4.widget.NestedScrollView>
 
-        <include
-            android:id="@+id/home_fragment_title"
-            layout="@layout/layout_home_title"/>
-    </FrameLayout>
+            <include
+                android:id="@+id/home_fragment_title"
+                layout="@layout/layout_home_title"/>
+        </FrameLayout>
 
-    <View
-        android:id="@+id/view_home_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#77000000"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:visibility="gone"/>
+        <View
+            android:id="@+id/view_home_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#77000000"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="gone"/>
 
-    <ProgressBar
-        android:id="@+id/pb_load"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminateDrawable="@drawable/progress_bar_color"
-        android:visibility="gone"/>
+        <ProgressBar
+            android:id="@+id/pb_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress_bar_color"
+            android:visibility="gone"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

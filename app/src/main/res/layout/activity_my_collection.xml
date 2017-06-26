@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.dsgj.youyuntong.activity.mine.MyCollectionActivity">
-<include
-    layout="@layout/layout_message_title"/>
+
+    <include
+        layout="@layout/layout_message_title"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_collect"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/blue_text"
+        app:tabSelectedTextColor="@color/blue_text"
+        app:tabTextAppearance="@style/collect_tabLayout_textSize"
+        app:tabTextColor="@color/black"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_collect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
 </LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_no_internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/wuwang"/>
+
+    <TextView
+        android:id="@+id/tv_no_internet_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_no_internet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/no_internet_hint"
+        android:textColor="@color/gray99"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_try_again"
+        android:layout_width="72dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/tv_no_internet_hint"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_blue_normal"
+        android:gravity="center"
+        android:text="@string/tv_try_again"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_close"
+        android:layout_width="72dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/tv_no_internet_hint"
+        android:layout_marginEnd="105dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_white_normal"
+        android:gravity="center"
+        android:text="@string/close"
+        android:textColor="@color/gray99"
+        android:textSize="18sp"/>
+</RelativeLayout>

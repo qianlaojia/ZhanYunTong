@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.JavaBean.HomePage.HomePageBean;
 import com.dsgj.youyuntong.JavaBean.HomePage.HomePagerImageUrlBean;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.activity.ProductDetailActivity;
 import com.google.gson.Gson;
 

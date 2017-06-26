@@ -3,8 +3,7 @@ package com.dsgj.youyuntong.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Handler;
-import android.os.Message;
+import android.graphics.drawable.Drawable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,10 +19,13 @@ import com.dsgj.youyuntong.JavaBean.ProductDetail.ProductDetailImageBean;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
 import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
+import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.adapter.StartTimeAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
+import com.dsgj.youyuntong.base.BaseJavaBean;
 import com.google.gson.Gson;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -41,9 +43,7 @@ public class ProductDetailActivity extends BaseActivity {
     private RelativeLayout mBack;
     private int overallXScroll = 0;
     private int height = 458;
-    private static final int NET_OUT = 1;
-    private static final int INTERNET_SUCCESS = 2;
-    private static final int ERROR = 3;
+
     private ProductDetailBean.ResultBean mResultBean;
     private XBanner mXbImage;
     private List<ProductDetailImageBean.PhotoBean> mImageBeanList;
@@ -63,7 +63,10 @@ public class ProductDetailActivity extends BaseActivity {
     private String mSceneryName;
     private String mPrice;
     private String mLocation;
-
+    boolean isCollect = false;
+    private String mUrl;
+    private String mProduct_id;
+    private String mProduct_code;
 
     @Override
     protected int getLayoutID() {
@@ -96,9 +99,9 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        String product_id = intent.getStringExtra("product_id");
-        final String product_code = intent.getStringExtra("product_code");
-        internetDataGet(product_id, product_code);
+        mProduct_id = intent.getStringExtra("product_id");
+        mProduct_code = intent.getStringExtra("product_code");
+        internetDataGet(mProduct_id, mProduct_code);
         mEndText.setText("我是有底线的");
         mMiddleText.setText("产品详情");
         mEndText.setTextColor(Color.GRAY);
@@ -161,7 +164,22 @@ public class ProductDetailActivity extends BaseActivity {
                 ToastUtils.show(this, "分享");
                 break;
             case R.id.tv_tt_detail_collect:
-                ToastUtils.show(this, "收藏");
+                if (isCollect) {
+                    Drawable nav_up = getResources().getDrawable(R.mipmap.xiangqingye_shoucang);
+                    nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                    mCollect.setCompoundDrawables(null, nav_up, null, null);
+                    isCollect = false;
+                    manageCollect(false);
+                    ToastUtils.show(ProductDetailActivity.this, "收藏已取消");
+                } else {
+                    Drawable nav_up = getResources().getDrawable(R.mipmap.xiangqingye_shoucangchenggong);
+                    nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                    mCollect.setCompoundDrawables(null, nav_up, null, null);
+                    isCollect = true;
+                    manageCollect(true);
+                    ToastUtils.show(ProductDetailActivity.this, "收藏成功");
+                }
+
                 break;
             case R.id.tv_tt_detail_destine:
                 Intent intent = new Intent(ProductDetailActivity.this, DateAndNumActivity.class);
@@ -176,69 +194,85 @@ public class ProductDetailActivity extends BaseActivity {
 
     }
 
+    private void manageCollect(boolean b) {
+        if (b) {
+            mUrl = HttpUtils.URL_BASE_USER + "collection_add";
+        } else {
+            mUrl = HttpUtils.URL_BASE_USER + "collection_del";
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("type", "phone");
+        map.put("access_token", "");
+        map.put("userName", SPUtils.with(this).get("userName", ""));
+        map.put("token", SPUtils.with(this).get("token", ""));
+        map.put("product_id", mProduct_id);
+        map.put("product_code", mProduct_code);
+        HttpUtils.post(this, new BaseJavaBean(), mUrl, map, new RequestCallBack() {
+            @Override
+            public void onOutNet() {
+                ToastUtils.show(ProductDetailActivity.this, "网络已断开");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                LogUtils.e("收藏/删除收藏操作成功！");
+
+            }
+
+            @Override
+            public void onFailure(int code) {
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+
+    }
+
     private void internetDataGet(String product_id, String product_code) {
         final Map<String, String> map = new HashMap<>();
         map.put("product_id", product_id);
         map.put("product_code", product_code);
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                HttpUtils.post(ProductDetailActivity.this
-                        , new ProductDetailBean()
-                        , HttpUtils.URL_BASE_TOURISM + "product_detail"
-                        , map
-                        , new RequestCallBack() {
-                            @Override
-                            public void onOutNet() {
-                                mHandle.sendEmptyMessage(NET_OUT);
-                            }
 
-                            @Override
-                            public void onSuccess(String data) {
-                                Gson gson = new Gson();
-                                mResultBean = gson.fromJson(data
-                                        , ProductDetailBean.ResultBean.class);
-                                ProductDetailImageBean productDetailImageBean = gson.fromJson(mResultBean.getSmeta(), ProductDetailImageBean.class);
-                                mImageBeanList = productDetailImageBean.getPhoto();
+        HttpUtils.post(ProductDetailActivity.this
+                , new ProductDetailBean()
+                , HttpUtils.URL_BASE_TOURISM + "product_detail"
+                , map
+                , new RequestCallBack() {
+                    @Override
+                    public void onOutNet() {
+                        ToastUtils.show(ProductDetailActivity.this, "网络已断开！");
+                    }
+
+                    @Override
+                    public void onSuccess(String data) {
+                        Gson gson = new Gson();
+                        mResultBean = gson.fromJson(data
+                                , ProductDetailBean.ResultBean.class);
+                        ProductDetailImageBean productDetailImageBean = gson.fromJson(mResultBean.getSmeta(), ProductDetailImageBean.class);
+                        mImageBeanList = productDetailImageBean.getPhoto();
 
 
-                                mHandle.sendEmptyMessage(INTERNET_SUCCESS);
+                        setDataIntoUI();
 
-                            }
+                    }
 
-                            @Override
-                            public void onFailure(int code) {
-                                mHandle.sendEmptyMessage(ERROR);
+                    @Override
+                    public void onFailure(int code) {
+                        ToastUtils.show(ProductDetailActivity.this, "返回数据失败，请稍后重试！");
 
-                            }
+                    }
 
-                            @Override
-                            public void onError(Exception e) {
-
-                            }
-                        });
-            }
-        }.start();
+                    @Override
+                    public void onError(Exception e) {
+                        ToastUtils.show(ProductDetailActivity.this, "返回数据失败，请稍后重试！");
+                    }
+                });
     }
 
-    private Handler mHandle = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case NET_OUT:
-                    ToastUtils.show(ProductDetailActivity.this, "网络已断开！");
-                    break;
-                case INTERNET_SUCCESS:
-                    setDataIntoUI();
-                    break;
-                case ERROR:
-                    ToastUtils.show(ProductDetailActivity.this, "返回数据失败，请稍后重试！");
-                    break;
-            }
-        }
-    };
 
     private void setDataIntoUI() {
         mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -265,7 +299,7 @@ public class ProductDetailActivity extends BaseActivity {
         }
         XBannerUtils.setBannerHolder(ProductDetailActivity.this, mXbImage, xbImageList);
         mSceneryName = mResultBean.getTitle();
-        mPrice = mResultBean.getPrice() ;
+        mPrice = mResultBean.getPrice();
         mLocation = mResultBean.getCity();
         mProductCode.setText(mResultBean.getProduct_code());
         mMProductName.setText(mSceneryName);

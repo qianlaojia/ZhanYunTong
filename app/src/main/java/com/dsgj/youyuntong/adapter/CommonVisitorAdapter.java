@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.IDCardValidateUtils;
 
 import java.util.List;
 

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.adapter.GroupTrip.GroupTripRecycleViewAdapter;
 
 /**
  * TODO:

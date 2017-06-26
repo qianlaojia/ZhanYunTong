@@ -1,8 +1,6 @@
 package com.dsgj.youyuntong.fragment.fragment;
 
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -54,72 +52,42 @@ public class TravelAbordFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            //相当于Fragment的onResume
-            new Thread() {
 
+            Map<String, String> map = new HashMap<>();
+            map.put("type", "国内游");
+            map.put("page", "");
+            map.put("city", "郑州市");
+            map.put("page_size", "15");
+            HttpUtils.post(getActivity(), new LogInBean(), HttpUtils.URL_BASE_TOURISM + "package_tour", map, new RequestCallBack() {
                 @Override
-                public void run() {
-                    super.run();
-                    Map<String, String> map = new HashMap<>();
-                    map.put("type", "国内游");
-                    map.put("page", "");
-                    map.put("city", "郑州市");
-                    map.put("page_size", "15");
-                    HttpUtils.post(getActivity(), new LogInBean(), HttpUtils.URL_BASE_TOURISM + "package_tour", map, new RequestCallBack() {
-                        @Override
-                        public void onOutNet() {
-
-                        }
-
-                        @Override
-                        public void onSuccess(String data) {
-                            mHandler.sendEmptyMessage(INTERNET_SUCCESS);
-                        }
-
-                        @Override
-                        public void onFailure(int code) {
-
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-
-                        }
-                    });
-
+                public void onOutNet() {
 
                 }
-            }.start();
-        } else {
-            //相当于Fragment的onPause
+
+                @Override
+                public void onSuccess(String data) {
+                    ToastUtils.show(getActivity(), "出国游的下边的列表数据获取成功！");
+                }
+
+                @Override
+                public void onFailure(int code) {
+
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                }
+            });
+
+
         }
+
     }
 
-    public Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case INTERNET_SUCCESS:
-                    ToastUtils.show(getActivity(), "出国游的下边的列表数据获取成功！");
-                  /*  //设置格式
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                    mRecyclerView.setLayoutManager(linearLayoutManager);
-                    //设置适配器
-                    GroupTripRecyclerViewAdapter groupTripAroundRecyclerViewAdapter = new
-                            GroupTripRecyclerViewAdapter(getActivity());
-                    groupTripAroundRecyclerViewAdapter.setOnItemClickListener(new GroupTripRecyclerViewAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            ToastUtils.show(getActivity(), "第" + position + "个被点击！");
-                        }
-                    });
-                    mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-                    mRecyclerView.setAdapter(groupTripAroundRecyclerViewAdapter);
-                    mRecyclerView.setNestedScrollingEnabled(false);*/
-                    break;
-            }
-        }
-    };
+
+
 }
+
+
+

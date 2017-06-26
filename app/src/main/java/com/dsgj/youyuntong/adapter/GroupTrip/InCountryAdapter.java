@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dsgj.youyuntong.JavaBean.GroupTour.AroundTripBean;
 import com.dsgj.youyuntong.JavaBean.GroupTour.AroundTripImageBean;
 import com.dsgj.youyuntong.JavaBean.GroupTour.InCountryBean;
 import com.dsgj.youyuntong.R;

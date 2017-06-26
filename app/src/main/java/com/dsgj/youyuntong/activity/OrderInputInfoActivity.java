@@ -31,6 +31,9 @@ public class OrderInputInfoActivity extends BaseActivity {
     private TextView mOrderName;
     private TextView mOrderPhone;
     private double mTotal1;
+    private String mSceneryName1;
+    private int mVisitorCount;
+    private String mStartTime;
 
 
     @Override
@@ -60,18 +63,18 @@ public class OrderInputInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        String sceneryName = intent.getStringExtra("sceneryName");
+        mSceneryName1 = intent.getStringExtra("sceneryName");
         String sceneryPrice = intent.getStringExtra("sceneryPrice");
         String startCity = intent.getStringExtra("startLocation");
-        String startTime = intent.getStringExtra("finalDate");
-        int visitorCount = intent.getIntExtra("visitorCount", 1);
-        mVisitor.setText(visitorCount + "人");
-        mGoOffTime.setText(startTime);
+        mStartTime = intent.getStringExtra("finalDate");
+        mVisitorCount = intent.getIntExtra("visitorCount", 1);
+        mVisitor.setText(mVisitorCount + "人");
+        mGoOffTime.setText(mStartTime);
         mTicketPrice.setText("¥" + sceneryPrice);
         mStartCity.setText(startCity);
-        mSceneryName.setText(sceneryName);
+        mSceneryName.setText(mSceneryName1);
         double i = Double.parseDouble(sceneryPrice);
-        mTotal1 = visitorCount * i;
+        mTotal1 = mVisitorCount * i;
         mTotal.setText(mTotal1 + "元");
         mMiddleText.setText("填写资料");
         //预订人信息
@@ -102,10 +105,11 @@ public class OrderInputInfoActivity extends BaseActivity {
             case R.id.tv_pay_at_once:
                 //传递相关的参数到下一个界面：
                 Intent intentToPay = new Intent(this, OrderPayActivity.class);
-                intentToPay.putExtra("totalPrice", mTotal1);
-                intentToPay.putExtra("", "");
-                intentToPay.putExtra("", "");
-                intentToPay.putExtra("", "");
+                intentToPay.putExtra("totalPrice", mTotal1);//总价格
+                intentToPay.putExtra("spotName",mSceneryName1);//景区名称
+                intentToPay.putExtra("visitorCount",mVisitorCount);//出行人数
+                intentToPay.putExtra("startTime", mStartTime);//出行时间
+                startActivity(intentToPay);
                 this.finish();
                 break;
         }

@@ -234,4 +234,9 @@
     <string name="payOnline">在线支付：</string>
     <string name="orderNumber">订单编号：</string>
     <string name="visitorNumber">出行人数：</string>
+    <string name="collectNoDataHint">你暂时没有收藏你喜欢的产品呦！</string>
+    <string name="look_look">去逛逛</string>
+    <string name="no_internet_hint">网络连接异常，再试一下</string>
+    <string name="close">关闭</string>
+    <string name="tv_try_again">重试</string>
 </resources>

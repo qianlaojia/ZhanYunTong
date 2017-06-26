@@ -93,49 +93,46 @@ public class TicketActivity extends BaseActivity {
 
 
     private void GetServerData() {
-        new Thread() {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("page", "");
+        map.put("city", "郑州");
+        map.put("page_size", "15");
+        HttpUtils.post(TicketActivity.this, new TicketBean(), HttpUtils.URL_BASE_TOURISM + "ticket", map, new RequestCallBack() {
             @Override
-            public void run() {
-                super.run();
-                Map<String, String> map = new HashMap<>();
-                map.put("page", "");
-                map.put("city", "郑州");
-                map.put("page_size", "15");
-                HttpUtils.post(TicketActivity.this, new TicketBean(), HttpUtils.URL_BASE_TOURISM + "ticket", map, new RequestCallBack() {
-                    @Override
-                    public void onOutNet() {
-                        mHandler.sendEmptyMessage(NET_OUT);
-                    }
-
-                    @Override
-                    public void onSuccess(String data) {
-                        Gson gson = new Gson();
-                        TicketBean.ResultBean resultBean = gson.fromJson(data, TicketBean.ResultBean.class);
-                        //轮播图
-                        List<TicketBean.ResultBean.SlideBean> slideBean = resultBean.getSlide();
-                        mImageList = new ArrayList<>();
-
-                        for (int i = 0; i < slideBean.size(); i++) {
-                            mImageList.add("http://59.110.106.1" + slideBean.get(i).getSlide_pic());
-                        }
-                        //热门景点
-                        mScenicHotBean = resultBean.getScenic_hot();
-                        mMProductListBean = resultBean.getProduct_list();
-                        mHandler.sendEmptyMessage(GET_DATA_SUCCESS);
-                    }
-
-                    @Override
-                    public void onFailure(int code) {
-                        mHandler.sendEmptyMessage(NET_OUT);
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        mHandler.sendEmptyMessage(NET_OUT);
-                    }
-                });
+            public void onOutNet() {
+                ToastUtils.show(TicketActivity.this, "网络错误，加载失败，请稍候重试");
             }
-        }.start();
+
+            @Override
+            public void onSuccess(String data) {
+                Gson gson = new Gson();
+                TicketBean.ResultBean resultBean = gson.fromJson(data, TicketBean.ResultBean.class);
+                //轮播图
+                List<TicketBean.ResultBean.SlideBean> slideBean = resultBean.getSlide();
+                mImageList = new ArrayList<>();
+
+                for (int i = 0; i < slideBean.size(); i++) {
+                    mImageList.add("http://59.110.106.1" + slideBean.get(i).getSlide_pic());
+                }
+                //热门景点
+                mScenicHotBean = resultBean.getScenic_hot();
+                mMProductListBean = resultBean.getProduct_list();
+                DataFlash();
+                mBackground.setVisibility(View.GONE);
+                mPbBackground.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(int code) {
+                ToastUtils.show(TicketActivity.this, "网络错误，加载失败，请稍候重试");
+            }
+
+            @Override
+            public void onError(Exception e) {
+                ToastUtils.show(TicketActivity.this, "网络错误，加载失败，请稍候重试");
+            }
+        });
     }
 
 
@@ -163,22 +160,6 @@ public class TicketActivity extends BaseActivity {
 
     }
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case GET_DATA_SUCCESS:
-                    DataFlash();
-                    mBackground.setVisibility(View.GONE);
-                    mPbBackground.setVisibility(View.GONE);
-                    break;
-                case NET_OUT:
-                    ToastUtils.show(TicketActivity.this, "网络错误，加载失败，请稍候重试");
-
-                    break;
-            }
-        }
-    };
 
     /**
      * 网络请求数据成功处理数据。

@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,14 +25,15 @@ import com.baidu.location.LocationClientOption;
 import com.bumptech.glide.Glide;
 import com.dsgj.youyuntong.JavaBean.HomePage.HomePageBean;
 import com.dsgj.youyuntong.R;
-import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
+import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.SPUtils;
+import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.Utils.recyclerview.LinearLayoutUtils;
-import com.dsgj.youyuntong.Utils.view.XBannerUtils;
 import com.dsgj.youyuntong.Utils.system.callPhoneUtils;
-import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.Utils.view.XBannerUtils;
+import com.dsgj.youyuntong.activity.BusTicketActivity;
 import com.dsgj.youyuntong.activity.CalendarActivity;
 import com.dsgj.youyuntong.activity.CitiesActivity;
 import com.dsgj.youyuntong.activity.GroupTour.GroupTourActivity;
@@ -60,9 +62,6 @@ import java.util.Map;
  */
 
 public class HomeFragment extends BaseFragment {
-
-    private static final int MSG_UPDATE_TEXT = 1;
-    private static final int INTERNET_ERROR = 2;
     public String s;
     public TextView mLocation;
     private TextView mSearch;
@@ -82,78 +81,14 @@ public class HomeFragment extends BaseFragment {
     private XBanner mXBannerHomePage;
     private NestedScrollView mNsvHomePager;
     private ProgressBar mProgressBar;
-    private Handler handler = new Handler() {
-        // 该方法运行在主线程中
-        // 接收到handler发送的消息，对UI进行操作
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_TEXT:
-                    mSearch1.setVisibility(View.VISIBLE);
-                    fourItem.setVisibility(View.VISIBLE);
-                    mGridViewList = LinearLayoutUtils.getStringAndLogo();
-                    setSearch(mSearch1);
-                    setFourSelect(fourItem);
-                    mGridViewList = new ArrayList<>();
-                    //初始化定位服务：
-                    mLocationClient = new LocationClient(getActivity());
-                    mLocationClient.registerLocationListener(mBDLocationListener);
-                    mLocationClient.start();
-                    initLocation();
-                    mMBadgeView.setTargetView(mMessages);
-                    String MMessage = SPUtils.with(getActivity()).get("message_unread", "0");
-                    if (MMessage.equals("1")) {
-                        mMBadgeView.setBadgeCount(1);
-                    } else {
-                        mMBadgeView.setBadgeCount(0);
-                    }
-                    mLocation.setText("郑州市");
-                    XBannerUtils.setBannerHolder(getActivity(), mXBannerHomePage, mImageUrl);//处理轮播图
-                    //获得门票等四个布局
-
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    HomePageRecyclerViewAdapter adapter = new HomePageRecyclerViewAdapter(getActivity()
-                            , mGridViewList
-                            , mProductListBean);
-                    mRecyclerView.setNestedScrollingEnabled(false);
-                    mRecyclerView.setAdapter(adapter);
-
-                    //标题栏变色
-                    mNsvHomePager.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-                        @Override
-                        public void onScrollChange(NestedScrollView v,
-                                                   int scrollX, int scrollY,
-                                                   int oldScrollX, int oldScrollY) {
-                            overallXScroll = overallXScroll + scrollY - oldScrollY;// 累加y值 解决滑动一半y值为0
-                            if (overallXScroll <= 0) {   //设置标题的背景颜色
-                                mLlTitle.setBackgroundResource(R.drawable.shape_title_back);
-                            } else if (overallXScroll > 0 && overallXScroll <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-                                float scale = (float) overallXScroll / height;
-                                float alpha = (255 * scale);
-                                mLlTitle.setBackgroundColor(Color.argb((int) alpha, 0, 145, 242));
-                            } else {
-                                mLlTitle.setBackgroundColor(Color.argb(255, 0, 145, 242));
-                            }
-                        }
-
-                    });
-                    ProgressBarDismiss();
-                    mCoverView.setVisibility(View.GONE);
-                    break;
-                case INTERNET_ERROR:
-                    ToastUtils.show(getActivity(), "网络已断开!");
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
     private List<HomePageBean.ResultBean.ProductListBean> mProductListBean;
     private View mCoverView;
     private LinearLayout mSearch1;
     private LinearLayout fourItem;
     private String mThatTime;
+    private SwipeRefreshLayout mSrl;
+    private HomePageRecyclerViewAdapter mAdapter;
+
 
     @Override
     protected int getLayoutID() {
@@ -175,63 +110,103 @@ public class HomeFragment extends BaseFragment {
         mCoverView = view.findViewById(R.id.view_home_fragment);
         mSearch1 = (LinearLayout) view.findViewById(R.id.ll_home_page_search);
         fourItem = (LinearLayout) view.findViewById(R.id.ll_home_four_item);
+        mSrl = (SwipeRefreshLayout) view.findViewById(R.id.sfl_refresh);
 
     }
 
     @Override
     protected void initData() {
-
         mRecyclerView.setFocusable(false);
-        GetInternetData();
+        GetInternetData("1");
 
 
     }
 
-    private void GetInternetData() {
+    private void GetInternetData(String page) {
         mProgressBar.setVisibility(View.VISIBLE);
-        new Thread() {
+        Map<String, String> map = new HashMap<>();
+        map.put("page", page);
+        map.put("city", "西安");
+        map.put("page_size", "5");
+        HttpUtils.post(getActivity(), new HomePageBean(), HttpUtils.URL_BASE + "home", map, new RequestCallBack() {
+            @Override
+            public void onOutNet() {
+                ToastUtils.show(getActivity(), "网络已断开!");
+            }
 
             @Override
-            public void run() {
-                super.run();
-                Map<String, String> map = new HashMap<>();
-                map.put("page", "");
-                map.put("city", "西安");
-                map.put("page_size", "15");
-                HttpUtils.post(getActivity(), new HomePageBean(), HttpUtils.URL_BASE + "home", map, new RequestCallBack() {
-                    @Override
-                    public void onOutNet() {
-                        handler.sendEmptyMessage(INTERNET_ERROR);//发送消息
-                    }
+            public void onSuccess(String data) {
+                LogUtils.e(data);
+                Gson gson = new Gson();
+                HomePageBean.ResultBean homepageBean = gson.fromJson(data, HomePageBean.ResultBean.class);
+                List<HomePageBean.ResultBean.SlideListBean> slideListBean = homepageBean.getSlide_list();
+                mImageUrl = new ArrayList<>();
+                for (int i = 0; i < slideListBean.size(); i++) {
+                    mImageUrl.add("http://59.110.106.1" + slideListBean.get(i).getSlide_pic());
+                }
+                mProductListBean = homepageBean.getProduct_list();
+                mSearch1.setVisibility(View.VISIBLE);
+                fourItem.setVisibility(View.VISIBLE);
+                mGridViewList = LinearLayoutUtils.getStringAndLogo();
+                setSearch(mSearch1);
+                setFourSelect(fourItem);
+                mGridViewList = new ArrayList<>();
+                //初始化定位服务：
+                mLocationClient = new LocationClient(getActivity());
+                mLocationClient.registerLocationListener(mBDLocationListener);
+                mLocationClient.start();
+                initLocation();
+                mMBadgeView.setTargetView(mMessages);
+                String MMessage = SPUtils.with(getActivity()).get("message_unread", "0");
+                if (MMessage.equals("1")) {
+                    mMBadgeView.setBadgeCount(1);
+                } else {
+                    mMBadgeView.setBadgeCount(0);
+                }
+                mLocation.setText("郑州市");
+                XBannerUtils.setBannerHolder(getActivity(), mXBannerHomePage, mImageUrl);//处理轮播图
+                //获得门票等四个布局
 
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                mAdapter = new HomePageRecyclerViewAdapter(getActivity()
+                        , mGridViewList
+                        , mProductListBean);
+                mRecyclerView.setNestedScrollingEnabled(false);
+                mRecyclerView.setAdapter(mAdapter);
+
+                //标题栏变色
+                mNsvHomePager.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
                     @Override
-                    public void onSuccess(String data) {
-                        LogUtils.e(data);
-                        Gson gson = new Gson();
-                        HomePageBean.ResultBean homepageBean = gson.fromJson(data, HomePageBean.ResultBean.class);
-                        List<HomePageBean.ResultBean.SlideListBean> slideListBean = homepageBean.getSlide_list();
-                        mImageUrl = new ArrayList<>();
-                        for (int i = 0; i < slideListBean.size(); i++) {
-                            mImageUrl.add("http://59.110.106.1" + slideListBean.get(i).getSlide_pic());
+                    public void onScrollChange(NestedScrollView v,
+                                               int scrollX, int scrollY,
+                                               int oldScrollX, int oldScrollY) {
+                        overallXScroll = overallXScroll + scrollY - oldScrollY;// 累加y值 解决滑动一半y值为0
+                        if (overallXScroll <= 0) {   //设置标题的背景颜色
+                            mLlTitle.setBackgroundResource(R.drawable.shape_title_back);
+                        } else if (overallXScroll > 0 && overallXScroll <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                            float scale = (float) overallXScroll / height;
+                            float alpha = (255 * scale);
+                            mLlTitle.setBackgroundColor(Color.argb((int) alpha, 0, 145, 242));
+                        } else {
+                            mLlTitle.setBackgroundColor(Color.argb(255, 0, 145, 242));
                         }
-                        mProductListBean = homepageBean.getProduct_list();
-                        handler.sendEmptyMessage(MSG_UPDATE_TEXT);//发送消息
                     }
 
-                    @Override
-                    public void onFailure(int code) {
-                        LogUtils.e("首页访问失败！");
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        LogUtils.e("网络连接出现错误！");
-                    }
                 });
+                ProgressBarDismiss();
+                mCoverView.setVisibility(View.GONE);
             }
-        }.start();
 
+            @Override
+            public void onFailure(int code) {
+                LogUtils.e("首页访问失败！");
+            }
 
+            @Override
+            public void onError(Exception e) {
+                LogUtils.e("网络连接出现错误！");
+            }
+        });
     }
 
 
@@ -243,6 +218,15 @@ public class HomeFragment extends BaseFragment {
         mPhone.setOnClickListener(this);
         mSearch.setOnClickListener(this);
 
+        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                GetInternetData("1");
+                mAdapter.notifyDataSetChanged();
+                mSrl.setRefreshing(false);
+
+            }
+        });
     }
 
     private void ProgressBarDismiss() {
@@ -252,21 +236,21 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_Location:
+            case R.id.tv_Location://定位界面
                 jumpToActivity(CitiesActivity.class);
-
                 break;
             case R.id.iv_phone://电话（完成）
                 String phoneNumber = "13623717683";
                 callPhoneUtils.MakePhone(getActivity(), phoneNumber);
                 break;
-            case R.id.iv_message://跳转到消息页面（完成）
+            case R.id.iv_message://消息界面
                 SPUtils.with(getActivity()).save("message_unread", "0");
                 jumpToActivity(MessageActivity.class);
                 break;
-            case R.id.et_search://跳转到消息页面（完成）
+            case R.id.et_search://搜索界面
                 jumpToActivity(SearchActivity.class);
                 break;
+
         }
     }
 
@@ -310,7 +294,6 @@ public class HomeFragment extends BaseFragment {
                 mLocation.setText(Location);
             }
 
-            //  LogInBean.i(TAG, "onReceiveLocation: `````````````````" + locationText);
             mLocationClient.stop();
         }
 
@@ -322,7 +305,8 @@ public class HomeFragment extends BaseFragment {
     private Activity mContext = getActivity();
 
     private void setSearch(LinearLayout view) {
-        final TextView mBusTicket = (TextView) view.findViewById(R.id.bus_ticket);
+
+        final TextView mBusTicket = (TextView) view.findViewById(R.id.bus_ticket_home_page);
         TextView fromLocation = (TextView) view.findViewById(R.id.from_location);
         final TextView toLocation = (TextView) view.findViewById(R.id.to_location);
         final TextView goOfTime = (TextView) view.findViewById(R.id.go_of_time);
@@ -330,7 +314,6 @@ public class HomeFragment extends BaseFragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd EEEE");
         String now = sdf.format(today);
         mThatTime = SPUtils.with(mContext).get("selectedDate", now);
-
         goOfTime.setText(mThatTime);
         Button queryButton = (Button) view.findViewById(R.id.btn_home_query);
         final String start = SPUtils.with(mContext).get("出发位置", "郑州");
@@ -340,7 +323,7 @@ public class HomeFragment extends BaseFragment {
         mBusTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.e("汽车票");
+                jumpToActivity(BusTicketActivity.class);
             }
         });
         fromLocation.setOnClickListener(new View.OnClickListener() {
@@ -463,5 +446,6 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
 
 }

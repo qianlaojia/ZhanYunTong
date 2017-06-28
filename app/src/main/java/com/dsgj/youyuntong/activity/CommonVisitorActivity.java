@@ -1,7 +1,5 @@
 package com.dsgj.youyuntong.activity;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -50,13 +48,12 @@ public class CommonVisitorActivity extends BaseActivity {
     private EditText mInputName;
     private EditText mInputID;
     private CommonVisitorAdapter mAdapter;
-    public static final int INTERNET_SUCCESS = 1;
-    private static final int NET_OUT = 2;
-    private static final int ERROR = 3;
     private String mNewVisitorName;
     private String mNewVisitorId;
     private List<String> mVisitorName;
     private List<String> mVisitorId;
+    private List<newVisitorBean.ResultBean> mNewResultBeanList;
+
 
     @Override
     protected int getLayoutID() {
@@ -76,6 +73,7 @@ public class CommonVisitorActivity extends BaseActivity {
         mSave = (Button) findViewById(R.id.btn_save_visitor);
         mInputName = (EditText) findViewById(R.id.et_insert_name_insert_visitor);
         mInputID = (EditText) findViewById(R.id.et_insert_ID_insert_visitor);
+
 
     }
 
@@ -112,10 +110,11 @@ public class CommonVisitorActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        LogUtils.e("后边是返回的数据结果！" + response);
                         Gson gson = new Gson();
                         newVisitorBean newVisitorBean = gson.fromJson(response
                                 , newVisitorBean.class);
-                        List<newVisitorBean.ResultBean> resultBeanList = newVisitorBean.getResult();
+                        final List<newVisitorBean.ResultBean> resultBeanList = newVisitorBean.getResult();
                         mVisitorName = new ArrayList<>();
                         mVisitorId = new ArrayList<>();
                         for (int i = 0; i < resultBeanList.size(); i++) {
@@ -125,11 +124,23 @@ public class CommonVisitorActivity extends BaseActivity {
                         LinearLayoutManager layoutManager = new LinearLayoutManager(CommonVisitorActivity.this);
                         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                         mVisitorList.setLayoutManager(layoutManager);
-                        mAdapter = new CommonVisitorAdapter(CommonVisitorActivity.this, mVisitorName, mVisitorId);
+                        mAdapter = new CommonVisitorAdapter(CommonVisitorActivity.this, mVisitorName, mVisitorId, true);
+                        mNewResultBeanList = new ArrayList<>();
+                        final List<Integer> positionList = new ArrayList<>();//下边的点击事件是对整型数据集合的操作
                         mAdapter.setOnItemClickListener(new CommonVisitorAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-
+                                newVisitorBean.ResultBean resultBean = resultBeanList.get(mVisitorName.size() - 1 - position);
+                                if (!positionList.contains(position)) {
+                                    mNewResultBeanList.add(resultBean);
+                                    positionList.add(position);
+                                } else {
+                                    mNewResultBeanList.remove(resultBean);
+                                    for (int i = 0; i < positionList.size(); i++) {
+                                        if (positionList.get(i).equals(position))
+                                            positionList.remove(i);
+                                    }
+                                }
                             }
                         });
                         mVisitorList.addItemDecoration(new DividerItemDecoration(CommonVisitorActivity.this,
@@ -153,9 +164,20 @@ public class CommonVisitorActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_title_back:
+                Gson ToJson = new Gson();
+                //转换成json数据，再保存
+                String strJson = ToJson.toJson(mNewResultBeanList);
+                LogUtils.e("后边是转化后的字符串：" + strJson);
+                SPUtils.with(CommonVisitorActivity.this).save("ChooseVisitor", strJson);
                 this.finish();
                 break;
             case R.id.tv_common_visitor_ok:
+                Gson ToJson1 = new Gson();
+                //转换成json数据，再保存
+                String strJson1 = ToJson1.toJson(mNewResultBeanList);
+                LogUtils.e("后边是转化后的字符串：" + strJson1);
+                SPUtils.with(CommonVisitorActivity.this).save("ChooseVisitor", strJson1);
+                this.finish();
                 break;
             case R.id.tv_insert_visitor:
                 mMiddleText.setText("添加乘客");

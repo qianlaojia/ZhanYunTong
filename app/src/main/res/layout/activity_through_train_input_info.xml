@@ -7,14 +7,11 @@
     tools:context="com.dsgj.youyuntong.activity.OrderInputInfoActivity">
 
 
-    <include
-        layout="@layout/layout_message_title"/>
-
-
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="58dp"
+        android:layout_marginTop="48dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +21,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white">
 
                 <TextView
@@ -235,7 +232,8 @@
                     android:layout_below="@id/tv_to_common_visitor"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"/>
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -247,6 +245,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/notice"
@@ -257,6 +256,9 @@
             </RelativeLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <include
+        layout="@layout/layout_message_title"/>
 
     <include
         layout="@layout/layout_through_train_input_info_bottom"

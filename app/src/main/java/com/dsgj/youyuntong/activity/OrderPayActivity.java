@@ -5,20 +5,26 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alipay.sdk.app.PayTask;
+import com.dsgj.youyuntong.JavaBean.InternetDataBean.OrderCreateBean;
+import com.dsgj.youyuntong.JavaBean.OrderDetailBean;
+import com.dsgj.youyuntong.JavaBean.WeixinPayBean;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.Http.HttpUtils;
 import com.dsgj.youyuntong.Utils.Http.RequestCallBack;
 import com.dsgj.youyuntong.Utils.Pay.PayResult;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
+import com.dsgj.youyuntong.Utils.log.LogUtils;
 import com.dsgj.youyuntong.base.BaseActivity;
 import com.dsgj.youyuntong.base.BaseJavaBean;
+import com.google.gson.Gson;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +41,11 @@ public class OrderPayActivity extends BaseActivity {
     private TextView mAll_money;
     private TextView mPay;
     private static final int SDK_PAY_FLAG = 1;
+    private OrderDetailBean.ResultBean mOrderDetailBean;
+    private String mOrderSN;//生成的订单号
+    private String mUserName;
+    public static final String APP_ID = "wxcf03d9aa82b2caf8";
+    private IWXAPI api;
 
     @Override
     protected int getLayoutID() {
@@ -61,17 +72,59 @@ public class OrderPayActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        api = WXAPIFactory.createWXAPI(OrderPayActivity.this, APP_ID, true);
+        api.registerApp(APP_ID);
         mMiddleText.setText("订单支付");
         Intent intent = getIntent();
-        double totalMoney = intent.getDoubleExtra("totalPrice", 0.00);//总金额
-        String sceneryName = intent.getStringExtra("spotName"); //景区名称
-        int visitorCount = intent.getIntExtra("visitorCount", 0);//出行人数
-        String time = intent.getStringExtra("startTime");//出行时间
-        mTotalPrice.setText(totalMoney + "元");
-        mAll_money.setText(totalMoney + "元");
-        mSceneryName.setText(sceneryName);
-        mVisitorNumber.setText(visitorCount + "人");
-        startTime.setText(time);
+        String mStrJson = intent.getStringExtra("traveler");
+        final String mStartTime = intent.getStringExtra("date");
+        final String mGetVisitors = intent.getStringExtra("number");
+        //-----------------------------------------------------------------------
+        OrderCreateBean mOrderCreateBean = new OrderCreateBean(this);
+        //生成订单接口
+        Map<String, String> map = new HashMap<>();
+        map.put("type", mOrderCreateBean.getType());
+        map.put("access_token", mOrderCreateBean.getAccess_token());
+        map.put("userName", mOrderCreateBean.getUserName());
+        map.put("token", mOrderCreateBean.getToken());
+        map.put("product_code", SPUtils.with(this).get("product_code", ""));
+        map.put("traveler", mStrJson);
+        map.put("contact_name", mOrderCreateBean.getContact_name());
+        map.put("telephone", mOrderCreateBean.getUserName());
+        map.put("date", mStartTime);
+        map.put("number", mGetVisitors);
+        HttpUtils.post(this, new BaseJavaBean(), HttpUtils.URL_BASE_ORDER + "order_generate", map, new RequestCallBack() {
+
+            @Override
+            public void onOutNet() {
+                ToastUtils.show(OrderPayActivity.this, "网络已断开");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                Gson gson = new Gson();
+                mOrderDetailBean = gson.fromJson(data, OrderDetailBean.ResultBean.class);
+                mOrderSN = mOrderDetailBean.getOrder_sn();
+                mTotalPrice.setText(mOrderDetailBean.getTotal());
+                mOrderNumber.setText(mOrderSN);
+                mSceneryName.setText(mOrderDetailBean.getGoods_name());
+                mVisitorNumber.setText(mGetVisitors);
+                startTime.setText(mStartTime);
+                mAll_money.setText(mOrderDetailBean.getTotal());
+            }
+
+            @Override
+            public void onFailure(int code) {
+
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+
 
     }
 
@@ -88,16 +141,19 @@ public class OrderPayActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_pay:
-                ToastUtils.show(OrderPayActivity.this, "支付宝付账！");
-                String userName = SPUtils.with(OrderPayActivity.this).get("userName", "");
+                ToastUtils.show(OrderPayActivity.this, "微信支付！");
+                mUserName = SPUtils.with(OrderPayActivity.this).get("userName", "");
+                LogUtils.e("userName:  " + mUserName + ":这是用户的手机账号！");
                 String token = SPUtils.with(OrderPayActivity.this).get("token", "");
+                LogUtils.e("token:  " + token + ":这是用户的token！");
                 Map<String, String> map = new HashMap<>();
                 map.put("type", "phone");
                 map.put("access_token", "");
-                map.put("userName", userName);
+                map.put("userName", mUserName);
                 map.put("token", token);
-                map.put("order_id", "phone");
-                HttpUtils.post(OrderPayActivity.this,new BaseJavaBean(),HttpUtils.URL_BASE_PAY+"app_pay",map, new RequestCallBack() {
+                map.put("order_sn", mOrderSN);
+                LogUtils.e("orderId:   " + mOrderSN + ":这是用户的orderId！");
+                HttpUtils.post(OrderPayActivity.this, new BaseJavaBean(), HttpUtils.URL_BASE_PAY + "wx_pay", map, new RequestCallBack() {
                     @Override
                     public void onOutNet() {
 
@@ -105,35 +161,85 @@ public class OrderPayActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(final String data) {
+                        LogUtils.e(data);
+                        Gson gson = new Gson();
+                        WeixinPayBean weixinPayBean = gson.fromJson(data, WeixinPayBean.class);
+                        PayReq req = new PayReq();
+                        req.appId = APP_ID;
+                        req.partnerId = weixinPayBean.getPartnerid();
+                        req.prepayId = weixinPayBean.getPrepayid();
+                        req.packageValue = weixinPayBean.getPackageX();
+                        req.nonceStr = weixinPayBean.getNoncestr();
+                        req.timeStamp =weixinPayBean.getTimestamp()+"";
+                        req.sign = weixinPayBean.getSign();
+                        api.sendReq(req);
+
+                    }
+
+                    @Override
+                    public void onFailure(int code) {
+                        LogUtils.e(code + "");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        LogUtils.e(e.toString());
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               /* HttpUtils.post(OrderPayActivity.this, new BaseJavaBean(), HttpUtils.URL_BASE_PAY + "ali_pay", map, new RequestCallBack() {
+                    @Override
+                    public void onOutNet() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(final String data) {
+                        LogUtils.e(data);
                         Runnable payRunnable = new Runnable() {
                             @Override
                             public void run() {
                                 PayTask alipay = new PayTask(OrderPayActivity.this);
                                 Map<String, String> result = alipay.payV2(data, true);
-                                Log.i("msp", result.toString());
+                                LogUtils.e(result.toString());
                                 Message msg = new Message();
                                 msg.what = SDK_PAY_FLAG;
                                 msg.obj = result;
                                 mHandler.sendMessage(msg);
                             }
                         };
-
                         Thread payThread = new Thread(payRunnable);
                         payThread.start();
                     }
 
                     @Override
                     public void onFailure(int code) {
-
+                        LogUtils.e(code + "");
                     }
 
                     @Override
                     public void onError(Exception e) {
+                        LogUtils.e(e.toString());
 
                     }
                 });
-
-
+*/
 
                 break;
         }

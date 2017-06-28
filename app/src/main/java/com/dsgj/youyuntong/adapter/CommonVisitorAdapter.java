@@ -21,6 +21,7 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<String> newVisitorName;
     private List<String> newVisitorID;
+    private boolean showOrNot;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -32,10 +33,11 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public CommonVisitorAdapter(Context context, List<String> newVisitorName, List<String> newVisitorID) {
+    public CommonVisitorAdapter(Context context, List<String> newVisitorName, List<String> newVisitorID, boolean show) {
         this.mContext = context;
         this.newVisitorID = newVisitorID;
         this.newVisitorName = newVisitorName;
+        this.showOrNot = show;
     }
 
     public void removeItem(int position) {
@@ -55,7 +57,11 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
         final CommonViewHolder commonViewHolder = (CommonViewHolder) holder;
         commonViewHolder.nameText.setText(newVisitorName.get(newVisitorName.size() - 1 - position));
         commonViewHolder.idText.setText(newVisitorID.get(newVisitorName.size() - 1 - position));
-        commonViewHolder.chooseImageView.setVisibility(View.VISIBLE);
+        if (showOrNot) {
+            commonViewHolder.chooseImageView.setVisibility(View.VISIBLE);
+        } else {
+            commonViewHolder.chooseImageView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -70,21 +76,21 @@ public class CommonVisitorAdapter extends RecyclerView.Adapter {
 
         private CommonViewHolder(final View itemView) {
             super(itemView);
-            final int[] state = {1};
             nameText = (TextView) itemView.findViewById(R.id.tv_item_common_visitor_name_details);
             idText = (TextView) itemView.findViewById(R.id.tv_item_common_visitor_id_details);
             chooseImageView = (ImageView) itemView.findViewById(R.id.iv_common_visitor_item_choose);
             chooseImageView.setImageResource(R.mipmap.changyongchengke_weixuanze);
+            final int[] state = {1};
             if (mOnItemClickListener != null) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        mOnItemClickListener.onItemClick(itemView, getAdapterPosition());
+                        //控制后边的是否勾对的标志
                         if (state[0] == 1) {
-                            mOnItemClickListener.onItemClick(itemView, getAdapterPosition());
                             chooseImageView.setImageResource(R.mipmap.changyongchengke_gouxuan);
                             state[0] = 2;
                         } else if (state[0] == 2) {
-                            mOnItemClickListener.onItemClick(itemView, getAdapterPosition());
                             chooseImageView.setImageResource(R.mipmap.changyongchengke_weixuanze);
                             state[0] = 1;
                         }

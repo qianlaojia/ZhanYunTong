@@ -19,6 +19,17 @@ public class newVisitorBean {
     private int retCode;
     private String retDese;
     private List<ResultBean> result;
+    /**
+     * contact_id : 55
+     * user_id : 2336
+     * contact_name :
+     * idnumber :
+     */
+
+    private String contact_id;
+    private String user_id;
+    private String contact_name;
+    private String idnumber;
 
     public int getRetCode() {
         return retCode;
@@ -42,6 +53,38 @@ public class newVisitorBean {
 
     public void setResult(List<ResultBean> result) {
         this.result = result;
+    }
+
+    public String getContact_id() {
+        return contact_id;
+    }
+
+    public void setContact_id(String contact_id) {
+        this.contact_id = contact_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getContact_name() {
+        return contact_name;
+    }
+
+    public void setContact_name(String contact_name) {
+        this.contact_name = contact_name;
+    }
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
     }
 
     public static class ResultBean {
@@ -89,4 +132,5 @@ public class newVisitorBean {
             this.idnumber = idnumber;
         }
     }
+
 }

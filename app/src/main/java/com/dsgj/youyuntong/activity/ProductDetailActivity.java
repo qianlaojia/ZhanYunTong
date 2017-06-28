@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dsgj.youyuntong.JavaBean.InternetDataBean.OrderCreateBean;
 import com.dsgj.youyuntong.JavaBean.ProductDetail.ProductDetailBean;
 import com.dsgj.youyuntong.JavaBean.ProductDetail.ProductDetailImageBean;
 import com.dsgj.youyuntong.R;
@@ -101,6 +102,7 @@ public class ProductDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         mProduct_id = intent.getStringExtra("product_id");
         mProduct_code = intent.getStringExtra("product_code");
+        SPUtils.with(this).save("product_code",mProduct_code);
         internetDataGet(mProduct_id, mProduct_code);
         mEndText.setText("我是有底线的");
         mMiddleText.setText("产品详情");
@@ -134,11 +136,12 @@ public class ProductDetailActivity extends BaseActivity {
                 intent.putExtra("sceneryPrice", mPrice);
                 intent.putExtra("startLocation", mLocation);
                 startActivity(intent);
-
             }
         });
-        mStartTime.addItemDecoration(new ProductDetailActivity.RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
+        mStartTime.addItemDecoration(new ProductDetailActivity
+                .RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
         mStartTime.setAdapter(startTimeAdapter);
+        mStartTime.setNestedScrollingEnabled(false);
     }
 
 
@@ -194,7 +197,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     }
 
-    private void manageCollect(boolean b) {
+    private void manageCollect(boolean b) {//增加收藏和删除收藏
         if (b) {
             mUrl = HttpUtils.URL_BASE_USER + "collection_add";
         } else {
@@ -236,7 +239,6 @@ public class ProductDetailActivity extends BaseActivity {
         final Map<String, String> map = new HashMap<>();
         map.put("product_id", product_id);
         map.put("product_code", product_code);
-
         HttpUtils.post(ProductDetailActivity.this
                 , new ProductDetailBean()
                 , HttpUtils.URL_BASE_TOURISM + "product_detail"

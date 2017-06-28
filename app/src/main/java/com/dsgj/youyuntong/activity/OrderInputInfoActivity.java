@@ -2,25 +2,30 @@ package com.dsgj.youyuntong.activity;
 
 
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dsgj.youyuntong.JavaBean.ChoosedVisitorBean;
+import com.dsgj.youyuntong.JavaBean.InternetDataBean.OrderCreateBean;
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
 import com.dsgj.youyuntong.Utils.ToastUtils;
-import com.dsgj.youyuntong.activity.CommonVisitorActivity;
+import com.dsgj.youyuntong.Utils.view.DividerItemDecoration;
+import com.dsgj.youyuntong.adapter.CommonVisitorAdapter;
 import com.dsgj.youyuntong.base.BaseActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderInputInfoActivity extends BaseActivity {
-
-
     private RelativeLayout mBack;
     private TextView mMiddleText;
     private TextView mTotal;
@@ -38,8 +43,13 @@ public class OrderInputInfoActivity extends BaseActivity {
     private int mVisitorCount;
     private String mStartTime;
     private String mNumber;
-    private String mName;
     private String mMName;
+    private RecyclerView mVisitorShowList;
+
+    private List<ChoosedVisitorBean> mGetVisitors;
+    private double mPrice;
+    private OrderCreateBean mOrderCreateBean;
+    private String mStrJson;
 
 
     @Override
@@ -63,6 +73,7 @@ public class OrderInputInfoActivity extends BaseActivity {
         mVisitor = (TextView) findViewById(R.id.tv_visitor_counter_detail);
         mOrderName = (TextView) findViewById(R.id.tv_input_info_order_person_name);
         mOrderPhone = (TextView) findViewById(R.id.tv_input_info_phone_number);
+        mVisitorShowList = (RecyclerView) findViewById(R.id.rl_visitor);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -79,16 +90,60 @@ public class OrderInputInfoActivity extends BaseActivity {
         mTicketPrice.setText("¥" + sceneryPrice);
         mStartCity.setText(startCity);
         mSceneryName.setText(mSceneryName1);
-        double i = Double.parseDouble(sceneryPrice);
-        mTotal1 = mVisitorCount * i;
+        mPrice = Double.parseDouble(sceneryPrice);
+        mTotal1 = mVisitorCount * mPrice;
         mTotal.setText(mTotal1 + "元");
         mMiddleText.setText("填写资料");
         //预订人信息
-        mNumber = SPUtils.with(OrderInputInfoActivity.this).get("userName", "");
-       mMName = SPUtils.with(OrderInputInfoActivity.this).get("realName", "");
+        mOrderCreateBean = new OrderCreateBean(OrderInputInfoActivity.this);
+        mNumber = mOrderCreateBean.getUserName();
+        mMName = mOrderCreateBean.getContact_name();
         mOrderPhone.setText(mNumber);
         mOrderName.setText(mMName);
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //返回的时候获得新添加的游客数据用list保存
+        mGetVisitors = getVisitors();
+        mTotal1 = mPrice * mGetVisitors.size();
+
+        mTotal.setText(mTotal1 + "元");
+        List<String> newVisitorName = new ArrayList<>();
+        List<String> newVisitorID = new ArrayList<>();
+        for (int i = 0; i < mGetVisitors.size(); i++) {
+            newVisitorName.add(mGetVisitors.get(i).getContact_name());
+            newVisitorID.add(mGetVisitors.get(i).getIdnumber());
+        }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(OrderInputInfoActivity.this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mVisitorShowList.setLayoutManager(layoutManager);
+        CommonVisitorAdapter mAdapter = new CommonVisitorAdapter(OrderInputInfoActivity.this
+                , newVisitorName, newVisitorID, false);
+        mVisitorShowList.addItemDecoration(new DividerItemDecoration(OrderInputInfoActivity.this,
+                DividerItemDecoration.VERTICAL_LIST));
+        mVisitorShowList.setAdapter(mAdapter);
+        mVisitorShowList.setNestedScrollingEnabled(false);
+
+    }
+
+    private List<ChoosedVisitorBean> getVisitors() {
+        List<ChoosedVisitorBean> newVisitor = new ArrayList<>();
+        boolean isReturn = SPUtils.with(OrderInputInfoActivity.this)
+                .contains(OrderInputInfoActivity.this, "ChooseVisitor");
+        if (isReturn) {
+            mStrJson = SPUtils.with(OrderInputInfoActivity.this).get("ChooseVisitor", "");
+            //下边是将json数据转换为list的操作。
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<ChoosedVisitorBean>>() {
+            }.getType();
+            newVisitor = gson.fromJson(mStrJson, type);
+            return newVisitor;
+
+        } else {
+            return newVisitor;
+        }
     }
 
     @Override
@@ -109,23 +164,19 @@ public class OrderInputInfoActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
                 break;
             case R.id.tv_pay_at_once:
-                //生成订单接口
-                Map<String,String> map = new HashMap<>();
-                map.put("type","phone");
-                map.put("access_token","");
-                map.put("userName",mNumber);
-                map.put("token",SPUtils.with(OrderInputInfoActivity.this).get("token",""));
-
-                map.put("type","phone");
-
-                //传递相关的参数到下一个界面：
-                Intent intentToPay = new Intent(this, OrderPayActivity.class);
-                intentToPay.putExtra("totalPrice", mTotal1);//总价格
-                intentToPay.putExtra("spotName",mSceneryName1);//景区名称
-                intentToPay.putExtra("visitorCount",mVisitorCount);//出行人数
-                intentToPay.putExtra("startTime", mStartTime);//出行时间
-                startActivity(intentToPay);
-                this.finish();
+                if (mGetVisitors.size() == 0) {
+                    ToastUtils.show(this, "请添加游客！");
+                } else { //传递相关的参数到下一个界面：
+                    Intent intentToPay = new Intent(this, OrderPayActivity.class);
+                    intentToPay.putExtra("totalPrice", mTotal1);//总价格
+                    intentToPay.putExtra("date", mStartTime);
+                    intentToPay.putExtra("number", mGetVisitors.size() + "");
+                    intentToPay.putExtra("traveler", mStrJson);
+                    startActivity(intentToPay);
+                    SPUtils.with(OrderInputInfoActivity.this)
+                            .remove("ChooseVisitor");
+                    this.finish();
+                }
                 break;
         }
 

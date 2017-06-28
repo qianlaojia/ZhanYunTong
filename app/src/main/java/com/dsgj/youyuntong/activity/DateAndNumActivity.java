@@ -2,8 +2,6 @@ package com.dsgj.youyuntong.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -15,10 +13,11 @@ import android.widget.TextView;
 
 import com.dsgj.youyuntong.R;
 import com.dsgj.youyuntong.Utils.SPUtils;
-import com.dsgj.youyuntong.Utils.ToastUtils;
 import com.dsgj.youyuntong.base.BaseActivity;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
